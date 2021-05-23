@@ -9,7 +9,7 @@ export class MainmenuService {
 	private readonly menu: any[] = [
 		{
 			title: 'Usuarios',
-			icon: 'toc',
+			icon: 'people_outline',
 			modules: [
 				{
 					title: 'Motor de Reglas',

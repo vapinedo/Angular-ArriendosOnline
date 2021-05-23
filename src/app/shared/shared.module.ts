@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { MaterialModule } from '../material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { SubmenuComponent } from './components/layout/sidebar/submenu/submenu.component';
 import { MainmenuComponent } from './components/layout/sidebar/mainmenu/mainmenu.component';
 
 const modules = [
@@ -24,6 +25,7 @@ const modules = [
 ];
 
 const components = [
+  SubmenuComponent,
   MainmenuComponent
 ];
 

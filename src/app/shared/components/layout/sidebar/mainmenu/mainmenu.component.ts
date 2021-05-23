@@ -13,6 +13,7 @@ export class MainmenuComponent implements OnDestroy {
   private subscriptions = new SubSink();
   
   public menu!: any[];
+  public submenuActive!: object;
   public sidedarIsOpen = false;
   
   constructor(
@@ -36,6 +37,7 @@ export class MainmenuComponent implements OnDestroy {
   }
 
   onOpenSidebar(selectedItemMenu: object) {
+    this.submenuActive = selectedItemMenu;
     this.sidedarIsOpen = true;
   }
 

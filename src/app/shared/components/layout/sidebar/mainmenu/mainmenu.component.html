@@ -16,4 +16,6 @@
             <span>{{ section.title }} </span>
         </a>
     </nav>
+
+    <app-submenu *ngIf="sidedarIsOpen" [submenu]="submenuActive" class="submenu"></app-submenu>
 </aside>
