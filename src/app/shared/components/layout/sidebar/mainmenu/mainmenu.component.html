@@ -1,0 +1,19 @@
+<aside 
+    id="sidebar" 
+    [ngClass]="{ 'expanded': sidedarIsOpen }" 
+    class="animate__animated animate__fadeInLeft animate_faster">
+
+    <nav class="main-menu">
+        <header (click)="onCloseSidebar()"> 
+            <mat-icon>home</mat-icon>
+        </header>
+
+        <a *ngFor="let section of menu" 
+            [matTooltip]="section.title" 
+            matTooltipPosition="right"
+            (click)="onOpenSidebar(section)">
+            <i class="material-icons-outlined">{{ section.icon }}</i>
+            <span>{{ section.title }} </span>
+        </a>
+    </nav>
+</aside>
