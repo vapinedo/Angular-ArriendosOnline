@@ -3,7 +3,16 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  firebaseConfig: {
+    apiKey: "AIzaSyDDqs1hraVJRP3pkY5UAzYVtyCXCqNhYI4",
+    authDomain: "ng-arriendos-uribia.firebaseapp.com",
+    databaseURL: "https://ng-arriendos-uribia-default-rtdb.firebaseio.com",
+    projectId: "ng-arriendos-uribia",
+    storageBucket: "ng-arriendos-uribia.appspot.com",
+    messagingSenderId: "689295074494",
+    appId: "1:689295074494:web:e0d72794a1862072f72aef"
+  }
 };
 
 /*

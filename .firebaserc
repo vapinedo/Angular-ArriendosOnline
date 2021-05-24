@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "ng-arriendos-uribia": {
+      "hosting": {
+        "arriendosOnline": [
+          "ng-arriendos-uribia"
+        ]
+      }
+    }
+  }
+}
