@@ -3,6 +3,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AuthGuard } from './guards/auth.guard';
 
+import { AuthService } from './services/auth.service';
 import { MessageService } from './services/message.service';
 import { DatetimeService } from './services/datetime.service';
 import { MainmenuService } from './services/mainmenu.service';
@@ -13,6 +14,7 @@ import { MainmenuService } from './services/mainmenu.service';
   ],
   providers: [
     AuthGuard,
+    AuthService,
     MessageService,
     DatetimeService,
     MainmenuService

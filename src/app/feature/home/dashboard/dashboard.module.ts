@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from '@shared/shared.module';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 
-import { HomeComponent } from './pages/home/home.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
 const modules = [
   CommonModule,
@@ -13,7 +13,7 @@ const modules = [
 ];
 
 const components = [
-  HomeComponent
+  DashboardComponent
 ];
 
 // const entryComponents = [

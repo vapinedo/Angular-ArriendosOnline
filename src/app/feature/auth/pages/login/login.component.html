@@ -1,0 +1,25 @@
+<section class="animate__animated animate__fadeIn animate_faster">
+
+    <article class="form-wrapper">
+        <h2 class="title">{{ title }}</h2>
+
+        <form [formGroup]="form" (ngSubmit)="onLogin()" autocomplete="off">
+            <mat-form-field appearance="outline">
+                <mat-label>Usuario</mat-label>
+                <input matInput type="text" formControlName="user">
+            </mat-form-field>       
+    
+            <mat-form-field appearance="outline">
+                <mat-label>Contraseña</mat-label>
+                <input matInput type="password" formControlName="password">
+            </mat-form-field>       
+                
+            <div class="footer">
+                <button type="submit" color="primary" mat-raised-button>
+                    <span>Ingresar</span>
+                </button>
+            </div>
+        </form>
+    </article>
+    
+</section>
