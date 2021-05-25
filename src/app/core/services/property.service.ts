@@ -2,6 +2,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { Property } from '@core/interfaces/property.interface';
 
 @Injectable()
 export class PropertyService {
@@ -12,7 +13,7 @@ export class PropertyService {
     private afs: AngularFirestore
   ) { }
 
-  public getAll() {
+  public getAll(): Observable<Property[]> {
     return this.afs.collection(this.collection)
       .snapshotChanges()
       .pipe(
@@ -24,6 +25,11 @@ export class PropertyService {
           })
         )
       );
+  }
+
+  public getById(id: number): Observable<Property | undefined> {
+    return this.afs.doc<Property>(`${this.collection}/${id}`)
+      .valueChanges();
   }
 
 }

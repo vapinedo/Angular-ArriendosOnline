@@ -5,6 +5,7 @@ import { SharedModule } from '@shared/shared.module';
 import { PropertyRoutingModule } from './property-routing.module';
 
 import { PropertyAdminComponent } from './pages/admin/property-admin.component';
+import { PropertyDetailComponent } from './pages/create/property-detail.component';
 
 const modules = [
   CommonModule,
@@ -13,7 +14,8 @@ const modules = [
 ];
 
 const components = [
-  PropertyAdminComponent
+  PropertyAdminComponent,
+  PropertyDetailComponent
 ];
 
 @NgModule({

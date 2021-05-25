@@ -43,6 +43,15 @@ body { font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 .mat-table {
     width: 100%;
+
+    .tools {
+        i {
+            cursor: pointer;
+            color: $gris-300;
+        }
+        i:hover { color: $azul-300; }
+        i:first-child { margin-right: .7em; }
+    }
 }
 
 /* -------------------------------------------------------
