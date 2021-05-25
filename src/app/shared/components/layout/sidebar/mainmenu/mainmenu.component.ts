@@ -28,7 +28,6 @@ export class MainmenuComponent implements OnDestroy {
       this.mainmenuSvc.getMenu()
         .subscribe({
           next: data => {
-            console.log(data);
             this.menu = data;
           },
           error: err => this.messageSvc.error(err)

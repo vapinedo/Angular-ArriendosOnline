@@ -14,14 +14,19 @@ const routes: Routes = [
     component:  HomeComponent,
     children: [
       {  
-        path: '',
+        path: 'dashboard',
         loadChildren: () => import('@feature/home/dashboard/dashboard.module')
         .then(m => m.DashboardModule)
+      },
+      {  
+        path: 'propiedades',
+        loadChildren: () => import('@feature/home/property/property.module')
+        .then(m => m.PropertyModule)
       }
     ]
   },
-  { path: '', redirectTo: '/auth',  pathMatch: 'full' },
-  { path: '***', redirectTo: '/auth' }
+  { path: '', redirectTo: '/home/propiedades',  pathMatch: 'full' },
+  { path: '***', redirectTo: '/home/propiedades' }
 ];
 
 @NgModule({

@@ -2,18 +2,18 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { SharedModule } from '@shared/shared.module';
-import { DashboardRoutingModule } from './dashboard-routing.module';
+import { PropertyRoutingModule } from './property-routing.module';
 
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { PropertyAdminComponent } from './pages/admin/property-admin.component';
 
 const modules = [
   CommonModule,
   SharedModule,
-  DashboardRoutingModule
+  PropertyRoutingModule
 ];
 
 const components = [
-  DashboardComponent
+  PropertyAdminComponent
 ];
 
 @NgModule({
@@ -21,4 +21,4 @@ const components = [
   exports: [components],
   imports: [modules]
 })
-export class DashboardModule { }
+export class PropertyModule { }

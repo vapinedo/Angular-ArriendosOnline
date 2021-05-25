@@ -7,6 +7,7 @@ import { AuthService } from './services/auth.service';
 import { MessageService } from './services/message.service';
 import { DatetimeService } from './services/datetime.service';
 import { MainmenuService } from './services/mainmenu.service';
+import { PropertyService } from './services/property.service';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { MainmenuService } from './services/mainmenu.service';
     AuthService,
     MessageService,
     DatetimeService,
-    MainmenuService
+    MainmenuService,
+    PropertyService
   ]
 })
 export class CoreModule { }
