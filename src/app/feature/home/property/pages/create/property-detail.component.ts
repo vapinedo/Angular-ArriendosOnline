@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Property } from '@core/interfaces/property.interface';
@@ -11,7 +12,7 @@ import { PropertyService } from '@core/services/property.service';
 export class PropertyDetailComponent implements OnInit {
 
   public title = 'Propiedad Detalle';
-  public property$: Observable<Property>;
+  public property$!: Observable<Property | undefined>;
 
   constructor(
     private propertySvc: PropertyService,

@@ -8,6 +8,7 @@ import { MessageService } from './services/message.service';
 import { DatetimeService } from './services/datetime.service';
 import { MainmenuService } from './services/mainmenu.service';
 import { PropertyService } from './services/property.service';
+import { ValidatorsService } from './services/validators.service';
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import { PropertyService } from './services/property.service';
     MessageService,
     DatetimeService,
     MainmenuService,
-    PropertyService
+    PropertyService,
+    ValidatorsService
   ]
 })
 export class CoreModule { }
