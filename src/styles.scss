@@ -48,9 +48,10 @@ body { font-family: Roboto, "Helvetica Neue", sans-serif; }
         i {
             cursor: pointer;
             color: $gris-300;
+            margin-right: .7em;
         }
         i:hover { color: $azul-300; }
-        i:first-child { margin-right: .7em; }
+        i:last-child { margin-right: 0; }
     }
 }
 

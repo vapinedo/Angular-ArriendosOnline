@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2';
 import { Injectable } from '@angular/core';
 import { ActiveToast, ToastrService } from 'ngx-toastr';
 
@@ -13,6 +14,18 @@ export class MessageService {
   error(message: string): ActiveToast<any> {
     return this.toastr.error(message);
   }
+
+  confirm() {
+    return Swal.fire({
+      title: '¿Está seguro?',
+      text: "Estás a punto de eliminar un registro",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Confirmar'
+    }); 
+  } 
 
 }
 

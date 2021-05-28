@@ -1,6 +1,7 @@
 export interface Property {
+    img?: any;
     id?: string;
-    img?: string;
+    imgRef?: any;
     type?: string;
     price?: number;
 }

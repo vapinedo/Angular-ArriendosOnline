@@ -3,7 +3,7 @@
     <article class="form-wrapper">
         <h2 class="title">{{ title }}</h2>
 
-        <form [formGroup]="form" (ngSubmit)="onLogin()" autocomplete="off">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
             <mat-form-field appearance="outline">
                 <mat-label>Email</mat-label>
                 <input matInput type="text" formControlName="email">
@@ -15,9 +15,7 @@
             </mat-form-field>       
                 
             <div class="footer">
-                <button type="submit" color="primary" mat-raised-button>
-                    <span>Ingresar</span>
-                </button>
+                <button type="submit" color="primary" mat-raised-button>Ingresar</button>
             </div>
         </form>
     </article>

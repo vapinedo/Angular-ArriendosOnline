@@ -1,0 +1,27 @@
+<section>
+    <h2>{{ title }}</h2>
+
+    <article class="box animate__animated animate__fadeIn animate_faster">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
+            <mat-form-field appearance="outline">
+                <mat-label>Tipo de propiedad</mat-label>
+                <input matInput type="text" formControlName="type">
+            </mat-form-field>       
+    
+            <mat-form-field appearance="outline">
+                <mat-label>Precio</mat-label>
+                <input matInput type="text" formControlName="price">
+            </mat-form-field>       
+
+            <div class="file-upload">
+                <img *ngFor="let url of imageUrls" height="120" [src]="url">
+                <input type="file" (change)="onSelectImage($event)" multiple>
+            </div>
+
+            <div class="footer">
+                <button type="submit" color="primary" mat-raised-button>Crear</button>
+            </div>
+        </form>
+    </article>
+
+  </section>

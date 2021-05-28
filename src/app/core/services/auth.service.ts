@@ -5,10 +5,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 @Injectable()
 export class AuthService {
 
-  public userData: Observable<firebase.user>;
-  // private UserArr: User[]; 
-  // private collection = 'users';
-  // private endPoint = 'https://portafolioangular-135a6.firebaseio.com';
+  public userData: Observable<any>;
 
   constructor(
     private afAuth: AngularFireAuth

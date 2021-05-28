@@ -34,7 +34,7 @@ export class LoginComponent {
       }); 
     }
 
-  onLogin() {
+  onSubmit() {
     if (this.form.valid) {
       const { email, password } = this.form.value;
       this.authSvc.loginByEmail(email, password)
