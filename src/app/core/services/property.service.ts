@@ -4,12 +4,14 @@ import { finalize, map } from 'rxjs/operators';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { Property } from '@core/interfaces/property.interface';
+import { FileUpload } from '@core/interfaces/file-upload.interface';
 
 @Injectable()
 export class PropertyService {
 
   private filePath: any;
-  private fileFolder = 'propiedades';
+  private assetsFolder = 'propiedades';
+  private downloadURL!: Observable<string>;
   private readonly collectionName = 'propiedades';
 
   constructor(
@@ -46,35 +48,34 @@ export class PropertyService {
       .doc(item.id).update(item);
   }
 
-  public beforeCreateAndUpdate(property: Property, file: any): void {
-    this._fileUpload(property, file);
-  }
+  // public beforeCreateAndUpdate(property: Property, file: any): void {
+  //   this._fileUpload(property, file);
+  // }
 
-  private _createOrUpdate(item: Property) {
-    const property: Property = {
-      img: item.img,
-      type: item.type,
-      price: item.price,
-      imgRef: this.filePath
-    };
-    // TODO edit
-    this.afs.collection<Property>(this.collectionName).add(property);
-  }
-
-  private _fileUpload(property: Property, file: any) {
-    this.filePath = `${this.fileFolder}/${file.name}`;
+  public fileUpload(property: Property, file: any) {
+    this.filePath = `${this.assetsFolder}/${file.name}`;
     const fileRef = this.storage.ref(this.filePath);
     const task = this.storage.upload(this.filePath, file);
 
-    task.snapshotChanges()    
+    return task.snapshotChanges()    
       .pipe(
         finalize(() => {
-          fileRef.getDownloadURL().subscribe(fileUrl => {
-            property.img = fileUrl;
-            this._createOrUpdate(property);
+          fileRef.getDownloadURL().subscribe(downloadURL => {
+            this.downloadURL = downloadURL;
+            this._create(property);
           })
         })
-      ).subscribe();
+      );
+  }
+
+  private _create(item: Property): void {
+    const property: Property = {
+      type: item.type,
+      price: item.price,
+      img: this.downloadURL,
+      imgRef: this.filePath
+    };
+    this.afs.collection<Property>(this.collectionName).add(property);
   }
 
 }
