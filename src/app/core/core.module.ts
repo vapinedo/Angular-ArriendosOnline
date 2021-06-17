@@ -9,6 +9,7 @@ import { DatetimeService } from './services/datetime.service';
 import { MainmenuService } from './services/mainmenu.service';
 import { PropertyService } from './services/property.service';
 import { ValidatorsService } from './services/validators.service';
+import { FileuploaderService } from './services/fileuploader.service';
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import { ValidatorsService } from './services/validators.service';
     DatetimeService,
     MainmenuService,
     PropertyService,
-    ValidatorsService
+    ValidatorsService,
+    FileuploaderService
   ]
 })
 export class CoreModule { }

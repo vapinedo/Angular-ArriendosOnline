@@ -5,8 +5,8 @@
         <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
 
             <mat-form-field appearance="outline">
-                <mat-label>Tipo de propiedad</mat-label>
-                <input matInput type="text" formControlName="type">
+                <mat-label>Categoría</mat-label>
+                <input matInput type="text" formControlName="category">
             </mat-form-field>       
     
             <mat-form-field appearance="outline">
@@ -14,12 +14,22 @@
                 <input matInput type="text" formControlName="price">
             </mat-form-field>       
 
-            <!-- <div class="file-upload">
-                <img *ngFor="let url of imageUrls" height="120" [src]="url">
-                <input type="file" (change)="onSelectImage($event)" multiple accept=".jpeg,.jpg,.png">
-            </div> -->
+            <mat-form-field appearance="outline">
+                <mat-label>Imágenes</mat-label>
+                <input readonly matInput type="text" formControlName="images">
+            </mat-form-field>       
 
-            <app-file-uploader></app-file-uploader>
+            <article>
+                <p *ngIf="isInvalidFormats">Solo puede subir imágenes JPEG, JPG o PNG</p>
+                <input 
+                    multiple
+                    type="file" 
+                    class="mb-4"
+                    [accept]="allowedFormats"
+                    (input)="onFileChange($event)">
+
+                <img class="mb-4" height="120px" [src]="url" *ngFor="let url of imgPreviewUrls">
+            </article>
 
             <div class="footer">
                 <button type="submit" color="primary" mat-raised-button>Crear</button>

@@ -32,7 +32,7 @@ export class PropertyEditComponent implements OnInit, OnDestroy {
       id: [null, Validators.required],
       img: [null, Validators.required],
       type: [null, [Validators.required]],
-      price: [null, [Validators.required]]
+      category: [null, [Validators.required]]
     }); 
   }
 
@@ -42,14 +42,13 @@ export class PropertyEditComponent implements OnInit, OnDestroy {
 
   private _setForm(): void {
     this.subscriptions.add(
-      this.propertySvc.getOne(this.propertyID)
+      this.propertySvc.readOne(this.propertyID)
         .subscribe({
           next: data => {
             this.form.patchValue({
-              img: data?.img,
-              type: data?.type,
               price: data?.price,
-              id: this.propertyID
+              id: this.propertyID,
+              type: data?.category
             });
           },
           error: err => this.messageSvc.error(err)

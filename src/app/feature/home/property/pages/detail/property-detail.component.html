@@ -4,9 +4,9 @@
     <article
         *ngIf="property$ | async as property; else loading"
         class="box animate__animated animate__fadeIn animate_faster">
-        <h3>{{ property.type }}</h3>
+        <h3>{{ property.category }}</h3>
         <p>${{ property.price }}</p>
-        <img [src]="property.img" width="500">
+        <!-- <img [src]="property.img" width="500"> -->
     </article>
 
     <ng-template #loading>

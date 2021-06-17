@@ -9,7 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SpinnerComponent } from './components/loaders/spinner.component';
 import { SubmenuComponent } from './components/layout/sidebar/submenu/submenu.component';
 import { MainmenuComponent } from './components/layout/sidebar/mainmenu/mainmenu.component';
-import { FileUploaderComponent } from './components/file-uploader/file-uploader.component';
+import { FileuploaderComponent } from './components/fileuploader/fileuploader.component';
 
 const modules = [
   CommonModule,
@@ -30,7 +30,7 @@ const components = [
   SpinnerComponent,
   SubmenuComponent,
   MainmenuComponent,
-  FileUploaderComponent
+  FileuploaderComponent
 ];
 
 @NgModule({
