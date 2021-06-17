@@ -20,7 +20,7 @@ export class PropertyAdminComponent implements OnInit, OnDestroy {
 
   public title = 'Propiedades';
   public dataSource = new MatTableDataSource();
-  public displayedColumns: string[] = ['img', 'type', 'price', 'acciones'];
+  public displayedColumns: string[] = ['img', 'category', 'price', 'acciones'];
 
   constructor(
     private messageSvc: MessageService,
@@ -32,6 +32,7 @@ export class PropertyAdminComponent implements OnInit, OnDestroy {
       this.propertySvc.read()
         .subscribe({
           next: data => {
+            console.log(data);
             this.dataSource.data = data;
             this.dataSource.paginator = this.paginator;
             this.dataSource.sort = this.sort;
