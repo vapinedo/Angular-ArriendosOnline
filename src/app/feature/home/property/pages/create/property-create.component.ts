@@ -1,4 +1,5 @@
 import { SubSink } from 'subsink';
+import { finalize } from 'rxjs/operators';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Property } from '@core/interfaces/property.interface';
 import { MessageService } from '@core/services/message.service';
@@ -56,14 +57,12 @@ export class PropertyCreateComponent implements OnInit, OnDestroy {
       const image = this.images[0];
       const property: Property = this._prepareDataBeforeSend(this.form.value);
 
-      this.subscriptions.add(
-        this.propertySvc.fileUpload(property, image)
-          .subscribe({
-            next: data => console.log('Create property', data),
-            error: err => console.log('Error', err),
-            complete: () => console.log('Create property complete')
-          })
-      );
+      this.propertySvc.fileUpload(property, image)
+        // .subscribe({
+        //   next: data => console.log('Create property', data),
+        //   error: err => console.log('Error', err),
+        //   complete: () => console.log('Create property complete')
+        // })
     }
     return;
   }

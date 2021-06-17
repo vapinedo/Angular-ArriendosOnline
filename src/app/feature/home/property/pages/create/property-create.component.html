@@ -14,10 +14,12 @@
                 <input matInput type="text" formControlName="price">
             </mat-form-field>       
 
-            <div class="file-upload">
+            <!-- <div class="file-upload">
                 <img *ngFor="let url of imageUrls" height="120" [src]="url">
-                <input type="file" (change)="onSelectImage($event)" multiple>
-            </div>
+                <input type="file" (change)="onSelectImage($event)" multiple accept=".jpeg,.jpg,.png">
+            </div> -->
+
+            <app-file-uploader></app-file-uploader>
 
             <div class="footer">
                 <button type="submit" color="primary" mat-raised-button>Crear</button>

@@ -37,24 +37,24 @@ export class PropertyEditComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this._setForm();
+  }
+
+  private _setForm(): void {
     this.subscriptions.add(
       this.propertySvc.getOne(this.propertyID)
         .subscribe({
           next: data => {
-            this._initValuesForm(data);
+            this.form.patchValue({
+              img: data?.img,
+              type: data?.type,
+              price: data?.price,
+              id: this.propertyID
+            });
           },
           error: err => this.messageSvc.error(err)
         })
     );
-  }
-
-  private _initValuesForm(data: any): void {
-    this.form.patchValue({
-      img: data.img,
-      type: data.type,
-      price: data.price,
-      id: this.propertyID
-    });
   }
 
   onSelectImage(event: any): void {
@@ -75,13 +75,9 @@ export class PropertyEditComponent implements OnInit, OnDestroy {
 
   onSubmit(): void {
     if (this.form.valid) {
+      const image = this.images[0];
       const property = this.form.value;
-
-      if (this.images) {
-        this.propertySvc.beforeCreateAndUpdate(property, this.images[0]);
-      } else {
-        this.propertySvc.update(property);
-      }
+      this.propertySvc.update(property, image);
     }
     return;
   }

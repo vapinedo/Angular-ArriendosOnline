@@ -13,7 +13,7 @@ const modules = [
 ];
 
 const components = [
-  DashboardComponent
+  DashboardComponent,
 ];
 
 @NgModule({

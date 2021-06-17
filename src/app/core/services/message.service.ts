@@ -7,8 +7,9 @@ export class MessageService {
 
   constructor(private toastr: ToastrService) { }
 
-  success(message: string): ActiveToast<any> {
-    return this.toastr.success(message);
+  success(message?: string): ActiveToast<any> {
+    const msg = message ? message : 'Registro creado exitosamente!';
+    return this.toastr.success(msg);
   }
 
   error(message: string): ActiveToast<any> {

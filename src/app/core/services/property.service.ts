@@ -1,17 +1,16 @@
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { finalize, map } from 'rxjs/operators';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { Property } from '@core/interfaces/property.interface';
 import { FileUpload } from '@core/interfaces/file-upload.interface';
+import { AngularFirestore, DocumentReference } from '@angular/fire/firestore';
 
 @Injectable()
 export class PropertyService {
 
   private filePath: any;
-  private assetsFolder = 'propiedades';
-  private downloadURL!: Observable<string>;
+  private readonly assetsFolder = 'propiedades';
   private readonly collectionName = 'propiedades';
 
   constructor(
@@ -43,14 +42,14 @@ export class PropertyService {
       .doc(id).delete();
   }
 
-  public update(item: Property): Promise<void> {
-    return this.afs.collection<Property>(this.collectionName)
-      .doc(item.id).update(item);
+  public update(property: Property, newFile?: any) {
+    if (newFile) {
+      return this.fileUpload(property, newFile);
+    } else {
+      return this.afs.collection<Property>(this.collectionName)
+        .doc(property.id).update(property);
+    }
   }
-
-  // public beforeCreateAndUpdate(property: Property, file: any): void {
-  //   this._fileUpload(property, file);
-  // }
 
   public fileUpload(property: Property, file: any) {
     this.filePath = `${this.assetsFolder}/${file.name}`;
@@ -61,21 +60,39 @@ export class PropertyService {
       .pipe(
         finalize(() => {
           fileRef.getDownloadURL().subscribe(downloadURL => {
-            this.downloadURL = downloadURL;
-            this._create(property);
+            property.img = downloadURL;
+            // this._create(property);
+            return downloadURL;
           })
         })
       );
+
+    // return task.snapshotChanges()    
+    //   .pipe(
+    //     finalize(() => {
+    //       fileRef.getDownloadURL().subscribe(downloadURL => {
+    //         property.img = downloadURL;
+    //         // this._create(property);
+    //         return downloadURL;
+    //       })
+    //     })
+    //   );
   }
 
-  private _create(item: Property): void {
-    const property: Property = {
-      type: item.type,
-      price: item.price,
-      img: this.downloadURL,
-      imgRef: this.filePath
-    };
-    this.afs.collection<Property>(this.collectionName).add(property);
+  private _create(property: Property) {
+    console.log('CREATE', property);
+    // const property: Property = {
+    //   type: item.type,
+    //   price: item.price,
+    //   imgRef: this.filePath
+    // };
+
+    // if (property.id) {
+    //   return this.afs.collection<Property>(this.collectionName)
+    //     .doc(item.id).update(property);
+    // } else {
+    //   return this.afs.collection<Property>(this.collectionName).add(property);
+    // }
   }
 
 }

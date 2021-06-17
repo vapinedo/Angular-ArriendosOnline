@@ -14,6 +14,7 @@
             </mat-form-field>       
 
             <div class="file-upload">
+                <img height="120" [src]="form.controls.img.value">
                 <img *ngFor="let url of imageUrls" height="120" [src]="url">
                 <input type="file" (change)="onSelectImage($event)" multiple>
             </div>
