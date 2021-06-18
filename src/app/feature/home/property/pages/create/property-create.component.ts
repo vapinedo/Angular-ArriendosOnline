@@ -1,4 +1,5 @@
 import { SubSink } from 'subsink';
+import { Router } from '@angular/router';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Property } from '@core/interfaces/property.interface';
 import { MessageService } from '@core/services/message.service';
@@ -19,6 +20,7 @@ export class PropertyCreateComponent implements OnInit, OnDestroy {
   private files: any = null;
   public imageUrls: string[] = [];
   public title = 'Propiedad Crear';
+  public showSpinner: boolean = false;
   public imgPreviewUrls: string[] = [];
 
   public isInvalidFormats: boolean = false;
@@ -26,6 +28,7 @@ export class PropertyCreateComponent implements OnInit, OnDestroy {
   private readonly validFormats: string[] = ['image/jpeg', 'image/png'];
 
   constructor(
+    private router: Router,
     private fb: FormBuilder,
     private messageSvc: MessageService,
     private propertySvc: PropertyService,
@@ -55,9 +58,10 @@ export class PropertyCreateComponent implements OnInit, OnDestroy {
 
   private _generateImgPreview(files: any): void {
     for(let i=0; i<files.length; i++) { 
+      const file = files[i];
       const reader = new FileReader();
       reader.onload = () => this.imgPreviewUrls.push(reader.result as string);
-      reader.readAsDataURL(files[i]);
+      reader.readAsDataURL(file);
     }
   }
 
@@ -73,6 +77,8 @@ export class PropertyCreateComponent implements OnInit, OnDestroy {
 
   async onSubmit() {
     if (this.form.valid) {
+      this.form.disable();
+      this.showSpinner = true;
       const formData = this.form.value;
 
       try {
@@ -83,9 +89,12 @@ export class PropertyCreateComponent implements OnInit, OnDestroy {
         }
         const filesURL = await Promise.all(promises);
         const newProperty = this._prepareDataBeforeSend(formData, filesURL);
-
         const propertyCreated = await this.propertySvc.create(newProperty);
-        console.log(propertyCreated);
+
+        this.showSpinner = false;
+        this.router.navigate(['/home/propiedades']);
+        
+        this.messageSvc.success();
       }
       catch (err) {
         console.log('ERROR', err);

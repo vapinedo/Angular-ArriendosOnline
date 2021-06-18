@@ -10,9 +10,39 @@ body { font-family: Roboto, "Helvetica Neue", sans-serif; }
 /* -------------------------------------------------------
     Mat Forms
  ------------------------------------------------------- */
- .mat-form-field {
+.mat-form-field {
      width: 100%;
- }
+     margin-bottom: 1em;
+}
+.fileupload {
+    overflow: hidden;
+    position: relative;
+    display: inline-block;
+
+    button {
+        color: gray;
+        font-size: 1em;
+        font-weight: bold;
+        padding: 8px 20px;
+        position: relative;
+        border-radius: 4px;
+        border: 2px solid gray;
+        background-color: white;
+    }
+    img {
+        height: 120px;
+        margin: 0 .7em;
+        border-radius: 4px;
+    }
+    input[type=file] {
+        top: 0;
+        left: 0;
+        opacity: 0;
+        height: 100%;
+        width: 100%;
+        position: absolute;
+    }
+}
 
  /* -------------------------------------------------------
     Mat Table

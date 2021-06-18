@@ -13,16 +13,17 @@ import { FileuploaderComponent } from './components/fileuploader/fileuploader.co
 
 const modules = [
   CommonModule,
+  ToastrModule,
   RouterModule,
   MaterialModule,
   ReactiveFormsModule,
   FormsModule,
   ToastrModule.forRoot({
     maxOpened: 3,
+    timeOut: 7000,
     autoDismiss: true,
-    timeOut: 5000,
-    positionClass: 'toast-top-right',
     preventDuplicates: true,
+    positionClass: 'toast-top-right'
   })
 ];
 
