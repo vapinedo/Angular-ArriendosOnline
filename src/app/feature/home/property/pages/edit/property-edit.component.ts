@@ -1,5 +1,5 @@
 import { SubSink } from 'subsink';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MessageService } from '@core/services/message.service';
 import { PropertyService } from '@core/services/property.service';
@@ -14,24 +14,31 @@ export class PropertyEditComponent implements OnInit, OnDestroy {
 
   private subscriptions = new SubSink();
 
-  public images: any;
-  public propertyID: any;
   public form: FormGroup;
-  public imageUrls: string[] = [];
-  public title = 'Actualizar Propiedad';
+  public propertyID: any;
+  private files: any = null;
+  public showSpinner: boolean = false;
+  public imgPreviewUrls: string[] = [];
+  public title = 'Propiedad Actualizar';
+
+  public isInvalidFormats: boolean = false;
+  public readonly allowedFormats = '.jpeg,.jpg,.png,.svg';
+  private readonly validFormats: string[] = ['image/jpeg', 'image/png'];
 
   constructor(
+    // private router: Router,
     private fb: FormBuilder,
     private messageSvc: MessageService,
     private propertySvc: PropertyService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    // private fileuploaderSvc: FileuploaderService
   ) {
     this.propertyID = activatedRoute.snapshot.paramMap.get('id');
 
     this.form = this.fb.group({
       id: [null, Validators.required],
-      img: [null, Validators.required],
-      type: [null, [Validators.required]],
+      price: [null, Validators.required],
+      images: [null, [Validators.required]],
       category: [null, [Validators.required]]
     }); 
   }
@@ -46,37 +53,26 @@ export class PropertyEditComponent implements OnInit, OnDestroy {
         .subscribe({
           next: data => {
             this.form.patchValue({
-              price: data?.price,
               id: this.propertyID,
-              type: data?.category
+              price: data?.price,
+              images: 'imagenes',
+              category: data?.category
             });
+            this.imgPreviewUrls = (data?.images) ? data?.images : [];
           },
           error: err => this.messageSvc.error(err)
         })
     );
   }
 
-  onSelectImage(event: any): void {
-    if (event.target.files) {
-      const images = event.target.files;
-      this.images = images;
-
-      for (let i=0; i<images.length; i++) {
-        let reader = new FileReader();
-        reader.readAsDataURL(images[i]);
-
-        reader.onload = (events:any) => {
-          this.imageUrls.push(events.target.result);  
-        }
-      }
-    }
+  onFileChange(event: any): void {
   }
 
   onSubmit(): void {
     if (this.form.valid) {
-      const image = this.images[0];
-      const property = this.form.value;
-      this.propertySvc.update(property, image);
+      // const image = this.images[0];
+      // const property = this.form.value;
+      // this.propertySvc.update(property, image);
     }
     return;
   }

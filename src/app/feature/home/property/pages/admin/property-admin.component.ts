@@ -32,7 +32,6 @@ export class PropertyAdminComponent implements OnInit, OnDestroy {
       this.propertySvc.read()
         .subscribe({
           next: data => {
-            console.log(data);
             this.dataSource.data = data;
             this.dataSource.paginator = this.paginator;
             this.dataSource.sort = this.sort;
