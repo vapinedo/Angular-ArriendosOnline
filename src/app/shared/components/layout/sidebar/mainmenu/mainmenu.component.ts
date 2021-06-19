@@ -12,9 +12,9 @@ export class MainmenuComponent implements OnDestroy {
   
   private subscriptions = new SubSink();
   
-  public menu!: any[];
-  public submenuActive!: object;
+  public menuList!: any[];
   public sidedarIsOpen = false;
+  public currentActiveMenu!: object;
   
   constructor(
     private messageSvc: MessageService,
@@ -26,18 +26,19 @@ export class MainmenuComponent implements OnDestroy {
   private _setMenu() {
     this.subscriptions.add(
       this.mainmenuSvc.getMenu()
-        .subscribe({
-          next: data => {
-            this.menu = data;
+      .subscribe({
+        next: data => {
+            console.log(data);
+            this.menuList = data;
           },
           error: err => this.messageSvc.error(err)
         })
-    );
-  }
-
-  onOpenSidebar(selectedItemMenu: object) {
-    this.submenuActive = selectedItemMenu;
+        );
+      }
+      
+  onShowMenu(menu: object) {
     this.sidedarIsOpen = true;
+    this.currentActiveMenu = menu;
   }
 
   onCloseSidebar(): void {

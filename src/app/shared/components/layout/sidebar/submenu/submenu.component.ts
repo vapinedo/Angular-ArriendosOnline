@@ -7,7 +7,7 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 })
 export class SubmenuComponent implements OnChanges {
 
-  @Input() submenu: any;
+  @Input() menuToShow: any;
   public submenuIsReady = false; 
 
   constructor() { }

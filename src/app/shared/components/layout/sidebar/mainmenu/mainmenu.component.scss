@@ -12,40 +12,40 @@
     .submenu { width: 100%; }
 
     &.expanded {
-        display: flex;
-        justify-content: flex-start;
+        // display: flex;
         min-width: 280px;
         max-width: 280px;
         text-align: center;
+        // justify-content: flex-start;
     }
 
     .main-menu {
-        background-color: $azul-500;
-        display: block;
         height: 100%;
         width: 94px;
+        display: block;
+        background-color: $azul-500;
 
         header { 
+            padding: 10px; 
             cursor: pointer;
             text-align: center;
-            padding: 10px; 
 
             mat-icon {
                 color: $blanco-500;
             }
         }
         a {
-            font-size: 12px;
-            font-family: 'keep_calmlight', sans-serif;
-            align-items: center;
-            border-left: 3px solid transparent;
-            color: $blanco-500;
             display: flex;
-            flex-direction: column;
-            padding: 20px 10px;
+            font-size: 12px;
             transition: 0.4s;
+            color: $blanco-500;
+            padding: 20px 10px;
+            align-items: center;
             text-decoration: none;
+            flex-direction: column;
+            border-left: 3px solid transparent;
             transition-property: background-color;
+            font-family: 'keep_calmlight', sans-serif;
     
             mat-icon {
                 color: $blanco-500;
@@ -54,8 +54,8 @@
                 margin-top: 12px;
             }
             &.active {
-                border-left-color: $blanco-500;
                 background-color: $azul-300;
+                border-left-color: $blanco-500;
             }
             &:hover { background-color: $azul-300; }
         }
