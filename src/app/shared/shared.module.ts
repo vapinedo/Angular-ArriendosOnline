@@ -7,8 +7,7 @@ import { MaterialModule } from '../material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { SpinnerComponent } from './components/loaders/spinner.component';
-import { SubmenuComponent } from './components/layout/sidebar/submenu/submenu.component';
-import { MainmenuComponent } from './components/layout/sidebar/mainmenu/mainmenu.component';
+import { SidebarComponent } from './components/layout/sidebar/sidebarcomponent';
 import { FileuploaderComponent } from './components/fileuploader/fileuploader.component';
 
 const modules = [
@@ -28,9 +27,8 @@ const modules = [
 ];
 
 const components = [
+  SidebarComponent,
   SpinnerComponent,
-  SubmenuComponent,
-  MainmenuComponent,
   FileuploaderComponent
 ];
 

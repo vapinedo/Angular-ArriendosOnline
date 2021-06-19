@@ -4,17 +4,17 @@ import { MessageService } from '@core/services/message.service';
 import { MainmenuService } from '@core/services/mainmenu.service';
 
 @Component({
-  selector: 'app-mainmenu',
-  templateUrl: './mainmenu.component.html',
-  styleUrls: ['./mainmenu.component.scss']
+  selector: 'app-sidebar',
+  templateUrl: './sidebar.component.html',
+  styleUrls: ['./sidebar.component.scss']
 })
-export class MainmenuComponent implements OnDestroy {
+export class SidebarComponent implements OnDestroy {
   
   private subscriptions = new SubSink();
   
   public menuList!: any[];
   public sidedarIsOpen = false;
-  public currentActiveMenu!: object;
+  public profileImage: string = '';
   
   constructor(
     private messageSvc: MessageService,
@@ -26,23 +26,18 @@ export class MainmenuComponent implements OnDestroy {
   private _setMenu() {
     this.subscriptions.add(
       this.mainmenuSvc.getMenu()
-      .subscribe({
-        next: data => {
-            console.log(data);
-            this.menuList = data;
-          },
+        .subscribe({
+          next: data => {
+              console.log(data);
+              this.menuList = data;
+            },
           error: err => this.messageSvc.error(err)
         })
-        );
-      }
-      
-  onShowMenu(menu: object) {
-    this.sidedarIsOpen = true;
-    this.currentActiveMenu = menu;
+    );
   }
-
-  onCloseSidebar(): void {
-    this.sidedarIsOpen = false;
+      
+  onToggleSidebar(): void {
+    this.sidedarIsOpen = !this.sidedarIsOpen;
   }
 
   ngOnDestroy(): void {
