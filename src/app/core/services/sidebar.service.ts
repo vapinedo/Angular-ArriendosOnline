@@ -2,29 +2,29 @@ import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 
 @Injectable()
-export class MainmenuService {
+export class SidebarService {
 
 	private readonly MILISECONDS_TO_RESPONSE = 0;
 
 	private readonly menu: any[] = [
 		{
-			title: 'Usuarios',
-			icon: 'group',
+			path: '/',
+			icon: 'bx bx-grid-alt',
+			linkName: 'Dashboard',
+		},
+		{
+			
+			icon: 'bx bx-collection',
+			linkName: 'Category',
 			submenu: [
-				{
-					title: 'Motor de Reglas',
-					items: [
-						{ 
-							title: 'Normativas', 
-							path: '/' 
-						}
-					],
-				}
+				{ title: 'HTML & CSS', path: '/' },
+				{ title: 'JavaScript', path: '/' },
+				{ title: 'PHP & MySQL', path: '/' }
 			]
 		}
 	];
 
-    getMenu(): Observable<any> {
+    read(): Observable<any> {
         return new Observable(observer => {
             setTimeout(() => {
                 observer.next(this.menu);

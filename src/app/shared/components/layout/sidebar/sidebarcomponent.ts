@@ -1,7 +1,7 @@
 import { SubSink } from 'subsink';
 import { Component, OnDestroy } from '@angular/core';
 import { MessageService } from '@core/services/message.service';
-import { MainmenuService } from '@core/services/mainmenu.service';
+import { SidebarService } from '@core/services/sidebar.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -12,25 +12,26 @@ export class SidebarComponent implements OnDestroy {
   
   private subscriptions = new SubSink();
   
-  public menuList!: any[];
-  public sidedarIsOpen = false;
+  public menu: any;
   public profileImage: string = '';
+  public showSubmenu: boolean = false;
+  public sidedarIsOpen: boolean = false;
   
   constructor(
-    private messageSvc: MessageService,
-    private mainmenuSvc: MainmenuService
+    private sidebarSvc: SidebarService,
+    private messageSvc: MessageService
   ) { 
     this._setMenu();
   }
 
   private _setMenu() {
     this.subscriptions.add(
-      this.mainmenuSvc.getMenu()
+      this.sidebarSvc.read()
         .subscribe({
           next: data => {
               console.log(data);
-              this.menuList = data;
-            },
+              this.menu = data;
+          },
           error: err => this.messageSvc.error(err)
         })
     );
@@ -38,6 +39,10 @@ export class SidebarComponent implements OnDestroy {
       
   onToggleSidebar(): void {
     this.sidedarIsOpen = !this.sidedarIsOpen;
+  }
+
+  onToggleSubmenu(): void {
+    this.showSubmenu = !this.showSubmenu;
   }
 
   ngOnDestroy(): void {
