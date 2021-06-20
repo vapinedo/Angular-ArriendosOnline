@@ -3,7 +3,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MessageService } from '@core/services/message.service';
-import { PropertyService } from '@core/services/property.service';
+import { PropertyService } from '@core/services/properties/property.service';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 
 @Component({
@@ -36,7 +36,7 @@ export class PropertyAdminComponent implements OnInit, OnDestroy {
             this.dataSource.paginator = this.paginator;
             this.dataSource.sort = this.sort;
           },
-          error: err => this.messageSvc.error('Error al cargar información')
+          error: err => this.messageSvc.error(err)
         })
     );
   }
@@ -47,9 +47,9 @@ export class PropertyAdminComponent implements OnInit, OnDestroy {
         if (result.isConfirmed) {
           this.propertySvc.delete(id) 
             .then(() => {
-              this.messageSvc.success('Registro eliminado exitosamente')
+              this.messageSvc.success()
             })
-            .catch(error => this.messageSvc.error('Error al eliminar registro'))
+            .catch(err => this.messageSvc.error(err))
         }
       })
       .catch(error => this.messageSvc.error(error));

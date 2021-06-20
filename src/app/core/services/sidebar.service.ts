@@ -8,18 +8,16 @@ export class SidebarService {
 
 	private readonly menu: any[] = [
 		{
-			path: '/',
+			path: '/home',
 			icon: 'bx bx-grid-alt',
 			linkName: 'Dashboard',
 		},
 		{
-			
-			icon: 'bx bx-collection',
-			linkName: 'Category',
+			icon: 'bx bx-home-smile',
+			linkName: 'Propiedades',
 			submenu: [
-				{ title: 'HTML & CSS', path: '/' },
-				{ title: 'JavaScript', path: '/' },
-				{ title: 'PHP & MySQL', path: '/' }
+				{ title: 'Listado', path: '/home/propiedades' },
+				{ title: 'Categorías', path: '/home/propiedad-categorias' },
 			]
 		}
 	];

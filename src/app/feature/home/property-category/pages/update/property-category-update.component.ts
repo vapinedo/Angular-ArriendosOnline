@@ -6,11 +6,11 @@ import { PropertyService } from '@core/services/properties/property.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-property-update',
-  templateUrl: './property-update.component.html',
-  styleUrls: ['./property-update.component.scss']
+  selector: 'app-property-category-update',
+  templateUrl: './property-category-update.component.html',
+  styleUrls: ['./property-category-update.component.scss']
 })
-export class PropertyUpdateComponent implements OnInit, OnDestroy {
+export class PropertyCategoryUpdateComponent implements OnInit, OnDestroy {
 
   private subscriptions = new SubSink();
 

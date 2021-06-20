@@ -1,16 +1,13 @@
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { finalize, map } from 'rxjs/operators';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
-import { Property } from '@core/interfaces/property.interface';
-import { FileUpload } from '@core/interfaces/file-upload.interface';
-import { AngularFirestore, DocumentReference } from '@angular/fire/firestore';
+import { Property } from '@core/interfaces/prroperty/property.interface';
 
 @Injectable()
 export class PropertyService {
 
-  private filePath: any;
-  private readonly assetsFolder = 'propiedades';
   private readonly collectionName = 'propiedades';
 
   constructor(
@@ -18,8 +15,8 @@ export class PropertyService {
     private storage: AngularFireStorage
   ) {}
 
-  public create(property: Property): Promise<any> {
-    return this.afs.collection<Property>(this.collectionName).add(property);
+  public create(item: Property): Promise<any> {
+    return this.afs.collection<Property>(this.collectionName).add(item);
   }
 
   public read(): Observable<any> {
@@ -41,9 +38,9 @@ export class PropertyService {
       .valueChanges();
   }
 
-  public update(property: Property, newFile?: any) {
+  public update(item: Property, newFile?: any) {
     return this.afs.collection<Property>(this.collectionName)
-      .doc(property.id).update(property);
+      .doc(item.id).update(item);
   }
 
   public delete(id: string): Promise<void> {

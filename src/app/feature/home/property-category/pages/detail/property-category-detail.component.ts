@@ -5,11 +5,11 @@ import { Property } from '@core/interfaces/prroperty/property.interface';
 import { PropertyService } from '@core/services/properties/property.service';
 
 @Component({
-  selector: 'app-property-detail',
-  templateUrl: './property-detail.component.html',
-  styleUrls: ['./property-detail.component.scss']
+  selector: 'app-property-category-detail',
+  templateUrl: './property-category-detail.component.html',
+  styleUrls: ['./property-category-detail.component.scss']
 })
-export class PropertyDetailComponent implements OnInit {
+export class PropertyCategoryDetailComponent implements OnInit {
 
   public title = 'Propiedad Detalle';
   public property$!: Observable<Property | undefined>;

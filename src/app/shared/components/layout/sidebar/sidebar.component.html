@@ -19,7 +19,7 @@
         <ul class="sub-menu" *ngIf="item.submenu">
           <li><a class="link_name" href="#">{{ item.linkName }}</a></li>
           <li *ngFor="let subItem of item.submenu">
-            <a href="#">{{ subItem.title }}</a>
+            <a [routerLink]="subItem.path">{{ subItem.title }}</a>
           </li>
         </ul>
       </article>

@@ -11,7 +11,7 @@ export class MessageService {
     const msg = message ? message : 'Registro creado exitosamente!';
     return this.toastr.success(msg);
   }
-
+  
   error(message: string): ActiveToast<any> {
     return this.toastr.error(message);
   }

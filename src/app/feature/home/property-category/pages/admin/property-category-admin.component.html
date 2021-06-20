@@ -1,0 +1,44 @@
+<h2>{{ title }}</h2>
+        
+<article class="box animate__animated animate__fadeIn animate_faster">
+    <div class="table-search">
+        <div class="input-search">
+            <mat-icon>search</mat-icon>
+            <input matInput 
+                #inputSearch
+                autocomplete="off"
+                placeholder="Buscar ...">
+        </div>
+        <button (click)="onCreate()" mat-raised-button color="primary">Crear nuevo</button>
+    </div>
+
+    <table mat-table [dataSource]="dataSource" matSort class="animate__animated animate__fadeIn animate__faster">
+        
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Categoría</th>
+            <td mat-cell *matCellDef="let item">{{ item?.name | titlecase }}</td>
+        </ng-container>
+        
+        <ng-container matColumnDef="visible">
+            <th mat-header-cell *matHeaderCellDef>Visible?</th>
+            <td mat-cell *matCellDef="let item">{{ item?.visible }}</td>
+        </ng-container>
+        
+        <ng-container matColumnDef="acciones">
+            <th mat-header-cell *matHeaderCellDef class="text-center">Acciones</th>
+            <td mat-cell *matCellDef="let item" class="tools text-center">
+                <i matTooltip="Editar" [routerLink]="['editar', item.id]" class="material-icons-outlined azul-300">edit</i>
+                <i matTooltip="Ver Detalle" [routerLink]="['detalle', item.id]" class="material-icons-outlined azul-300">remove_red_eye</i>
+                <i matTooltip="Eliminar" (click)="onDelete(item.id)" class="material-icons-outlined azul-300">delete</i>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    
+        <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">No se encontraron registros</td>
+        </tr>
+    </table>
+    <mat-paginator showFirstLastButtons [pageSizeOptions]="[7, 20, 50, 100]"></mat-paginator>
+</article>

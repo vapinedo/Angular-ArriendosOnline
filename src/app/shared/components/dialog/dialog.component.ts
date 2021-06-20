@@ -4,19 +4,19 @@ import { Component,
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-ventana-modal',
-  templateUrl: './ventana-modal.component.html',
-  styleUrls: ['./ventana-modal.component.scss']
+  selector: 'app-dialog',
+  templateUrl: './dialog.component.html',
+  styleUrls: ['./dialog.component.scss']
 })
-export class VentanaModalComponent implements OnInit, OnDestroy {
+export class DialogComponent implements OnInit, OnDestroy {
 
-  public modalTitle: string;
-  public componentRef: ComponentRef<any>;
-  @ViewChild('target', { read: ViewContainerRef, static: true }) container: ViewContainerRef;
+  public dialogTitle!: string;
+  public componentRef!: ComponentRef<any>;
+  @ViewChild('target', { read: ViewContainerRef, static: true }) container!: ViewContainerRef;
 
   constructor(
     private resolver: ComponentFactoryResolver,
-    public dialogRef: MatDialogRef<VentanaModalComponent>,
+    public dialogRef: MatDialogRef<DialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
@@ -26,7 +26,7 @@ export class VentanaModalComponent implements OnInit, OnDestroy {
     this.componentRef = this.container.createComponent(factory);
     this.componentRef.instance.dataFromModalWindow = this.data.dataComponent;
 
-    this.modalTitle = this.data.dataComponent.title;
+    this.dialogTitle = this.data.dataComponent.title;
   }
 
   close(): void {

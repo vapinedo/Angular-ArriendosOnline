@@ -7,9 +7,10 @@ import { AuthService } from './services/auth.service';
 import { MessageService } from './services/message.service';
 import { SidebarService } from './services/sidebar.service';
 import { DatetimeService } from './services/datetime.service';
-import { PropertyService } from './services/property.service';
 import { ValidatorsService } from './services/validators.service';
 import { FileuploaderService } from './services/fileuploader.service';
+import { PropertyService } from './services/properties/property.service';
+import { PropertyCategoryService } from './services/properties/property-category.service';
 
 @NgModule({
   imports: [
@@ -23,7 +24,8 @@ import { FileuploaderService } from './services/fileuploader.service';
     SidebarService,
     PropertyService,
     ValidatorsService,
-    FileuploaderService
+    FileuploaderService,
+    PropertyCategoryService
   ]
 })
 export class CoreModule { }

@@ -1,11 +1,11 @@
 import { SubSink } from 'subsink';
 import { Router } from '@angular/router';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Property } from '@core/interfaces/property.interface';
 import { MessageService } from '@core/services/message.service';
-import { PropertyService } from '@core/services/property.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Property } from '@core/interfaces/prroperty/property.interface';
 import { FileuploaderService } from '@core/services/fileuploader.service';
+import { PropertyService } from '@core/services/properties/property.service';
 
 @Component({
   selector: 'app-property-create',
@@ -37,7 +37,8 @@ export class PropertyCreateComponent implements OnInit, OnDestroy {
     this.form = this.fb.group({
       price: [null, [Validators.required]],
       images: [null, [Validators.required]],
-      category: [null, [Validators.required]]
+      category: [null, [Validators.required]],
+      visible: [false, [Validators.requiredTrue]]
     }); 
   }
 
@@ -96,9 +97,7 @@ export class PropertyCreateComponent implements OnInit, OnDestroy {
         
         this.messageSvc.success();
       }
-      catch (err) {
-        console.log('ERROR', err);
-      }
+      catch (err) { this.messageSvc.error(err); }
     }
     return;
   }
@@ -107,7 +106,8 @@ export class PropertyCreateComponent implements OnInit, OnDestroy {
     let property: Property = {
       images: filesURL,
       price: data.price,
-      category: data.category,
+      visible: data.visible,
+      category: data.category
     };
     return property;
   }

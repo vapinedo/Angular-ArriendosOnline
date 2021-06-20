@@ -30,7 +30,6 @@ export class SidebarComponent implements OnDestroy {
       this.sidebarSvc.read()
         .subscribe({
           next: data => {
-              console.log(data);
               this.menu = data;
           },
           error: err => this.messageSvc.error(err)
