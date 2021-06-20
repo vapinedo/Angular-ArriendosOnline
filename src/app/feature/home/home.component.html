@@ -1,9 +1,9 @@
 <main>
-  <app-sidebar></app-sidebar>
+  <app-sidebar [sidebarIsClosed]="sidebarIsClosed"></app-sidebar>
 
-  <section class="home-section">
+  <section class="home-section" [ngClass]="{'expanded': sidebarIsClosed}">
     <div class="home-content">
-      <i class='bx bx-menu'></i>
+      <i class='bx bx-menu' (click)="onToggleSidebar()"></i>
       <span class="text">Drop Down Sidebar</span>
     </div>
   </section>

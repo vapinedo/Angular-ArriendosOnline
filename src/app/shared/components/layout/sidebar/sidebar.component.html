@@ -1,13 +1,13 @@
-<aside class="sidebar" [ngClass]="{'close': sidedarIsOpen}" (click)="onToggleSubmenu()">
+<aside class="sidebar" [ngClass]="{'close': sidebarIsClosed}">
 
-  <header class="logo-details" (click)="onToggleSidebar()">
+  <header class="logo-details">
     <i class='bx bxl-periscope'></i>
     <span class="logo_name">Uribia Online</span>
   </header>
 
   <ul class="nav-links">
-    <li *ngFor="let item of menu" [ngClass]="{'showMenu': showSubmenu}" (click)="onToggleSubmenu()">
-      <article *ngIf="item.submenu; else simpleItemMenu">
+    <li *ngFor="let item of menu" [ngClass]="{'showMenu': showSubmenu}">
+      <article *ngIf="item.submenu; else simpleItemMenu" (click)="onToggleSubmenu()">
         <div class="iocn-link">
           <a>
             <i [class]="item.icon"></i>

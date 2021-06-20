@@ -1,5 +1,5 @@
 import { SubSink } from 'subsink';
-import { Component, OnDestroy } from '@angular/core';
+import { Component, Input, OnDestroy } from '@angular/core';
 import { MessageService } from '@core/services/message.service';
 import { SidebarService } from '@core/services/sidebar.service';
 
@@ -15,7 +15,8 @@ export class SidebarComponent implements OnDestroy {
   public menu: any;
   public profileImage: string = '';
   public showSubmenu: boolean = false;
-  public sidedarIsOpen: boolean = false;
+
+  @Input() sidebarIsClosed: boolean = false;
   
   constructor(
     private sidebarSvc: SidebarService,
@@ -37,10 +38,6 @@ export class SidebarComponent implements OnDestroy {
     );
   }
       
-  onToggleSidebar(): void {
-    this.sidedarIsOpen = !this.sidedarIsOpen;
-  }
-
   onToggleSubmenu(): void {
     this.showSubmenu = !this.showSubmenu;
   }

@@ -7,6 +7,12 @@ import { Component } from '@angular/core';
 })
 export class HomeComponent {
 
+  public sidebarIsClosed: boolean = false;
+
   constructor() { }
+
+  onToggleSidebar(): void {
+    this.sidebarIsClosed = !this.sidebarIsClosed;
+  }
 
 }

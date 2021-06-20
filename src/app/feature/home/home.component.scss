@@ -1,0 +1,32 @@
+.home-section {
+    left: 260px;
+    height: 100vh;
+    position: relative;
+    background: #E4E9F7;
+    width: calc(100% - 260px);
+    transition: all 0.5s ease;
+
+    .home-content {
+        height: 60px;
+        display: flex;
+        align-items: center;
+
+        .bx-menu, .text {
+            font-size: 35px;
+            color: #11101d;
+        }
+        .bx-menu {
+          margin: 0 15px;
+          cursor: pointer;
+        }
+        .text {
+          font-size: 26px;
+          font-weight: 600;
+        }    
+    }
+}
+
+.home-section.expanded {
+    left: 78px;
+    width: calc(100% - 78px);
+}
