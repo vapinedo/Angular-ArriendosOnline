@@ -3,16 +3,16 @@ import { Component, OnDestroy } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MessageService } from '@core/services/message.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Neighborhood } from '@core/interfaces/neighborhood.interface';
+import { NeighborhoodService } from '@core/services/neighborhood.service';
 import { DialogComponent } from '@shared/components/dialog/dialog.component';
-import { PropertyCategory } from '@core/interfaces/property-category.interface';
-import { PropertyCategoryService } from '@core/services/property-category.service';
 
 @Component({
-  selector: 'app-property-category-create',
-  templateUrl: './property-category-create.component.html',
-  styleUrls: ['./property-category-create.component.scss']
+  selector: 'app-neighborhood-create',
+  templateUrl: './neighborhood-create.component.html',
+  styleUrls: ['./neighborhood-create.component.scss']
 })
-export class PropertyCategoryCreateComponent implements OnDestroy {
+export class NeighborhoodCreateComponent implements OnDestroy {
 
   private subscriptions = new SubSink();
 
@@ -22,8 +22,8 @@ export class PropertyCategoryCreateComponent implements OnDestroy {
   constructor(
     private fb: FormBuilder,
     private messageSvc: MessageService,
-    private dialogRef: MatDialogRef<DialogComponent>,
-    private propertyCategorySvc: PropertyCategoryService
+    private neighborhoodSvc: NeighborhoodService,
+    private dialogRef: MatDialogRef<DialogComponent>
   ) {
     this.form = this.fb.group({
       visible: [false],
@@ -39,12 +39,12 @@ export class PropertyCategoryCreateComponent implements OnDestroy {
       
       try {
         const newData = this._prepareDataBeforeSend(formData);
-        const dataCreated = await this.propertyCategorySvc.create(newData);
+        const dataCreated = await this.neighborhoodSvc.create(newData);
 
         this.showSpinner = false;
         this.messageSvc.success();
 
-        /* informa (a property-category-admin.ts) 
+        /* informa (a property-create-admin.ts) 
           que el registro fue creado
           y el dialog ha sido cerrado */
         this.dialogRef.close(true); 
@@ -54,8 +54,8 @@ export class PropertyCategoryCreateComponent implements OnDestroy {
     return;
   }
 
-  private _prepareDataBeforeSend(data: any): PropertyCategory {
-    let response: PropertyCategory = {
+  private _prepareDataBeforeSend(data: any): Neighborhood {
+    let response: Neighborhood = {
       name: data.name,
       visible: data.visible
     };

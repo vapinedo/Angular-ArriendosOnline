@@ -5,31 +5,31 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MessageService } from '@core/services/message.service';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { NeighborhoodService } from '@core/services/neighborhood.service';
 import { DialogComponent } from '@shared/components/dialog/dialog.component';
-import { PropertyCategoryService } from '@core/services/property-category.service';
-import { PropertyCategoryCreateComponent } from '../create/property-category-create.component';
-import { PropertyCategoryUpdateComponent } from '../update/property-category-update.component';
+import { NeighborhoodCreateComponent } from '../create/neighborhood-create.component';
+import { NeighborhoodUpdateComponent } from '../update/neighborhood-update.component';
 
 @Component({
-  selector: 'app-property-category-admin',
-  templateUrl: './property-category-admin.component.html',
-  styleUrls: ['./property-category-admin.component.scss']
+  selector: 'app-neighborhood-admin',
+  templateUrl: './neighborhood-admin.component.html',
+  styleUrls: ['./neighborhood-admin.component.scss']
 })
-export class PropertyCategoryAdminComponent implements OnInit, OnDestroy {
+export class NeighborhoodAdminComponent implements OnInit, OnDestroy {
 
   private subscriptions = new SubSink();
 
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  public title = 'Listado de Categorías de propiedades';
+  public title = 'Listado de barrios';
   public dataSource = new MatTableDataSource();
   public displayedColumns: string[] = ['name', 'visible', 'acciones'];
 
   constructor(
     public dialog: MatDialog,
     private messageSvc: MessageService,
-    private propertyCategorySvc: PropertyCategoryService
+    private neighborhoodSvc: NeighborhoodService
   ) {}
 
   ngOnInit(): void {
@@ -38,7 +38,7 @@ export class PropertyCategoryAdminComponent implements OnInit, OnDestroy {
 
   private _setDatasource(): void {
     this.subscriptions.add(
-      this.propertyCategorySvc.read()
+      this.neighborhoodSvc.read()
         .subscribe({
           next: data => {
             this.dataSource.data = data;
@@ -55,8 +55,8 @@ export class PropertyCategoryAdminComponent implements OnInit, OnDestroy {
       width: '50vw',
       disableClose: true,
       data: { 
-        dataComponent: { title: 'Nueva categoría de propiedad' },
-        component: PropertyCategoryCreateComponent
+        dataComponent: { title: 'Nuevo barrio' },
+        component: NeighborhoodCreateComponent
       }
     });
 
@@ -75,8 +75,8 @@ export class PropertyCategoryAdminComponent implements OnInit, OnDestroy {
       width: '50vw',
       disableClose: true,
       data: { 
-        dataComponent: { id, title: 'Actualizar categoría de propiedad' },
-        component: PropertyCategoryUpdateComponent
+        dataComponent: { id, title: 'Actualizar barrio' },
+        component: NeighborhoodUpdateComponent
       }
     });
 
@@ -94,7 +94,7 @@ export class PropertyCategoryAdminComponent implements OnInit, OnDestroy {
     this.messageSvc.confirm()
       .then((result) => {
         if (result.isConfirmed) {
-          this.propertyCategorySvc.delete(id) 
+          this.neighborhoodSvc.delete(id) 
             .then(resolve => {
               console.log(resolve);
               this.messageSvc.success('Registro eliminado exitosamente')

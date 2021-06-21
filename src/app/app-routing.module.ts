@@ -27,6 +27,11 @@ const routes: Routes = [
         path: 'propiedad-categorias',
         loadChildren: () => import('@feature/home/property-category/property-category.module')
         .then(m => m.PropertyCategoryModule)
+      },      
+      {  
+        path: 'barrios',
+        loadChildren: () => import('@feature/home/neighborhood/neighborhood.module')
+        .then(m => m.NeighborhoodModule)
       }      
     ]
   },

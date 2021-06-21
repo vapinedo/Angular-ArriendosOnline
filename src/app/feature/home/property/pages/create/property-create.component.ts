@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { SubSink } from 'subsink';
 import { Router } from '@angular/router';
 import { Component, OnDestroy, OnInit } from '@angular/core';
@@ -5,7 +6,9 @@ import { Property } from '@core/interfaces/property.interface';
 import { MessageService } from '@core/services/message.service';
 import { PropertyService } from '@core/services/property.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Neighborhood } from '@core/interfaces/neighborhood.interface';
 import { FileuploaderService } from '@core/services/fileuploader.service';
+import { NeighborhoodService } from '@core/services/neighborhood.service';
 import { PropertyCategory } from '@core/interfaces/property-category.interface';
 import { PropertyCategoryService } from '@core/services/property-category.service';
 
@@ -25,7 +28,9 @@ export class PropertyCreateComponent implements OnDestroy, OnInit {
 
   public imageUrls: string[] = [];
   public imgPreviewUrls: string[] = [];
-  public propertyCategories: PropertyCategory[] = [];
+
+  public neighborhoods$: Observable<Neighborhood[]>;
+  public propertyCategories$: Observable<PropertyCategory[]>;
 
   public isInvalidFormats: boolean = false;
   public readonly allowedFormats = '.jpeg,.jpg,.png,.svg';
@@ -36,32 +41,24 @@ export class PropertyCreateComponent implements OnDestroy, OnInit {
     private fb: FormBuilder,
     private messageSvc: MessageService,
     private propertySvc: PropertyService,
+    private neighborhoodSvc: NeighborhoodService,
     private fileuploaderSvc: FileuploaderService,
     private propertyCategorySvc: PropertyCategoryService
   ) {
     this.form = this.fb.group({
       price: [null, [Validators.required]],
       images: [null, [Validators.required]],
+      address: [null, [Validators.required]],
       category: [null, [Validators.required]],
-      visible: [false, [Validators.requiredTrue]]
+      visible: [false, [Validators.requiredTrue]],
+      neighborhood: [null, [Validators.required]]
     }); 
+
+    this.neighborhoods$ = this.neighborhoodSvc.read();
+    this.propertyCategories$ = this.propertyCategorySvc.read();
   }
 
   ngOnInit(): void {
-    this._setPropertyCategories();
-  }
-
-  private _setPropertyCategories(): void {
-    this.subscriptions.add(
-      this.propertyCategorySvc.read()
-        .subscribe({
-          next: data => {
-            console.log(data);
-            this.propertyCategories = data;
-          },
-          error: err => this.messageSvc.error(err)
-        })
-    );
   }
 
   onFileChange(event: any): void {
@@ -121,13 +118,15 @@ export class PropertyCreateComponent implements OnDestroy, OnInit {
   }
 
   private _prepareDataBeforeSend(data: any, filesURL: string[]): Property {
-    let property: Property = {
+    let response: Property = {
       images: filesURL,
       price: data.price,
+      address: data.address,
       visible: data.visible,
-      category: data.category
+      category: data.category,
+      neighborhood: data.neighborhood
     };
-    return property;
+    return response;
   }
 
   ngOnDestroy(): void {

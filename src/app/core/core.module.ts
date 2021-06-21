@@ -10,6 +10,7 @@ import { PropertyService } from './services/property.service';
 import { DatetimeService } from './services/datetime.service';
 import { ValidatorsService } from './services/validators.service';
 import { FileuploaderService } from './services/fileuploader.service';
+import { NeighborhoodService } from './services/neighborhood.service';
 import { PropertyCategoryService } from './services/property-category.service';
 
 @NgModule({
@@ -25,6 +26,7 @@ import { PropertyCategoryService } from './services/property-category.service';
     PropertyService,
     ValidatorsService,
     FileuploaderService,
+    NeighborhoodService,
     PropertyCategoryService
   ]
 })

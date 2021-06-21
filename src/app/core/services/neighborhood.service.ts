@@ -2,23 +2,23 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { PropertyCategory } from '@core/interfaces/property-category.interface';
+import { Neighborhood } from '@core/interfaces/neighborhood.interface';
 
 @Injectable()
-export class PropertyCategoryService {
+export class NeighborhoodService {
 
-  private readonly collectionName = 'propiedadCategorias';
+  private readonly collectionName = 'barrios';
 
   constructor(
     private afs: AngularFirestore,
   ) {}
 
-  public create(item: PropertyCategory): Promise<any> {
-    return this.afs.collection<PropertyCategory>(this.collectionName).add(item);
+  public create(item: Neighborhood): Promise<any> {
+    return this.afs.collection<Neighborhood>(this.collectionName).add(item);
   }
 
   public read(): Observable<any> {
-    return this.afs.collection<PropertyCategory>(this.collectionName)
+    return this.afs.collection<Neighborhood>(this.collectionName)
       .snapshotChanges()
       .pipe(
         map(data => 
@@ -32,17 +32,17 @@ export class PropertyCategoryService {
   }
 
   public readOne(id: string): Observable<any | undefined> {
-    return this.afs.doc<PropertyCategory>(`${this.collectionName}/${id}`)
+    return this.afs.doc<Neighborhood>(`${this.collectionName}/${id}`)
       .valueChanges();
   }
 
-  public update(item: PropertyCategory, id: string) {
-    return this.afs.collection<PropertyCategory>(this.collectionName)
+  public update(item: Neighborhood, id: string) {
+    return this.afs.collection<Neighborhood>(this.collectionName)
       .doc(id).update(item);
   }
 
   public delete(id: string): Promise<void> {
-    return this.afs.collection<PropertyCategory>(this.collectionName)
+    return this.afs.collection<Neighborhood>(this.collectionName)
       .doc(id).delete();
   }
 

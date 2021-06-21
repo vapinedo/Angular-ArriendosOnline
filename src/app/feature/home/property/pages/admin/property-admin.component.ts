@@ -18,7 +18,7 @@ export class PropertyAdminComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  public title = 'Propiedades';
+  public title = 'Listado de Propiedades';
   public dataSource = new MatTableDataSource();
   public displayedColumns: string[] = ['img', 'category', 'price', 'acciones'];
 

@@ -7,7 +7,6 @@ import { PropertyCategoryRoutingModule } from './property-category-routing.modul
 import { DialogComponent } from '@shared/components/dialog/dialog.component';
 import { PropertyCategoryAdminComponent } from './pages/admin/property-category-admin.component';
 import { PropertyCategoryCreateComponent } from './pages/create/property-category-create.component';
-import { PropertyCategoryDetailComponent } from './pages/detail/property-category-detail.component';
 import { PropertyCategoryUpdateComponent } from './pages/update/property-category-update.component';
 
 const modules = [
@@ -19,7 +18,6 @@ const modules = [
 const components = [
   PropertyCategoryAdminComponent,
   PropertyCategoryCreateComponent,
-  PropertyCategoryDetailComponent,
   PropertyCategoryUpdateComponent
 ];
 

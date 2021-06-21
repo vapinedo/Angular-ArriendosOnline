@@ -7,7 +7,16 @@
             <mat-form-field appearance="outline">
                 <mat-label>Categoría</mat-label>
                 <mat-select formControlName="category" disableRipple>
-                    <mat-option *ngFor="let item of propertyCategories" [value]="item.name">
+                    <mat-option *ngFor="let item of propertyCategories$ | async" [value]="item.name">
+                        {{ item.name }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>       
+
+            <mat-form-field appearance="outline">
+                <mat-label>Barrio</mat-label>
+                <mat-select formControlName="neighborhood" disableRipple>
+                    <mat-option *ngFor="let item of neighborhoods$ | async" [value]="item.name">
                         {{ item.name }}
                     </mat-option>
                 </mat-select>
@@ -16,6 +25,11 @@
             <mat-form-field appearance="outline">
                 <mat-label>Precio</mat-label>
                 <input matInput type="text" formControlName="price">
+            </mat-form-field>       
+    
+            <mat-form-field appearance="outline">
+                <mat-label>Dirección</mat-label>
+                <input matInput type="text" formControlName="address">
             </mat-form-field>       
             
             <div class="custom_mat_form_field_inline">

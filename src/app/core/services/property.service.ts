@@ -26,8 +26,8 @@ export class PropertyService {
         map(data => 
           data.map(item => {
             const id = item.payload.doc.id;
-            const property = item.payload.doc.data() as object; 
-            return { id, ...property };
+            const payload = item.payload.doc.data() as object; 
+            return { id, ...payload };
           })
         )
       );

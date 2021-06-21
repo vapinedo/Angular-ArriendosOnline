@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { PropertyCategoryAdminComponent } from './pages/admin/property-category-admin.component';
-
+import { NeighborhoodAdminComponent } from './pages/admin/neighborhood-admin.component';
 
 const routes: Routes = [
-  { path: '', component: PropertyCategoryAdminComponent },
+  { path: '', component: NeighborhoodAdminComponent },
 ];
 
 @NgModule({
@@ -14,4 +13,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class PropertyCategoryRoutingModule { }
+export class NeighborhoodRoutingModule { }
