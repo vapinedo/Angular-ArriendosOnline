@@ -3,7 +3,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MessageService } from '@core/services/message.service';
-import { PropertyService } from '@core/services/properties/property.service';
+import { PropertyService } from '@core/services/property.service';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 
 @Component({

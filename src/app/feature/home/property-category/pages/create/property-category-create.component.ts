@@ -1,40 +1,34 @@
 import { SubSink } from 'subsink';
-import { Router } from '@angular/router';
+import { Component, OnDestroy } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MessageService } from '@core/services/message.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { PropertyCategory } from '@core/interfaces/prroperty/property-category.interface';
-import { PropertyCategoryService } from '@core/services/properties/property-category.service';
 import { DialogComponent } from '@shared/components/dialog/dialog.component';
+import { PropertyCategoryService } from '@core/services/property-category.service';
+import { PropertyCategoryNew } from '@core/interfaces/property-category/property-category-new.interface';
 
 @Component({
   selector: 'app-property-category-create',
   templateUrl: './property-category-create.component.html',
   styleUrls: ['./property-category-create.component.scss']
 })
-export class PropertyCategoryCreateComponent implements OnInit, OnDestroy {
+export class PropertyCategoryCreateComponent implements OnDestroy {
 
   private subscriptions = new SubSink();
 
   public form: FormGroup;
   public showSpinner: boolean = false;
-  public title = 'Crear categoría de propiedad';
 
   constructor(
-    private router: Router,
     private fb: FormBuilder,
     private messageSvc: MessageService,
     private dialogRef: MatDialogRef<DialogComponent>,
-    private propertyCategorySvc: PropertyCategoryService,
+    private propertyCategorySvc: PropertyCategoryService
   ) {
     this.form = this.fb.group({
-      name: [null, [Validators.required]],
-      visible: [false, [Validators.requiredTrue]]
+      visible: [false],
+      name: [null, [Validators.required]]
     }); 
-  }
-
-  ngOnInit(): void {
   }
 
   async onSubmit() {
@@ -42,17 +36,18 @@ export class PropertyCategoryCreateComponent implements OnInit, OnDestroy {
       this.form.disable();
       this.showSpinner = true;
       const formData = this.form.value;
+
+      console.log(formData);
       
       try {
-        const newPropertyCategory = this._prepareDataBeforeSend(formData);
-        const propertyCategoryCreated = await this.propertyCategorySvc.create(newPropertyCategory);
+        const newData = this._prepareDataBeforeSend(formData);
+        const dataCreated = await this.propertyCategorySvc.create(newData);
 
         this.showSpinner = false;
-        this.router.navigate(['/home/propiedad-categorias']);
         this.messageSvc.success();
 
         /* informa (a property-create-admin.ts) 
-          que la el registro se creo exitosamente
+          que el registro fue creado
           y el dialog ha sido cerrado */
         this.dialogRef.close(true); 
       }
@@ -61,12 +56,12 @@ export class PropertyCategoryCreateComponent implements OnInit, OnDestroy {
     return;
   }
 
-  private _prepareDataBeforeSend(data: any): PropertyCategory {
-    let propertyCategory: PropertyCategory = {
+  private _prepareDataBeforeSend(data: any): PropertyCategoryNew {
+    let response: PropertyCategoryNew = {
       name: data.name,
       visible: data.visible
     };
-    return propertyCategory;
+    return response;
   }
 
   ngOnDestroy(): void {

@@ -6,8 +6,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MessageService } from '@core/services/message.service';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { DialogComponent } from '@shared/components/dialog/dialog.component';
-import { PropertyCategoryService } from '@core/services/properties/property-category.service';
+import { PropertyCategoryService } from '@core/services/property-category.service';
 import { PropertyCategoryCreateComponent } from '../create/property-category-create.component';
+import { PropertyCategoryUpdateComponent } from '../update/property-category-update.component';
 
 @Component({
   selector: 'app-property-category-admin',
@@ -69,13 +70,34 @@ export class PropertyCategoryAdminComponent implements OnInit, OnDestroy {
     )
   }  
 
+  onUpdate(id: string): void {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      width: '50vw',
+      disableClose: true,
+      data: { 
+        dataComponent: { id, title: 'Actualizar categoría de propiedad' },
+        component: PropertyCategoryUpdateComponent
+      }
+    });
+
+    this.subscriptions.add(
+      dialogRef.afterClosed()
+        .subscribe(success => {
+          if(success) {
+            this._setDatasource();
+          }
+        })
+    )
+  }  
+
   onDelete(id: string): void {
     this.messageSvc.confirm()
       .then((result) => {
         if (result.isConfirmed) {
           this.propertyCategorySvc.delete(id) 
-            .then(() => {
-              this.messageSvc.success()
+            .then(resolve => {
+              console.log(resolve);
+              this.messageSvc.success('Registro eliminado exitosamente')
             })
             .catch(err => this.messageSvc.error(err))
         }

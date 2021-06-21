@@ -24,7 +24,7 @@ export class DialogComponent implements OnInit, OnDestroy {
     this.container.clear(); 
     const factory = this.resolver.resolveComponentFactory(this.data.component);
     this.componentRef = this.container.createComponent(factory);
-    this.componentRef.instance.dataFromModalWindow = this.data.dataComponent;
+    this.componentRef.instance.dataFromDialog = this.data.dataComponent;
 
     this.dialogTitle = this.data.dataComponent.title;
   }

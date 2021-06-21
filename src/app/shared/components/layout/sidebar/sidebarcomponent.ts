@@ -15,6 +15,7 @@ export class SidebarComponent implements OnDestroy {
   public menu: any;
   public profileImage: string = '';
   public showSubmenu: boolean = false;
+  public title: string = 'Uribia Online';
 
   @Input() sidebarIsClosed: boolean = false;
   

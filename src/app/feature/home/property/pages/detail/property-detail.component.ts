@@ -1,8 +1,8 @@
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { PropertyService } from '@core/services/property.service';
 import { Property } from '@core/interfaces/prroperty/property.interface';
-import { PropertyService } from '@core/services/properties/property.service';
 
 @Component({
   selector: 'app-property-detail',

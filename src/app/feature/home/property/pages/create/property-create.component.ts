@@ -1,18 +1,18 @@
 import { SubSink } from 'subsink';
 import { Router } from '@angular/router';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { MessageService } from '@core/services/message.service';
+import { PropertyService } from '@core/services/property.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Property } from '@core/interfaces/prroperty/property.interface';
 import { FileuploaderService } from '@core/services/fileuploader.service';
-import { PropertyService } from '@core/services/properties/property.service';
 
 @Component({
   selector: 'app-property-create',
   templateUrl: './property-create.component.html',
   styleUrls: ['./property-create.component.scss']
 })
-export class PropertyCreateComponent implements OnInit, OnDestroy {
+export class PropertyCreateComponent implements OnDestroy {
 
   private subscriptions = new SubSink();
 
@@ -40,9 +40,6 @@ export class PropertyCreateComponent implements OnInit, OnDestroy {
       category: [null, [Validators.required]],
       visible: [false, [Validators.requiredTrue]]
     }); 
-  }
-
-  ngOnInit(): void {
   }
 
   onFileChange(event: any): void {
@@ -89,13 +86,12 @@ export class PropertyCreateComponent implements OnInit, OnDestroy {
           promises.push(promise);
         }
         const filesURL = await Promise.all(promises);
-        const newProperty = this._prepareDataBeforeSend(formData, filesURL);
-        const propertyCreated = await this.propertySvc.create(newProperty);
+        const newData = this._prepareDataBeforeSend(formData, filesURL);
+        const dataCreated = await this.propertySvc.create(newData);
 
         this.showSpinner = false;
-        this.router.navigate(['/home/propiedades']);
-        
         this.messageSvc.success();
+        this.router.navigate(['/home/propiedades']);
       }
       catch (err) { this.messageSvc.error(err); }
     }

@@ -2,7 +2,7 @@ import { SubSink } from 'subsink';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MessageService } from '@core/services/message.service';
-import { PropertyService } from '@core/services/properties/property.service';
+import { PropertyService } from '@core/services/property.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
