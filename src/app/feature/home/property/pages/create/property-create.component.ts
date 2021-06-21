@@ -1,27 +1,31 @@
 import { SubSink } from 'subsink';
 import { Router } from '@angular/router';
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Property } from '@core/interfaces/property.interface';
 import { MessageService } from '@core/services/message.service';
 import { PropertyService } from '@core/services/property.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FileuploaderService } from '@core/services/fileuploader.service';
+import { PropertyCategory } from '@core/interfaces/property-category.interface';
+import { PropertyCategoryService } from '@core/services/property-category.service';
 
 @Component({
   selector: 'app-property-create',
   templateUrl: './property-create.component.html',
   styleUrls: ['./property-create.component.scss']
 })
-export class PropertyCreateComponent implements OnDestroy {
+export class PropertyCreateComponent implements OnDestroy, OnInit {
 
   private subscriptions = new SubSink();
 
   public form: FormGroup;
   private files: any = null;
-  public imageUrls: string[] = [];
-  public title = 'Propiedad Crear';
+  public title = 'Nueva Propiedad';
   public showSpinner: boolean = false;
+
+  public imageUrls: string[] = [];
   public imgPreviewUrls: string[] = [];
+  public propertyCategories: PropertyCategory[] = [];
 
   public isInvalidFormats: boolean = false;
   public readonly allowedFormats = '.jpeg,.jpg,.png,.svg';
@@ -32,7 +36,8 @@ export class PropertyCreateComponent implements OnDestroy {
     private fb: FormBuilder,
     private messageSvc: MessageService,
     private propertySvc: PropertyService,
-    private fileuploaderSvc: FileuploaderService
+    private fileuploaderSvc: FileuploaderService,
+    private propertyCategorySvc: PropertyCategoryService
   ) {
     this.form = this.fb.group({
       price: [null, [Validators.required]],
@@ -40,6 +45,23 @@ export class PropertyCreateComponent implements OnDestroy {
       category: [null, [Validators.required]],
       visible: [false, [Validators.requiredTrue]]
     }); 
+  }
+
+  ngOnInit(): void {
+    this._setPropertyCategories();
+  }
+
+  private _setPropertyCategories(): void {
+    this.subscriptions.add(
+      this.propertyCategorySvc.read()
+        .subscribe({
+          next: data => {
+            console.log(data);
+            this.propertyCategories = data;
+          },
+          error: err => this.messageSvc.error(err)
+        })
+    );
   }
 
   onFileChange(event: any): void {

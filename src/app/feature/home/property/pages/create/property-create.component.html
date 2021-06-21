@@ -6,7 +6,11 @@
 
             <mat-form-field appearance="outline">
                 <mat-label>Categoría</mat-label>
-                <input matInput type="text" formControlName="category">
+                <mat-select formControlName="category" disableRipple>
+                    <mat-option *ngFor="let item of propertyCategories" [value]="item.name">
+                        {{ item.name }}
+                    </mat-option>
+                </mat-select>
             </mat-form-field>       
     
             <mat-form-field appearance="outline">
