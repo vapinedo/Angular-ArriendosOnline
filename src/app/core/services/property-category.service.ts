@@ -2,8 +2,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { PropertyCategoryNew } from '@core/interfaces/property-category/property-category-new.interface';
-import { PropertyCategoryUpdate } from '@core/interfaces/property-category/property-category-update.interface';
+import { PropertyCategory } from '@core/interfaces/property-category.interface';
 
 @Injectable()
 export class PropertyCategoryService {
@@ -14,12 +13,12 @@ export class PropertyCategoryService {
     private afs: AngularFirestore,
   ) {}
 
-  public create(item: PropertyCategoryNew): Promise<any> {
-    return this.afs.collection<any>(this.collectionName).add(item);
+  public create(item: PropertyCategory): Promise<any> {
+    return this.afs.collection<PropertyCategory>(this.collectionName).add(item);
   }
 
   public read(): Observable<any> {
-    return this.afs.collection<any>(this.collectionName)
+    return this.afs.collection<PropertyCategory>(this.collectionName)
       .snapshotChanges()
       .pipe(
         map(data => 
@@ -32,18 +31,18 @@ export class PropertyCategoryService {
       );
   }
 
-  public readOne(id: number): Observable<any | undefined> {
-    return this.afs.doc<any>(`${this.collectionName}/${id}`)
+  public readOne(id: string): Observable<any | undefined> {
+    return this.afs.doc<PropertyCategory>(`${this.collectionName}/${id}`)
       .valueChanges();
   }
 
-  public update(item: PropertyCategoryUpdate) {
-    return this.afs.collection<any>(this.collectionName)
-      .doc(item.id).update(item);
+  public update(item: PropertyCategory, id: string) {
+    return this.afs.collection<PropertyCategory>(this.collectionName)
+      .doc(id).update(item);
   }
 
   public delete(id: string): Promise<void> {
-    return this.afs.collection<any>(this.collectionName)
+    return this.afs.collection<PropertyCategory>(this.collectionName)
       .doc(id).delete();
   }
 

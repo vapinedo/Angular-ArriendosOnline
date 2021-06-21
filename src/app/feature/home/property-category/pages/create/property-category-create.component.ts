@@ -4,8 +4,8 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { MessageService } from '@core/services/message.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DialogComponent } from '@shared/components/dialog/dialog.component';
+import { PropertyCategory } from '@core/interfaces/property-category.interface';
 import { PropertyCategoryService } from '@core/services/property-category.service';
-import { PropertyCategoryNew } from '@core/interfaces/property-category/property-category-new.interface';
 
 @Component({
   selector: 'app-property-category-create',
@@ -36,8 +36,6 @@ export class PropertyCategoryCreateComponent implements OnDestroy {
       this.form.disable();
       this.showSpinner = true;
       const formData = this.form.value;
-
-      console.log(formData);
       
       try {
         const newData = this._prepareDataBeforeSend(formData);
@@ -56,8 +54,8 @@ export class PropertyCategoryCreateComponent implements OnDestroy {
     return;
   }
 
-  private _prepareDataBeforeSend(data: any): PropertyCategoryNew {
-    let response: PropertyCategoryNew = {
+  private _prepareDataBeforeSend(data: any): PropertyCategory {
+    let response: PropertyCategory = {
       name: data.name,
       visible: data.visible
     };

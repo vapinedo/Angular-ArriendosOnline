@@ -4,8 +4,8 @@ import { MessageService } from '@core/services/message.service';
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DialogComponent } from '@shared/components/dialog/dialog.component';
+import { PropertyCategory } from '@core/interfaces/property-category.interface';
 import { PropertyCategoryService } from '@core/services/property-category.service';
-import { PropertyCategoryUpdate } from '@core/interfaces/property-category/property-category-update.interface';
 
 @Component({
   selector: 'app-property-category-update',
@@ -19,6 +19,7 @@ export class PropertyCategoryUpdateComponent implements OnInit, OnDestroy {
   public form: FormGroup;
   @Input() dataFromDialog: any;
   public showSpinner: boolean = false;
+  private propertyCategoryID!: string;
 
   constructor(
     private fb: FormBuilder,
@@ -26,7 +27,6 @@ export class PropertyCategoryUpdateComponent implements OnInit, OnDestroy {
     private dialogRef: MatDialogRef<DialogComponent>,
     private propertyCategorySvc: PropertyCategoryService
   ) {
-    
     this.form = this.fb.group({
       visible: [null],
       id: [null, Validators.required],
@@ -35,20 +35,19 @@ export class PropertyCategoryUpdateComponent implements OnInit, OnDestroy {
   }
   
   ngOnInit(): void {
+    this.propertyCategoryID = this.dataFromDialog.id;
     this._setForm();
   }
 
   private _setForm(): void {
-    const propertyCategoryID = this.dataFromDialog.id
-
     this.subscriptions.add(
-      this.propertyCategorySvc.readOne(propertyCategoryID)
+      this.propertyCategorySvc.readOne(this.propertyCategoryID)
         .subscribe({
           next: data => {
             this.form.patchValue({
               name: data?.name,
-              id: propertyCategoryID,
-              visible: data?.visible
+              visible: data?.visible,
+              id: this.propertyCategoryID
             });
           },
           error: err => this.messageSvc.error(err)
@@ -64,7 +63,7 @@ export class PropertyCategoryUpdateComponent implements OnInit, OnDestroy {
       
       try {
         const dataToUpdate = this._prepareDataBeforeSend(formData);
-        const dataUpdated = await this.propertyCategorySvc.update(dataToUpdate);
+        const dataUpdated = await this.propertyCategorySvc.update(dataToUpdate, this.propertyCategoryID);
 
         this.showSpinner = false;
         this.messageSvc.success('Registro actualizado exitosamente');
@@ -79,9 +78,8 @@ export class PropertyCategoryUpdateComponent implements OnInit, OnDestroy {
     return;
   }
 
-  private _prepareDataBeforeSend(data: any): PropertyCategoryUpdate {
-    let response: PropertyCategoryUpdate = {
-      id: data.id,
+  private _prepareDataBeforeSend(data: any): PropertyCategory {
+    let response: PropertyCategory = {
       name: data.name,
       visible: data.visible
     };

@@ -1,4 +1,4 @@
-export interface PropertyCategoryNew {
+export interface PropertyCategory {
     name: string;
     visible: boolean;
 }

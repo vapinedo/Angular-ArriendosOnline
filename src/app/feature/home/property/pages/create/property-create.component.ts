@@ -1,10 +1,10 @@
 import { SubSink } from 'subsink';
 import { Router } from '@angular/router';
 import { Component, OnDestroy } from '@angular/core';
+import { Property } from '@core/interfaces/property.interface';
 import { MessageService } from '@core/services/message.service';
 import { PropertyService } from '@core/services/property.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Property } from '@core/interfaces/prroperty/property.interface';
 import { FileuploaderService } from '@core/services/fileuploader.service';
 
 @Component({

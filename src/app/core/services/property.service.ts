@@ -3,7 +3,7 @@ import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
-import { Property } from '@core/interfaces/prroperty/property.interface';
+import { Property } from '@core/interfaces/property.interface';
 
 @Injectable()
 export class PropertyService {

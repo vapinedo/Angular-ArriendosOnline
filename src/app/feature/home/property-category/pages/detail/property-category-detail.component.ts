@@ -2,7 +2,7 @@ import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { PropertyService } from '@core/services/property.service';
-import { Property } from '@core/interfaces/prroperty/property.interface';
+import { Property } from '@core/interfaces/property.interface';
 
 @Component({
   selector: 'app-property-category-detail',
