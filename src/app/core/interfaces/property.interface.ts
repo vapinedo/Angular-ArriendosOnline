@@ -6,4 +6,5 @@ export interface Property {
     visible: boolean;
     category: string;
     neighborhood: string;
+    operationType: string;
 }

@@ -5,7 +5,7 @@
     align-items: stretch;
 
     .container-fluid {
-        padding: 0;
+        padding: 1em;
         min-height: 100%;
         background: #E4E9F7;
         transition: all 0.5s ease;
@@ -16,14 +16,11 @@
             align-items: center;
 
             .bx-menu {
-                margin: 0 15px;
+                margin: 0;
                 cursor: pointer;
                 font-size: 35px;
                 color: #11101d;
             }
         }
-        .content {
-            padding: 1em;
-        }        
     }
 }

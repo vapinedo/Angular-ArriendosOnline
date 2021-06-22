@@ -1,10 +1,23 @@
-<section class="modal-content custom-scrollbar">
+<article class="box animate__animated animate__fadeIn animate_faster">
     <h2>{{ title }}</h2>
 
-    <article class="box animate__animated animate__fadeIn animate_faster">
-        <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
 
-            <mat-form-field appearance="outline">
+        <mat-form-field appearance="outline" class="file-wrapper">
+            <article class="fileupload">
+                <button [disabled]="showSpinner">
+                    Subir fotos
+                    <input (input)="onFileChange($event)" type="file" multiple [accept]="allowedFormats">
+                </button>
+                <img *ngFor="let url of imgPreviewUrls" [src]="url">
+            </article>
+            
+            <input [hidden]="true" readonly matInput type="text" formControlName="images">
+        </mat-form-field>       
+        <!-- <p *ngIf="isInvalidFormats">Solo puede subir imágenes JPEG, JPG o PNG</p> -->
+
+        <article class="row">
+            <mat-form-field appearance="outline" class="col">
                 <mat-label>Categoría</mat-label>
                 <mat-select formControlName="category" disableRipple>
                     <mat-option *ngFor="let item of propertyCategories$ | async" [value]="item.name">
@@ -12,8 +25,17 @@
                     </mat-option>
                 </mat-select>
             </mat-form-field>       
+    
+            <mat-form-field appearance="outline" class="col">
+                <mat-label>Tipo de operación</mat-label>
+                <mat-select formControlName="operationType" disableRipple>
+                    <mat-option *ngFor="let item of operationType" [value]="item">
+                        {{ item.key }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>       
 
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="outline" class="col">
                 <mat-label>Barrio</mat-label>
                 <mat-select formControlName="neighborhood" disableRipple>
                     <mat-option *ngFor="let item of neighborhoods$ | async" [value]="item.name">
@@ -21,44 +43,32 @@
                     </mat-option>
                 </mat-select>
             </mat-form-field>       
-    
-            <mat-form-field appearance="outline">
+        </article>
+
+        <article class="row">
+            <mat-form-field appearance="outline" class="col">
                 <mat-label>Precio</mat-label>
                 <input matInput type="text" formControlName="price">
             </mat-form-field>       
     
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="outline" class="col">
                 <mat-label>Dirección</mat-label>
                 <input matInput type="text" formControlName="address">
             </mat-form-field>       
             
-            <div class="custom_mat_form_field_inline">
+            <div class="custom_mat_form_field_inline" class="col">
                 <mat-label>Visible?</mat-label>
                 <mat-slide-toggle disableRipple formControlName="visible"></mat-slide-toggle>
             </div>  
+        </article>
 
-            <mat-form-field appearance="outline" class="file-wrapper">
-                <article class="fileupload">
-                    <button [disabled]="showSpinner">
-                        Subir fotos
-                        <input (input)="onFileChange($event)" type="file" multiple [accept]="allowedFormats">
-                    </button>
-                    <img *ngFor="let url of imgPreviewUrls" [src]="url">
-                </article>
-                
-                <input [hidden]="true" readonly matInput type="text" formControlName="images">
-            </mat-form-field>       
-            <!-- <p *ngIf="isInvalidFormats">Solo puede subir imágenes JPEG, JPG o PNG</p> -->
-
-            <div class="footer">
-                <app-spinner *ngIf="showSpinner"></app-spinner>
-                <button 
-                    *ngIf="!showSpinner" 
-                    [disabled]="form.invalid" 
-                    type="submit" color="primary" mat-raised-button>Crear</button>
-            </div>
-            
-        </form>
-    </article>
-
-  </section>
+        <div class="footer">
+            <app-spinner *ngIf="showSpinner"></app-spinner>
+            <button 
+                *ngIf="!showSpinner" 
+                [disabled]="form.invalid" 
+                type="submit" color="primary" mat-raised-button>Crear</button>
+        </div>
+        
+    </form>
+</article>

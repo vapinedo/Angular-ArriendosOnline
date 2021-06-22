@@ -28,9 +28,11 @@ export class PropertyCreateComponent implements OnDestroy, OnInit {
 
   public imageUrls: string[] = [];
   public imgPreviewUrls: string[] = [];
+  
+  public operationType: any[] = [];
 
-  public neighborhoods$: Observable<Neighborhood[]>;
-  public propertyCategories$: Observable<PropertyCategory[]>;
+  public neighborhoods$!: Observable<Neighborhood[]>;
+  public propertyCategories$!: Observable<PropertyCategory[]>;
 
   public isInvalidFormats: boolean = false;
   public readonly allowedFormats = '.jpeg,.jpg,.png,.svg';
@@ -51,14 +53,15 @@ export class PropertyCreateComponent implements OnDestroy, OnInit {
       address: [null, [Validators.required]],
       category: [null, [Validators.required]],
       visible: [false, [Validators.requiredTrue]],
-      neighborhood: [null, [Validators.required]]
+      neighborhood: [null, [Validators.required]],
+      operationType: [null, [Validators.required]]
     }); 
-
-    this.neighborhoods$ = this.neighborhoodSvc.read();
-    this.propertyCategories$ = this.propertyCategorySvc.read();
   }
-
+  
   ngOnInit(): void {
+    this.neighborhoods$ = this.neighborhoodSvc.read();
+    this.operationType = this.propertySvc.readOperationType();
+    this.propertyCategories$ = this.propertyCategorySvc.read();
   }
 
   onFileChange(event: any): void {
@@ -124,7 +127,8 @@ export class PropertyCreateComponent implements OnDestroy, OnInit {
       address: data.address,
       visible: data.visible,
       category: data.category,
-      neighborhood: data.neighborhood
+      neighborhood: data.neighborhood,
+      operationType: data.operationType
     };
     return response;
   }

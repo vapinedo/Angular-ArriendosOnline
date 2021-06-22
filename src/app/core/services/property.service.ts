@@ -48,4 +48,15 @@ export class PropertyService {
       .doc(id).delete();
   }
 
+  /*
+    HARDCODED METHODS
+  */
+  public readOperationType(): any[] {
+    const response = [
+      { key: 'En Venta', value: 'venta' },
+      { key: 'En Arriendo', value: 'arriendo' }
+    ];
+    return response;
+  }
+
 }
