@@ -1,13 +1,13 @@
-<main>
+<main id="wrapper">
   <app-sidebar [sidebarIsClosed]="sidebarIsClosed"></app-sidebar>
 
-  <section class="wrapper-content" [ngClass]="{'expanded': sidebarIsClosed}">
+  <section class="container-fluid">
     <header class="header-content">
       <i class='bx bx-menu' (click)="onToggleSidebar()"></i>
     </header>
 
-    <section class="container-fluid">
+    <div class="content">
       <router-outlet></router-outlet>
-    </section>
+    </div>
   </section>
 </main>
