@@ -2,7 +2,6 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { AngularFireStorage } from '@angular/fire/storage';
 import { Property } from '@core/interfaces/property.interface';
 
 @Injectable()
@@ -11,8 +10,7 @@ export class PropertyService {
   private readonly collectionName = 'propiedades';
 
   constructor(
-    private afs: AngularFirestore,
-    private storage: AngularFireStorage
+    private afs: AngularFirestore
   ) {}
 
   public create(item: Property): Promise<any> {
@@ -33,7 +31,7 @@ export class PropertyService {
       );
   }
 
-  public readOne(id: number): Observable<Property | undefined> {
+  public readOne(id: string): Observable<Property | undefined> {
     return this.afs.doc<Property>(`${this.collectionName}/${id}`)
       .valueChanges();
   }

@@ -1,6 +1,8 @@
 import { Observable } from 'rxjs';
 import { SubSink } from 'subsink';
 import { Router } from '@angular/router';
+import { Owner } from '@core/interfaces/owner.interface';
+import { OwnerService } from '@core/services/owner.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Property } from '@core/interfaces/property.interface';
 import { MessageService } from '@core/services/message.service';
@@ -31,6 +33,7 @@ export class PropertyCreateComponent implements OnDestroy, OnInit {
   
   public operationType: any[] = [];
 
+  public owners$!: Observable<Owner[]>;
   public neighborhoods$!: Observable<Neighborhood[]>;
   public propertyCategories$!: Observable<PropertyCategory[]>;
 
@@ -41,6 +44,7 @@ export class PropertyCreateComponent implements OnDestroy, OnInit {
   constructor(
     private router: Router,
     private fb: FormBuilder,
+    private ownerSvc: OwnerService,
     private messageSvc: MessageService,
     private propertySvc: PropertyService,
     private neighborhoodSvc: NeighborhoodService,
@@ -54,6 +58,7 @@ export class PropertyCreateComponent implements OnDestroy, OnInit {
       price: [null, [Validators.required]],
       mobile: [null, [Validators.required]],
       images: [null, [Validators.required]],
+      ownerID: [null, [Validators.required]],
       address: [null, [Validators.required]],
       category: [null, [Validators.required]],
       neighborhood: [null, [Validators.required]],
@@ -62,6 +67,7 @@ export class PropertyCreateComponent implements OnDestroy, OnInit {
   }
   
   ngOnInit(): void {
+    this.owners$ = this.ownerSvc.read();
     this.neighborhoods$ = this.neighborhoodSvc.read();
     this.operationType = this.propertySvc.readOperationType();
     this.propertyCategories$ = this.propertyCategorySvc.read();
@@ -129,6 +135,7 @@ export class PropertyCreateComponent implements OnDestroy, OnInit {
       price: data.price,
       mobile: data.mobile,
       address: data.address,
+      ownerID: data.ownerID,
       visible: data.visible,
       category: data.category,
       description: data.description,

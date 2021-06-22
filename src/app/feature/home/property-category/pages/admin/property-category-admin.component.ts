@@ -42,8 +42,8 @@ export class PropertyCategoryAdminComponent implements OnInit, OnDestroy {
         .subscribe({
           next: data => {
             this.dataSource.data = data;
-            this.dataSource.paginator = this.paginator;
             this.dataSource.sort = this.sort;
+            this.dataSource.paginator = this.paginator;
           },
           error: err => this.messageSvc.error(err)
         })

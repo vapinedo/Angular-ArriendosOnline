@@ -24,6 +24,11 @@ const routes: Routes = [
         .then(m => m.PropertyModule)
       },
       {  
+        path: 'propietarios',
+        loadChildren: () => import('@feature/home/owner/owner.module')
+        .then(m => m.OwnerModule)
+      },      
+      {  
         path: 'propiedad-categorias',
         loadChildren: () => import('@feature/home/property-category/property-category.module')
         .then(m => m.PropertyCategoryModule)

@@ -1,18 +1,18 @@
 import { SubSink } from 'subsink';
 import { Component, OnDestroy } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
+import { Owner } from '@core/interfaces/owner.interface';
+import { OwnerService } from '@core/services/owner.service';
 import { MessageService } from '@core/services/message.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Neighborhood } from '@core/interfaces/neighborhood.interface';
-import { NeighborhoodService } from '@core/services/neighborhood.service';
 import { DialogComponent } from '@shared/components/dialog/dialog.component';
 
 @Component({
-  selector: 'app-neighborhood-create',
-  templateUrl: './neighborhood-create.component.html',
-  styleUrls: ['./neighborhood-create.component.scss']
+  selector: 'app-owner-create',
+  templateUrl: './owner-create.component.html',
+  styleUrls: ['./owner-create.component.scss']
 })
-export class NeighborhoodCreateComponent implements OnDestroy {
+export class OwnerCreateComponent implements OnDestroy {
 
   private subscriptions = new SubSink();
 
@@ -21,13 +21,14 @@ export class NeighborhoodCreateComponent implements OnDestroy {
 
   constructor(
     private fb: FormBuilder,
+    private ownerSvc: OwnerService,
     private messageSvc: MessageService,
-    private neighborhoodSvc: NeighborhoodService,
     private dialogRef: MatDialogRef<DialogComponent>
   ) {
     this.form = this.fb.group({
-      visible: [false],
-      name: [null, [Validators.required]]
+      name: [null, [Validators.required]],
+      mobile: [null, [Validators.required]],
+      lastname: [null, [Validators.required]]
     }); 
   }
 
@@ -39,12 +40,12 @@ export class NeighborhoodCreateComponent implements OnDestroy {
       
       try {
         const newData = this._prepareDataBeforeSend(formData);
-        const dataCreated = await this.neighborhoodSvc.create(newData);
+        const dataCreated = await this.ownerSvc.create(newData);
 
         this.showSpinner = false;
         this.messageSvc.success();
 
-        /* informa (a neighborhood-admin.ts) 
+        /* informa (a owner-admin.ts) 
           que el registro fue creado
           y el dialog ha sido cerrado */
         this.dialogRef.close(true); 
@@ -54,10 +55,11 @@ export class NeighborhoodCreateComponent implements OnDestroy {
     return;
   }
 
-  private _prepareDataBeforeSend(data: any): Neighborhood {
-    let response: Neighborhood = {
+  private _prepareDataBeforeSend(data: any): Owner {
+    let response: Owner = {
       name: data.name,
-      visible: data.visible
+      mobile: data.mobile,
+      lastname: data.lastname
     };
     return response;
   }

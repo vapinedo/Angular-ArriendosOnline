@@ -1,0 +1,28 @@
+<article class="box animate__animated animate__fadeIn animate_faster">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
+
+        <mat-form-field appearance="outline">
+            <mat-label>Nombres</mat-label>
+            <input matInput type="text" formControlName="name">
+        </mat-form-field>       
+
+        <mat-form-field appearance="outline">
+            <mat-label>Apellidos</mat-label>
+            <input matInput type="text" formControlName="lastname">
+        </mat-form-field>       
+
+        <mat-form-field appearance="outline">
+            <mat-label>Celular</mat-label>
+            <input matInput type="text" formControlName="mobile">
+        </mat-form-field>       
+
+        <div class="footer">
+            <app-spinner *ngIf="showSpinner"></app-spinner>
+            <button 
+                *ngIf="!showSpinner" 
+                [disabled]="form.invalid" 
+                type="submit" color="primary" mat-raised-button>Actualizar</button>
+        </div>
+        
+    </form>
+</article>

@@ -2,34 +2,34 @@ import { SubSink } from 'subsink';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
+import { OwnerService } from '@core/services/owner.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MessageService } from '@core/services/message.service';
+import { OwnerCreateComponent } from '../create/owner-create.component';
+import { OwnerUpdateComponent } from '../update/owner-update.component';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { NeighborhoodService } from '@core/services/neighborhood.service';
 import { DialogComponent } from '@shared/components/dialog/dialog.component';
-import { NeighborhoodCreateComponent } from '../create/neighborhood-create.component';
-import { NeighborhoodUpdateComponent } from '../update/neighborhood-update.component';
 
 @Component({
-  selector: 'app-neighborhood-admin',
-  templateUrl: './neighborhood-admin.component.html',
-  styleUrls: ['./neighborhood-admin.component.scss']
+  selector: 'app-owner-admin',
+  templateUrl: './owner-admin.component.html',
+  styleUrls: ['./owner-admin.component.scss']
 })
-export class NeighborhoodAdminComponent implements OnInit, OnDestroy {
+export class OwnerAdminComponent implements OnInit, OnDestroy {
 
   private subscriptions = new SubSink();
 
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  public title = 'Listado de barrios';
+  public title = 'Listado de propietarios';
   public dataSource = new MatTableDataSource();
-  public displayedColumns: string[] = ['name', 'visible', 'acciones'];
+  public displayedColumns: string[] = ['name', 'lastname', 'mobile', 'acciones'];
 
   constructor(
     public dialog: MatDialog,
-    private messageSvc: MessageService,
-    private neighborhoodSvc: NeighborhoodService
+    private ownerSvc: OwnerService,
+    private messageSvc: MessageService
   ) {}
 
   ngOnInit(): void {
@@ -38,7 +38,7 @@ export class NeighborhoodAdminComponent implements OnInit, OnDestroy {
 
   private _setDatasource(): void {
     this.subscriptions.add(
-      this.neighborhoodSvc.read()
+      this.ownerSvc.read()
         .subscribe({
           next: data => {
             this.dataSource.data = data;
@@ -55,8 +55,8 @@ export class NeighborhoodAdminComponent implements OnInit, OnDestroy {
       width: '50vw',
       disableClose: true,
       data: { 
-        dataComponent: { title: 'Nuevo barrio' },
-        component: NeighborhoodCreateComponent
+        dataComponent: { title: 'Nuevo propietario' },
+        component: OwnerCreateComponent
       }
     });
 
@@ -75,8 +75,8 @@ export class NeighborhoodAdminComponent implements OnInit, OnDestroy {
       width: '50vw',
       disableClose: true,
       data: { 
-        dataComponent: { id, title: 'Actualizar barrio' },
-        component: NeighborhoodUpdateComponent
+        dataComponent: { id, title: 'Actualizar propietario' },
+        component: OwnerUpdateComponent
       }
     });
 
@@ -94,7 +94,7 @@ export class NeighborhoodAdminComponent implements OnInit, OnDestroy {
     this.messageSvc.confirm()
       .then((result) => {
         if (result.isConfirmed) {
-          this.neighborhoodSvc.delete(id) 
+          this.ownerSvc.delete(id) 
             .then(resolve => {
               console.log(resolve);
               this.messageSvc.success('Registro eliminado exitosamente')

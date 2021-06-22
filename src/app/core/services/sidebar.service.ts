@@ -17,6 +17,7 @@ export class SidebarService {
 			linkName: 'Propiedades',
 			submenu: [
 				{ title: 'Listado', path: '/home/propiedades' },
+				{ title: 'Propietarios', path: '/home/propietarios' },
 				{ title: 'Barrios', path: '/home/barrios' },
 				{ title: 'Categorías', path: '/home/propiedad-categorias' }
 			]

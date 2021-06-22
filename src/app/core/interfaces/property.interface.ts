@@ -3,6 +3,7 @@ export interface Property {
     price: number;
     mobile: string;
     address: string;
+    ownerID: string;
     images: string[];
     visible: boolean;
     category: string;

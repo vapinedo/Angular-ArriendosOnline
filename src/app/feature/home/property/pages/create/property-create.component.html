@@ -64,6 +64,15 @@
 
         <article class="row">
             <mat-form-field appearance="outline" class="col">
+                <mat-label>Propietario *</mat-label>
+                <mat-select formControlName="ownerID" disableRipple>
+                    <mat-option *ngFor="let item of owners$ | async" [value]="item.id">
+                        {{ item.name }} {{ item.lastname }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>       
+
+            <mat-form-field appearance="outline" class="col">
                 <mat-label>Celular de contacto *</mat-label>
                 <input matInput type="text" formControlName="mobile">
             </mat-form-field>       

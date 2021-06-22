@@ -10,7 +10,7 @@ export class PropertyCategoryService {
   private readonly collectionName = 'propiedadCategorias';
 
   constructor(
-    private afs: AngularFirestore,
+    private afs: AngularFirestore
   ) {}
 
   public create(item: PropertyCategory): Promise<any> {

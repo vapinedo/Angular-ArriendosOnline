@@ -10,7 +10,7 @@ export class NeighborhoodService {
   private readonly collectionName = 'barrios';
 
   constructor(
-    private afs: AngularFirestore,
+    private afs: AngularFirestore
   ) {}
 
   public create(item: Neighborhood): Promise<any> {
