@@ -46,13 +46,16 @@ export class PropertyCreateComponent implements OnDestroy, OnInit {
     private neighborhoodSvc: NeighborhoodService,
     private fileuploaderSvc: FileuploaderService,
     private propertyCategorySvc: PropertyCategoryService
-  ) {
-    this.form = this.fb.group({
+    ) {
+      this.form = this.fb.group({
+      visible: [false],
+      description: [null],
+      mobileOptional: [null],
       price: [null, [Validators.required]],
+      mobile: [null, [Validators.required]],
       images: [null, [Validators.required]],
       address: [null, [Validators.required]],
       category: [null, [Validators.required]],
-      visible: [false, [Validators.requiredTrue]],
       neighborhood: [null, [Validators.required]],
       operationType: [null, [Validators.required]]
     }); 
@@ -124,11 +127,14 @@ export class PropertyCreateComponent implements OnDestroy, OnInit {
     let response: Property = {
       images: filesURL,
       price: data.price,
+      mobile: data.mobile,
       address: data.address,
       visible: data.visible,
       category: data.category,
+      description: data.description,
       neighborhood: data.neighborhood,
-      operationType: data.operationType
+      operationType: data.operationType,
+      mobileOptional: data.mobileOptional
     };
     return response;
   }
