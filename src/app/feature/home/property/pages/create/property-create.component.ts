@@ -54,9 +54,7 @@ export class PropertyCreateComponent implements OnDestroy, OnInit {
       this.form = this.fb.group({
       visible: [false],
       description: [null],
-      mobileOptional: [null],
       price: [null, [Validators.required]],
-      mobile: [null, [Validators.required]],
       images: [null, [Validators.required]],
       ownerID: [null, [Validators.required]],
       address: [null, [Validators.required]],
@@ -133,15 +131,13 @@ export class PropertyCreateComponent implements OnDestroy, OnInit {
     let response: Property = {
       images: filesURL,
       price: data.price,
-      mobile: data.mobile,
       address: data.address,
       ownerID: data.ownerID,
       visible: data.visible,
       category: data.category,
       description: data.description,
       neighborhood: data.neighborhood,
-      operationType: data.operationType,
-      mobileOptional: data.mobileOptional
+      operationType: data.operationType
     };
     return response;
   }

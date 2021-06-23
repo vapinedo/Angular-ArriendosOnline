@@ -1,7 +1,6 @@
 export interface Property {
     id?: string;
     price: number;
-    mobile: string;
     address: string;
     ownerID: string;
     images: string[];
@@ -10,5 +9,4 @@ export interface Property {
     description?: string;
     neighborhood: string;
     operationType: string;
-    mobileOptional?: string;
 }

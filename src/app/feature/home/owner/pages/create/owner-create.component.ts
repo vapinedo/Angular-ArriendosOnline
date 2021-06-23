@@ -26,6 +26,7 @@ export class OwnerCreateComponent implements OnDestroy {
     private dialogRef: MatDialogRef<DialogComponent>
   ) {
     this.form = this.fb.group({
+      mobileOptional: [null],
       name: [null, [Validators.required]],
       mobile: [null, [Validators.required]],
       lastname: [null, [Validators.required]]
@@ -59,7 +60,8 @@ export class OwnerCreateComponent implements OnDestroy {
     let response: Owner = {
       name: data.name,
       mobile: data.mobile,
-      lastname: data.lastname
+      lastname: data.lastname,
+      mobileOptional: data.mobileOptional
     };
     return response;
   }
