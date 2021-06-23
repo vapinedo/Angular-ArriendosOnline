@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Component } from '@angular/core';
 import { AuthService } from '@core/services/auth.service';
 import { MessageService } from '@core/services/message.service';
+import { LoginData } from '@core/interfaces/login-data.interface';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ValidatorsService } from '@core/services/validators.service';
 
@@ -13,10 +14,12 @@ import { ValidatorsService } from '@core/services/validators.service';
 })
 export class LoginComponent {
 
+  public subscriptions = new Subscription();
+
   public form: FormGroup;
   public authError = false;
   public title = 'Arriendos Online';
-  public subscriptions = new Subscription();
+  public showSpinner: boolean = false;
   
   constructor( 
     private router: Router,
@@ -34,16 +37,32 @@ export class LoginComponent {
       }); 
     }
 
-  onSubmit() {
+  async onSubmit() {
     if (this.form.valid) {
-      const { email, password } = this.form.value;
-      this.authSvc.loginByEmail(email, password)
-        .then(data => {
-          this.router.navigate(['/home/propiedades']);
-        })
-        .catch(error => console.log('Error', error));
+      this.showSpinner = true;
+      const formData = this.form.value;
+
+      try {
+        const newData = this._prepareDataBeforeSend(formData);
+        const response = await this.authSvc.loginByEmail(newData);
+
+        this.showSpinner = false;
+        this.router.navigate(['/home/propiedades']);
+      }
+      catch (err) {
+        this.messageSvc.error(err); 
+        console.log('AUTH ERROR', err); 
+      }            
     }
     return;
+  }
+
+  private _prepareDataBeforeSend(data: any): LoginData {
+    let response: LoginData = {
+      email: data.email,
+      password: data.password
+    };
+    return response;
   }
 
 }

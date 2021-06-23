@@ -1,6 +1,7 @@
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { LoginData } from '@core/interfaces/login-data.interface';
 
 @Injectable()
 export class AuthService {
@@ -13,8 +14,8 @@ export class AuthService {
     this.userData = afAuth.authState;
   }
 
-  public loginByEmail(email: string, password: string): Promise<any> {
-    return this.afAuth.signInWithEmailAndPassword(email, password);
+  public loginByEmail(item: LoginData): Promise<any> {
+    return this.afAuth.signInWithEmailAndPassword(item.email, item.password);
   }
 
   public logout(): Promise<void> {
