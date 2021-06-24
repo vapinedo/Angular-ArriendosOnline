@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AdminComponent } from '@feature/admin/admin.component';
+import { AngularFireAuthGuard, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
 
+const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['/auth']);
 
 const routes: Routes = [
   {
@@ -12,6 +14,8 @@ const routes: Routes = [
   {  
     path: 'admin',
     component:  AdminComponent,
+    canActivate: [AngularFireAuthGuard], 
+    data: { authGuardPipe: redirectUnauthorizedToLogin },
     children: [
       {  
         path: '',
