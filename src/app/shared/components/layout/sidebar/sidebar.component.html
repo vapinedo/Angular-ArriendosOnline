@@ -29,8 +29,24 @@
           <i [class]="item.icon"></i>
           <span class="link_name">{{ item.linkName }}</span>
         </a>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" [routerLink]="item.path">{{ item.linkName }}</a></li>
+        </ul>
       </ng-template>
     </li>
+
+    <article class="profile-details">
+      <div class="profile-content">
+        <img src="image/profile.jpg" alt="profile">
+      </div>
+
+      <div class="name-job">
+        <div class="profile_name">User Logged</div>
+        <div class="job">Role</div>
+      </div>
+      <i class='bx bx-log-out'></i>
+    </article>
+
   </ul>
   
 </aside>

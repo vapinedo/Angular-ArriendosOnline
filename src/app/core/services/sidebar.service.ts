@@ -8,7 +8,7 @@ export class SidebarService {
 
 	private readonly menu: any[] = [
 		{
-			path: '/home',
+			path: '/admin',
 			icon: 'bx bx-grid-alt',
 			linkName: 'Dashboard',
 		},
@@ -16,10 +16,10 @@ export class SidebarService {
 			icon: 'bx bx-home-smile',
 			linkName: 'Propiedades',
 			submenu: [
-				{ title: 'Listado', path: '/home/propiedades' },
-				{ title: 'Propietarios', path: '/home/propietarios' },
-				{ title: 'Barrios', path: '/home/barrios' },
-				{ title: 'Categorías', path: '/home/propiedad-categorias' }
+				{ title: 'Listado', path: '/admin/propiedades' },
+				{ title: 'Propietarios', path: '/admin/propietarios' },
+				{ title: 'Barrios', path: '/admin/barrios' },
+				{ title: 'Categorías', path: '/admin/propiedad-categorias' }
 			]
 		}
 	];

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { HomeComponent } from '@feature/home/home.component';
+import { AdminComponent } from '@feature/admin/admin.component';
 
 
 const routes: Routes = [
@@ -10,38 +10,38 @@ const routes: Routes = [
     .then(m => m.AuthModule)
   },
   {  
-    path: 'home',
-    component:  HomeComponent,
+    path: 'admin',
+    component:  AdminComponent,
     children: [
       {  
         path: '',
-        loadChildren: () => import('@feature/home/dashboard/dashboard.module')
+        loadChildren: () => import('@feature/admin/dashboard/dashboard.module')
         .then(m => m.DashboardModule)
       },
       {  
         path: 'propiedades',
-        loadChildren: () => import('@feature/home/property/property.module')
+        loadChildren: () => import('@feature/admin/property/property.module')
         .then(m => m.PropertyModule)
       },
       {  
         path: 'propietarios',
-        loadChildren: () => import('@feature/home/owner/owner.module')
+        loadChildren: () => import('@feature/admin/owner/owner.module')
         .then(m => m.OwnerModule)
       },      
       {  
         path: 'propiedad-categorias',
-        loadChildren: () => import('@feature/home/property-category/property-category.module')
+        loadChildren: () => import('@feature/admin/property-category/property-category.module')
         .then(m => m.PropertyCategoryModule)
       },      
       {  
         path: 'barrios',
-        loadChildren: () => import('@feature/home/neighborhood/neighborhood.module')
+        loadChildren: () => import('@feature/admin/neighborhood/neighborhood.module')
         .then(m => m.NeighborhoodModule)
       }      
     ]
   },
-  { path: '', redirectTo: '/home/propiedades',  pathMatch: 'full' },
-  { path: '***', redirectTo: '/home/propiedades' }
+  { path: '', redirectTo: '/admin/propiedades',  pathMatch: 'full' },
+  { path: '***', redirectTo: '/admin/propiedades' }
 ];
 
 @NgModule({
