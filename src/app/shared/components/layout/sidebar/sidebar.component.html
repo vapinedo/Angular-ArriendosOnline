@@ -37,14 +37,17 @@
 
     <article class="profile-details">
       <div class="profile-content">
-        <img src="image/profile.jpg" alt="profile">
+        <img [src]="profileImage" alt="profile">
       </div>
 
       <div class="name-job">
-        <div class="profile_name">User Logged</div>
-        <div class="job">Role</div>
+        <div>
+          <div class="profile_name">Valp</div>
+          <div class="job">Role</div>
+        </div>
+        
+        <i (click)="onLogout()" class='bx bx-log-out' matTooltip="Cerrar sesión"></i>
       </div>
-      <i class='bx bx-log-out'></i>
     </article>
 
   </ul>

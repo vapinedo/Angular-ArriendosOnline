@@ -1,4 +1,6 @@
 import { SubSink } from 'subsink';
+import { Router } from '@angular/router';
+import { AuthService } from '@core/services/auth.service';
 import { Component, Input, OnDestroy } from '@angular/core';
 import { MessageService } from '@core/services/message.service';
 import { SidebarService } from '@core/services/sidebar.service';
@@ -11,15 +13,17 @@ import { SidebarService } from '@core/services/sidebar.service';
 export class SidebarComponent implements OnDestroy {
   
   private subscriptions = new SubSink();
-  
+
   public menu: any;
-  public profileImage: string = '';
   public showSubmenu: boolean = false;
   public title: string = 'Uribia Online';
+  public profileImage: string = '../../../../../assets/img/profile.jpg';
 
   @Input() sidebarIsClosed: boolean = false;
   
   constructor(
+    private router: Router,
+    private authSvc: AuthService,
     private sidebarSvc: SidebarService,
     private messageSvc: MessageService
   ) { 
@@ -40,6 +44,12 @@ export class SidebarComponent implements OnDestroy {
       
   onToggleSubmenu(): void {
     this.showSubmenu = !this.showSubmenu;
+  }
+
+  onLogout(): void {
+    this.authSvc.logout()
+      .then(resolve => this.router.navigate(['/auth']))
+      .catch(err => this.messageSvc.error(err));
   }
 
   ngOnDestroy(): void {

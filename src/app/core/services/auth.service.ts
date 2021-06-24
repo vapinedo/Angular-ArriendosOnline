@@ -12,6 +12,9 @@ export class AuthService {
     private afAuth: AngularFireAuth
   ) { 
     this.userData = afAuth.authState;
+    
+    afAuth.user
+      .subscribe(console.log)
   }
 
   public loginByEmail(item: LoginData): Promise<any> {

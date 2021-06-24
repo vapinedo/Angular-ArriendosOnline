@@ -47,7 +47,7 @@ export class LoginComponent {
         const response = await this.authSvc.loginByEmail(newData);
 
         this.showSpinner = false;
-        this.router.navigate(['/home/propiedades']);
+        this.router.navigate(['/admin/propiedades']);
       }
       catch (err) {
         this.messageSvc.error(err); 
