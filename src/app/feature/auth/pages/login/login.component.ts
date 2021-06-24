@@ -51,7 +51,6 @@ export class LoginComponent {
       }
       catch (err) {
         this.messageSvc.error(err); 
-        console.log('AUTH ERROR', err); 
       }            
     }
     return;

@@ -46,10 +46,14 @@ export class SidebarComponent implements OnDestroy {
     this.showSubmenu = !this.showSubmenu;
   }
 
-  onLogout(): void {
-    this.authSvc.logout()
-      .then(resolve => this.router.navigate(['/auth']))
-      .catch(err => this.messageSvc.error(err));
+  async onLogout(): Promise<void> {
+    try {
+      const response = this.authSvc.logout();
+      this.router.navigate(['/auth']);
+    }
+    catch (err) {
+      this.messageSvc.error(err); 
+    }            
   }
 
   ngOnDestroy(): void {
