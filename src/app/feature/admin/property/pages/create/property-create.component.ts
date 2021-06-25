@@ -74,6 +74,8 @@ export class PropertyCreateComponent implements OnDestroy, OnInit {
   onFileChange(event: any) {
     this.files = event.target.files;
 
+    console.log(this.files[0]);
+
     if (this.files) {
       if (this._filesAreOnlyImages(this.files)) {
         this._generateImgPreview(this.files);
@@ -82,6 +84,17 @@ export class PropertyCreateComponent implements OnDestroy, OnInit {
       }
     }
     return; 
+  }
+
+  onDeleteImage(imageIndex: number) {
+    const limit = this.imgPreviewUrls.length;
+
+    for(let i=0; i<limit; i++) {
+      delete this.files.i;
+      this.imgPreviewUrls.splice(i, 1);
+    }    
+    console.log(this.files);
+    console.log(this.imgPreviewUrls);
   }
 
   private _generateImgPreview(files: FileList): void {

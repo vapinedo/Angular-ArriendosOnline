@@ -9,11 +9,16 @@
                     <input (input)="onFileChange($event)" type="file" multiple [accept]="allowedFormats">
                 </article>
 
-                <div class="grid_images_preview">
-                    <img *ngFor="let url of imgPreviewUrls" class="images_preview" [src]="url">
+                <div class="image_preview_container">
+                    <div *ngFor="let url of imgPreviewUrls; let i = index" class="image_preview">
+                        <img [src]="url"> 
+                        <i class='bx bxs-star featured' *ngIf="i === 0"></i>
+                        <span class="image_remove">
+                            <i *ngIf="i !== 0" class='bx bx-star' matTooltip="Destacar" matTooltipPosition="left"></i>
+                            <i (click)="onDeleteImage(i)" class='bx bx-x-circle' matTooltip="Eliminar" matTooltipPosition="right"></i>
+                        </span>
+                    </div>
                 </div>
-
-
             </div><!-- form col 1 -->
 
             <div class="col-md-7">

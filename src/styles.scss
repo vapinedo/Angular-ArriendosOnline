@@ -171,7 +171,6 @@ body {
 }
 
 .fileupload {
-
     .upload_control{ 
         overflow: hidden;
         position: relative;
@@ -190,17 +189,54 @@ body {
         } 
     }
 
-    .grid_images_preview {
-
-        .images_preview:first-child {
-            margin: 0;
-            width: 100%;
-            margin-top: -18px;
-            margin-bottom: 15px;
-        }
-        .images_preview {
+    .image_preview_container {
+        .image_preview {
             width: 30%;
+            opacity: 1;
             margin: 5px;
-        }
-    }
-}
+            position: relative;
+            border-radius: 4px;
+            transition: .5s ease;
+            display: inline-block;
+
+            &:hover .image_remove {
+                opacity: 1;
+            }
+            &:first-child {
+                margin: 0;
+                width: 100%;
+                margin-top: -17px;
+                margin-bottom: 15px;
+            }
+            img {
+                width: 100%;
+            }
+            .image_remove {
+                top: 0;
+                left: 0;
+                gap: 10px;
+                opacity: 0;
+                width: 100%;
+                color: #fff;
+                display: flex;
+                font-size: 30px;
+                position: absolute;
+                padding: 2px 5px;
+                align-items: center;
+                transition: 0.5s ease;
+                background: rgba(0,0,0,.4);
+                justify-content: space-between;
+                i {
+                    cursor: pointer;
+                }
+            }
+            .featured {
+                left: 9px;
+                bottom: 9px;
+                color: #fff;
+                font-size: 40px;
+                position: absolute;
+            }
+        } // .image_preview
+    } // .image_preview_container
+} // .fileupload
