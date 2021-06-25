@@ -12,9 +12,10 @@ export class AuthService {
     private afAuth: AngularFireAuth
   ) { 
     this.userData = afAuth.authState;
-    
-    afAuth.user
-      .subscribe(console.log)
+    }
+
+  public getCurrentUser(): Observable<any> {
+    return this.afAuth.user;
   }
 
   public loginByEmail(item: LoginData): Promise<any> {

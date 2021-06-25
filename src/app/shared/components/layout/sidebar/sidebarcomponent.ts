@@ -28,6 +28,9 @@ export class SidebarComponent implements OnDestroy {
     private messageSvc: MessageService
   ) { 
     this._setMenu();
+
+    this.authSvc.getCurrentUser()
+      .subscribe(console.log);
   }
 
   private _setMenu() {

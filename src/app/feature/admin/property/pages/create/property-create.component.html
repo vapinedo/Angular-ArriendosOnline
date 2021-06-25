@@ -2,89 +2,88 @@
     <h2>{{ title }}</h2>
 
     <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
-
-        <mat-form-field appearance="outline" class="file-wrapper">
-            <article class="fileupload">
-                <button [disabled]="showSpinner">
-                    Subir fotos
+        <div class="row">
+            <div class="col-md-5 fileupload">
+                <article class="upload_control">
+                    <img *ngIf="imgPreviewUrls.length === 0" [src]="defaultImage" class="default_image">
                     <input (input)="onFileChange($event)" type="file" multiple [accept]="allowedFormats">
-                </button>
-                <img *ngFor="let url of imgPreviewUrls" [src]="url">
-            </article>
+                </article>
+
+                <div class="grid_images_preview">
+                    <img *ngFor="let url of imgPreviewUrls" class="images_preview" [src]="url">
+                </div>
+
+
+            </div><!-- form col 1 -->
+
+            <div class="col-md-7">
+                <article class="row">
+                    <mat-form-field appearance="outline" class="col">
+                        <mat-label>Categoría *</mat-label>
+                        <mat-select formControlName="category" disableRipple>
+                            <mat-option *ngFor="let item of propertyCategories$ | async" [value]="item.name">
+                                {{ item.name }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>       
             
-            <input [hidden]="true" readonly matInput type="text" formControlName="images">
-        </mat-form-field>       
-        <!-- <p *ngIf="isInvalidFormats">Solo puede subir imágenes JPEG, JPG o PNG</p> -->
-
-        <article class="row">
-            <mat-form-field appearance="outline" class="col">
-                <mat-label>Categoría *</mat-label>
-                <mat-select formControlName="category" disableRipple>
-                    <mat-option *ngFor="let item of propertyCategories$ | async" [value]="item.name">
-                        {{ item.name }}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>       
+                    <mat-form-field appearance="outline" class="col">
+                        <mat-label>Tipo de operación *</mat-label>
+                        <mat-select formControlName="operationType" disableRipple>
+                            <mat-option *ngFor="let item of operationType" [value]="item.value">
+                                {{ item.key }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>       
+                </article>
     
-            <mat-form-field appearance="outline" class="col">
-                <mat-label>Tipo de operación *</mat-label>
-                <mat-select formControlName="operationType" disableRipple>
-                    <mat-option *ngFor="let item of operationType" [value]="item.value">
-                        {{ item.key }}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>       
-
-            <mat-form-field appearance="outline" class="col">
-                <mat-label>Barrio *</mat-label>
-                <mat-select formControlName="neighborhood" disableRipple>
-                    <mat-option *ngFor="let item of neighborhoods$ | async" [value]="item.name">
-                        {{ item.name }}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>       
-        </article>
-
-        <article class="row">
-            <mat-form-field appearance="outline" class="col">
-                <mat-label>Precio *</mat-label>
-                <input matInput type="text" formControlName="price">
-            </mat-form-field>       
+                <article class="row">
+                    <mat-form-field appearance="outline" class="col">
+                        <mat-label>Barrio *</mat-label>
+                        <mat-select formControlName="neighborhood" disableRipple>
+                            <mat-option *ngFor="let item of neighborhoods$ | async" [value]="item.name">
+                                {{ item.name }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>       
     
-            <mat-form-field appearance="outline" class="col">
-                <mat-label>Dirección *</mat-label>
-                <input matInput type="text" formControlName="address">
-            </mat-form-field>       
+                    <mat-form-field appearance="outline" class="col">
+                        <mat-label>Precio *</mat-label>
+                        <input matInput type="text" formControlName="price">
+                    </mat-form-field>       
+                </article>
+    
+                <article class="row">
+                    <mat-form-field appearance="outline" class="col">
+                        <mat-label>Dirección *</mat-label>
+                        <input matInput type="text" formControlName="address">
+                    </mat-form-field>       
+                
+                    <mat-form-field appearance="outline" class="col">
+                        <mat-label>Propietario *</mat-label>
+                        <mat-select formControlName="ownerID" disableRipple>
+                            <mat-option *ngFor="let item of owners$ | async" [value]="item.id">
+                                {{ item.name }} {{ item.lastname }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>       
+                </article>
+    
+                <div class="custom_mat_form_field_inline">
+                    <mat-label>Visible?</mat-label>
+                    <mat-slide-toggle disableRipple formControlName="visible"></mat-slide-toggle>
+                </div>  
+    
+                <mat-form-field appearance="outline">
+                    <mat-label>Obervaciones</mat-label>
+                    <textarea matInput rows="4" type="text" formControlName="description"></textarea>
+                </mat-form-field>       
+            </div><!-- form col 1 -->
+        </div><!-- form row 1 -->
 
-            <mat-form-field appearance="outline" class="col">
-                <mat-label>Propietario *</mat-label>
-                <mat-select formControlName="ownerID" disableRipple>
-                    <mat-option *ngFor="let item of owners$ | async" [value]="item.id">
-                        {{ item.name }} {{ item.lastname }}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>       
-        </article>
-
-        <article class="row">
-            <div class="custom_mat_form_field_inline col">
-                <mat-label>Visible?</mat-label>
-                <mat-slide-toggle disableRipple formControlName="visible"></mat-slide-toggle>
-            </div>  
-        </article>
-
-        <article class="row">
-            <mat-form-field appearance="outline" class="col">
-                <mat-label>Obervaciones</mat-label>
-                <textarea matInput rows="4" type="text" formControlName="description"></textarea>
-            </mat-form-field>       
-        </article>
-
-        <div class="footer">
+        <div class="form_footer">
             <app-spinner *ngIf="showSpinner"></app-spinner>
-            <button 
-                *ngIf="!showSpinner" 
-                [disabled]="form.invalid" 
+            <button *ngIf="!showSpinner" [disabled]="form.invalid" 
                 type="submit" color="primary" mat-raised-button>Crear</button>
         </div>
         

@@ -18,36 +18,9 @@ body {
      width: 100%;
      margin-bottom: 1em;
 }
-.fileupload {
-    overflow: hidden;
-    position: relative;
-    display: inline-block;
-
-    button {
-        color: gray;
-        font-size: 1em;
-        font-weight: bold;
-        padding: 8px 20px;
-        position: relative;
-        border-radius: 4px;
-        border: 2px solid gray;
-        background-color: white;
-    }
-    img {
-        height: 120px;
-        margin: 0 .7em;
-        border-radius: 4px;
-    }
-    input[type=file] {
-        top: 0;
-        left: 0;
-        opacity: 0;
-        height: 100%;
-        width: 100%;
-        position: absolute;
-    }
+.form_footer {
+    text-align: right;
 }
-
  /* -------------------------------------------------------
     Mat Table
  ------------------------------------------------------- */
@@ -195,4 +168,39 @@ body {
     padding: 24px;
     border-radius: 5px;
     background-color: $blanco-500;
+}
+
+.fileupload {
+
+    .upload_control{ 
+        overflow: hidden;
+        position: relative;
+        display: inline-block;
+
+        .default_image {
+            width: 100%;
+        }
+        input[type=file] {
+            top: 0;
+            left: 0;
+            opacity: 0;
+            height: 100%;
+            width: 100%;
+            position: absolute;
+        } 
+    }
+
+    .grid_images_preview {
+
+        .images_preview:first-child {
+            margin: 0;
+            width: 100%;
+            margin-top: -18px;
+            margin-bottom: 15px;
+        }
+        .images_preview {
+            width: 30%;
+            margin: 5px;
+        }
+    }
 }

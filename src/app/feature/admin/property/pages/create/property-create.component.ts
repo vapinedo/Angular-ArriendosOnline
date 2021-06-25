@@ -28,11 +28,11 @@ export class PropertyCreateComponent implements OnDestroy, OnInit {
   public title = 'Nueva Propiedad';
   public showSpinner: boolean = false;
 
-  public imageUrls: string[] = [];
   public imgPreviewUrls: string[] = [];
+  public showImagesPreview: boolean = false;
+  public defaultImage: string = '../../../../../../assets/img/img_placeholder.jpg';
   
   public operationType: any[] = [];
-
   public owners$!: Observable<Owner[]>;
   public neighborhoods$!: Observable<Neighborhood[]>;
   public propertyCategories$!: Observable<PropertyCategory[]>;
@@ -71,19 +71,20 @@ export class PropertyCreateComponent implements OnDestroy, OnInit {
     this.propertyCategories$ = this.propertyCategorySvc.read();
   }
 
-  onFileChange(event: any): void {
+  onFileChange(event: any) {
     this.files = event.target.files;
-    
-    if (this.files && this._filesAreOnlyImages(this.files)) {
-      this._generateImgPreview(this.files);
-      this.form.controls.images.setValue('text');
-    } else {  
-      this.files = null;
-      this.isInvalidFormats = true;
+
+    if (this.files) {
+      if (this._filesAreOnlyImages(this.files)) {
+        this._generateImgPreview(this.files);
+      } else {
+        this.isInvalidFormats = true;
+      }
     }
+    return; 
   }
 
-  private _generateImgPreview(files: any): void {
+  private _generateImgPreview(files: FileList): void {
     for(let i=0; i<files.length; i++) { 
       const file = files[i];
       const reader = new FileReader();
@@ -102,7 +103,7 @@ export class PropertyCreateComponent implements OnDestroy, OnInit {
     return true;
   }
 
-  async onSubmit() {
+  async onSubmit(): Promise<void> {
     if (this.form.valid) {
       this.form.disable();
       this.showSpinner = true;
