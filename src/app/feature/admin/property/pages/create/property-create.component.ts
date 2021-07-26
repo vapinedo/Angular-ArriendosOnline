@@ -28,7 +28,7 @@ export class PropertyCreateComponent implements OnDestroy, OnInit {
   public title = 'Nueva Propiedad';
   public showSpinner: boolean = false;
 
-  public imgPreviewUrls: string[] = [];
+  public imgPreviewUrls: any[] = [];
   public showImagesPreview: boolean = false;
   public defaultImage: string = '../../../../../../assets/img/img_placeholder.jpg';
   
@@ -88,12 +88,19 @@ export class PropertyCreateComponent implements OnDestroy, OnInit {
       }
     }
   }
+
+  onFeatureImage(imageIndex: number): void {
+    const featureImageOnFiles = this.files.splice(imageIndex, 1);
+    const featureImageOnPreviewUrls = this.imgPreviewUrls.splice(imageIndex, 1);
+
+    this.files.unshift(featureImageOnFiles[0]);
+    this.imgPreviewUrls.unshift(featureImageOnPreviewUrls[0]);
+  }
   
   onDeleteImage(imageIndex: number): void {
     if (this.files.length === 1 ) {
       this.form.controls.images.patchValue(false);
     } 
-
     this.files.splice(imageIndex, 1);
     this.imgPreviewUrls.splice(imageIndex, 1);
   }

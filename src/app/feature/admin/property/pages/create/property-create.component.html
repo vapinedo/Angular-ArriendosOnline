@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-5 fileupload">
                 <article class="upload_control">
-                    <img *ngIf="imgPreviewUrls.length === 0" [src]="defaultImage" class="default_image">
+                    <img *ngIf="imgPreviewUrls.length === 0" [src]="defaultImage" class="default_image animate__animated animate__fadeIn animate_faster">
                     <input id="files" (input)="onFileChange($event)" type="file" multiple [accept]="allowedFormats">
                 </article>
 
@@ -14,7 +14,7 @@
                         <img [src]="url"> 
                         <i class='bx bxs-star featured' *ngIf="i === 0"></i>
                         <span class="image_remove">
-                            <i *ngIf="i !== 0" class='bx bx-star' matTooltip="Destacar" matTooltipPosition="left"></i>
+                            <i (click)="onFeatureImage(i)" *ngIf="i !== 0" class='bx bx-star' matTooltip="Destacar" matTooltipPosition="left"></i>
                             <i (click)="onDeleteImage(i)" class='bx bx-x-circle' matTooltip="Eliminar" matTooltipPosition="right"></i>
                         </span>
                     </div>
