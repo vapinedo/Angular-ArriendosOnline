@@ -6,7 +6,7 @@
             <div class="col-md-5 fileupload">
                 <article class="upload_control">
                     <img *ngIf="imgPreviewUrls.length === 0" [src]="defaultImage" class="default_image">
-                    <input (input)="onFileChange($event)" type="file" multiple [accept]="allowedFormats">
+                    <input id="files" (input)="onFileChange($event)" type="file" multiple [accept]="allowedFormats">
                 </article>
 
                 <div class="image_preview_container">

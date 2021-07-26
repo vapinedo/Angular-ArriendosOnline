@@ -23,8 +23,8 @@ export class PropertyCreateComponent implements OnDestroy, OnInit {
 
   private subscriptions = new SubSink();
 
+  private files: any[] = [];
   public form: FormGroup;
-  private files: any = null;
   public title = 'Nueva Propiedad';
   public showSpinner: boolean = false;
 
@@ -55,10 +55,10 @@ export class PropertyCreateComponent implements OnDestroy, OnInit {
       visible: [false],
       description: [null],
       price: [null, [Validators.required]],
-      images: [null, [Validators.required]],
       ownerID: [null, [Validators.required]],
       address: [null, [Validators.required]],
       category: [null, [Validators.required]],
+      images: [false, [Validators.requiredTrue]],
       neighborhood: [null, [Validators.required]],
       operationType: [null, [Validators.required]]
     }); 
@@ -71,30 +71,31 @@ export class PropertyCreateComponent implements OnDestroy, OnInit {
     this.propertyCategories$ = this.propertyCategorySvc.read();
   }
 
-  onFileChange(event: any) {
-    this.files = event.target.files;
-
-    console.log(this.files[0]);
-
-    if (this.files) {
-      if (this._filesAreOnlyImages(this.files)) {
-        this._generateImgPreview(this.files);
+  onFileChange(event: any): void {
+    const tempFiles = event.target.files;
+    
+    if (tempFiles) {
+      for (const file of tempFiles) {
+        this.files.push(file);
+      }
+      
+      if (this._filesAreOnlyImages(tempFiles)) {
+        this._generateImgPreview(tempFiles);
+        this.form.controls.images.patchValue(true);
       } else {
         this.isInvalidFormats = true;
+        this.form.controls.images.patchValue(false);
       }
     }
-    return; 
   }
+  
+  onDeleteImage(imageIndex: number): void {
+    if (this.files.length === 1 ) {
+      this.form.controls.images.patchValue(false);
+    } 
 
-  onDeleteImage(imageIndex: number) {
-    const limit = this.imgPreviewUrls.length;
-
-    for(let i=0; i<limit; i++) {
-      delete this.files.i;
-      this.imgPreviewUrls.splice(i, 1);
-    }    
-    console.log(this.files);
-    console.log(this.imgPreviewUrls);
+    this.files.splice(imageIndex, 1);
+    this.imgPreviewUrls.splice(imageIndex, 1);
   }
 
   private _generateImgPreview(files: FileList): void {
@@ -134,7 +135,7 @@ export class PropertyCreateComponent implements OnDestroy, OnInit {
 
         this.showSpinner = false;
         this.messageSvc.success();
-        this.router.navigate(['/home/propiedades']);
+        this.router.navigate(['/admin/propiedades']);
       }
       catch (err) { this.messageSvc.error(err); }
     }
