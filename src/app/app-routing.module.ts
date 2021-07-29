@@ -11,6 +11,11 @@ const routes: Routes = [
     loadChildren: () => import('@feature/auth/auth.module')
     .then(m => m.AuthModule)
   },
+  { 
+    path: 'home',
+    loadChildren: () => import('@feature/home/home.module')
+    .then(m => m.HomeModule)
+  },
   {  
     path: 'admin',
     component:  AdminComponent,
@@ -44,8 +49,8 @@ const routes: Routes = [
       }      
     ]
   },
-  { path: '', redirectTo: '/admin/propiedades',  pathMatch: 'full' },
-  { path: '***', redirectTo: '/admin/propiedades' }
+  { path: '', redirectTo: '/home',  pathMatch: 'full' },
+  { path: '***', redirectTo: '/home' }
 ];
 
 @NgModule({

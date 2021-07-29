@@ -2,6 +2,7 @@ import { Observable } from 'rxjs';
 import { SubSink } from 'subsink';
 import { Router } from '@angular/router';
 import { Owner } from '@core/interfaces/owner.interface';
+import { FileService } from '@core/services/file.service';
 import { OwnerService } from '@core/services/owner.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Property } from '@core/interfaces/property.interface';
@@ -9,7 +10,6 @@ import { MessageService } from '@core/services/message.service';
 import { PropertyService } from '@core/services/property.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Neighborhood } from '@core/interfaces/neighborhood.interface';
-import { FileuploaderService } from '@core/services/fileuploader.service';
 import { NeighborhoodService } from '@core/services/neighborhood.service';
 import { PropertyCategory } from '@core/interfaces/property-category.interface';
 import { PropertyCategoryService } from '@core/services/property-category.service';
@@ -44,11 +44,11 @@ export class PropertyCreateComponent implements OnDestroy, OnInit {
   constructor(
     private router: Router,
     private fb: FormBuilder,
+    private fileSvc: FileService,
     private ownerSvc: OwnerService,
     private messageSvc: MessageService,
     private propertySvc: PropertyService,
     private neighborhoodSvc: NeighborhoodService,
-    private fileuploaderSvc: FileuploaderService,
     private propertyCategorySvc: PropertyCategoryService
     ) {
       this.form = this.fb.group({
@@ -135,7 +135,7 @@ export class PropertyCreateComponent implements OnDestroy, OnInit {
         let promises: any[] = [];
         for (let i=0; i<this.files.length; i++) {
           const file = this.files[i];
-          const promise = await this.fileuploaderSvc.upload(file);
+          const promise = await this.fileSvc.create(file);
           promises.push(promise);
         }
         const filesURL = await Promise.all(promises);

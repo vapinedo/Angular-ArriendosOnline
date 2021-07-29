@@ -4,13 +4,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { AuthGuard } from './guards/auth.guard';
 
 import { AuthService } from './services/auth.service';
+import { FileService } from './services/file.service';
 import { OwnerService } from './services/owner.service';
 import { MessageService } from './services/message.service';
 import { SidebarService } from './services/sidebar.service';
 import { PropertyService } from './services/property.service';
 import { DatetimeService } from './services/datetime.service';
 import { ValidatorsService } from './services/validators.service';
-import { FileuploaderService } from './services/fileuploader.service';
 import { NeighborhoodService } from './services/neighborhood.service';
 import { PropertyCategoryService } from './services/property-category.service';
 
@@ -27,7 +27,7 @@ import { PropertyCategoryService } from './services/property-category.service';
     DatetimeService,
     PropertyService,
     ValidatorsService,
-    FileuploaderService,
+    FileService,
     NeighborhoodService,
     PropertyCategoryService
   ]

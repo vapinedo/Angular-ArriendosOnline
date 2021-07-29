@@ -1,8 +1,8 @@
 import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
+import { FileService } from '@core/services/file.service';
 import { MessageService } from '@core/services/message.service';
 import { AngularFireStorage, AngularFireUploadTask  } from '@angular/fire/storage';
-import { FileuploaderService } from '@core/services/fileuploader.service';
 
 @Component({
   selector: 'app-fileuploader',
@@ -12,9 +12,9 @@ import { FileuploaderService } from '@core/services/fileuploader.service';
 export class FileuploaderComponent implements OnInit {
 
   constructor(
+    private fileSvc: FileService,
     private messageSvc: MessageService,
-    private storage: AngularFireStorage,
-    private fileuploaderSvc: FileuploaderService
+    private storage: AngularFireStorage
   ) { }
 
   public task!: AngularFireUploadTask;              
@@ -56,7 +56,7 @@ export class FileuploaderComponent implements OnInit {
     if (files && this._filesAreOnlyImages(files)) {
       this._generateImgPreview(files);
 
-      this.fileuploaderSvc.upload(files)
+      this.fileSvc.create(files)
         .then(data => console.log('DATA', data))
         .catch(err => console.log('ERROR', err));
     }

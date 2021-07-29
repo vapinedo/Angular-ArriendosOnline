@@ -1,12 +1,12 @@
 import { SubSink } from 'subsink';
 import { MatSort } from '@angular/material/sort';
+import { FileService } from '@core/services/file.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Property } from '@core/interfaces/property.interface';
 import { MessageService } from '@core/services/message.service';
 import { PropertyService } from '@core/services/property.service';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { FileuploaderService } from '@core/services/fileuploader.service';
 
 @Component({
   selector: 'app-property-admin',
@@ -25,9 +25,9 @@ export class PropertyAdminComponent implements OnInit, OnDestroy {
   public displayedColumns: string[] = ['img', 'category', 'price', 'acciones'];
 
   constructor(
+    private fileSvc: FileService,
     private messageSvc: MessageService,
-    private propertySvc: PropertyService,
-    private fileuploaderSvc: FileuploaderService
+    private propertySvc: PropertyService
   ) {}
 
   ngOnInit(): void {
@@ -55,7 +55,7 @@ export class PropertyAdminComponent implements OnInit, OnDestroy {
   
         for (let i=0; i<files.length; i++) {
           const file = files[i];
-          const promise = await this.fileuploaderSvc.delete(file);
+          const promise = await this.fileSvc.delete(file);
           promises.push(promise);
         }
   

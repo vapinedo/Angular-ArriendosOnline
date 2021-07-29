@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireStorage, AngularFireUploadTask  } from '@angular/fire/storage';
 
 @Injectable()
-export class FileuploaderService {
+export class FileService {
 
   public task!: AngularFireUploadTask;              
   public isInvalidFormats: boolean = false;
@@ -17,7 +17,7 @@ export class FileuploaderService {
     private storage: AngularFireStorage
   ) {}
 
-  public async upload(file: any): Promise<any> {
+  public async create(file: any): Promise<any> {
     if (file && this._fileIsOnlyImage(file)) {
       const filePath = `${this.basePath}/${file.name}`; 
       const task =  this.storage.upload(filePath, file);
