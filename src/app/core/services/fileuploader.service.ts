@@ -1,6 +1,5 @@
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { MessageService } from './message.service';
 import { AngularFireStorage, AngularFireUploadTask  } from '@angular/fire/storage';
 
 @Injectable()
@@ -15,27 +14,25 @@ export class FileuploaderService {
   private readonly validFormats: string[] = ['image/jpeg', 'image/png'];
 
   constructor(
-    private messageSvc: MessageService,
     private storage: AngularFireStorage
   ) {}
 
-  public async upload(file: any) {
+  public async upload(file: any): Promise<any> {
     if (file && this._fileIsOnlyImage(file)) {
-      const filePath = `${this.basePath}/${file.name}`;  
+      const filePath = `${this.basePath}/${file.name}`; 
       const task =  this.storage.upload(filePath, file);
       const response = (await task).ref.getDownloadURL();
       return response;
-      // (await this.task).ref.getDownloadURL()
-      //   .then(url => filesURL.push(url))
-      //   .catch(error => this.messageSvc.error(error));
-     // this.progressValue = this.task.percentageChanges();
     }
     return;
   }
 
+  public delete(downloadUrl: string): Promise<any> {
+    return this.storage.refFromURL(downloadUrl).delete().toPromise();    
+  }
+  
   private _fileIsOnlyImage(file: any): boolean {
     const format = file.type;
     return (this.validFormats.includes(format)) ? true : false;
   }
-
 }

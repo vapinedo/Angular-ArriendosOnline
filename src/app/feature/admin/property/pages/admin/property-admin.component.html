@@ -36,7 +36,7 @@
             <td mat-cell *matCellDef="let item" class="tools text-center">
                 <i matTooltip="Editar" [routerLink]="['editar', item.id]" class="material-icons-outlined">edit</i>
                 <i matTooltip="Ver Detalle" [routerLink]="['detalle', item.id]" class="material-icons-outlined">remove_red_eye</i>
-                <i matTooltip="Eliminar" (click)="onDelete(item.id)" class="material-icons-outlined">delete</i>
+                <i matTooltip="Eliminar" (click)="onDelete(item)" class="material-icons-outlined">delete</i>
             </td>
         </ng-container>
 

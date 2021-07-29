@@ -78,11 +78,12 @@ export class PropertyCreateComponent implements OnDestroy, OnInit {
       for (const file of tempFiles) {
         this.files.push(file);
       }
-      
+        
       if (this._filesAreOnlyImages(tempFiles)) {
         this._generateImgPreview(tempFiles);
         this.form.controls.images.patchValue(true);
-      } else {
+      } 
+      else {
         this.isInvalidFormats = true;
         this.form.controls.images.patchValue(false);
       }
@@ -133,7 +134,8 @@ export class PropertyCreateComponent implements OnDestroy, OnInit {
       try {
         let promises: any[] = [];
         for (let i=0; i<this.files.length; i++) {
-          const promise = await this.fileuploaderSvc.upload(this.files[i]);
+          const file = this.files[i];
+          const promise = await this.fileuploaderSvc.upload(file);
           promises.push(promise);
         }
         const filesURL = await Promise.all(promises);

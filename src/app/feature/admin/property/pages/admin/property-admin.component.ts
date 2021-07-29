@@ -2,9 +2,11 @@ import { SubSink } from 'subsink';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { Property } from '@core/interfaces/property.interface';
 import { MessageService } from '@core/services/message.service';
 import { PropertyService } from '@core/services/property.service';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { FileuploaderService } from '@core/services/fileuploader.service';
 
 @Component({
   selector: 'app-property-admin',
@@ -24,7 +26,8 @@ export class PropertyAdminComponent implements OnInit, OnDestroy {
 
   constructor(
     private messageSvc: MessageService,
-    private propertySvc: PropertyService
+    private propertySvc: PropertyService,
+    private fileuploaderSvc: FileuploaderService
   ) {}
 
   ngOnInit(): void {
@@ -41,18 +44,26 @@ export class PropertyAdminComponent implements OnInit, OnDestroy {
     );
   }
 
-  onDelete(id: string): void {
-    this.messageSvc.confirm()
-      .then((result) => {
-        if (result.isConfirmed) {
-          this.propertySvc.delete(id) 
-            .then(() => {
-              this.messageSvc.success()
-            })
-            .catch(err => this.messageSvc.error(err))
+  async onDelete(item: Property): Promise<void> {
+    const deleteItem = await this.messageSvc.confirm();
+
+    if (deleteItem.isConfirmed) {
+      const files = item.images;
+
+      try {
+        let promises: any[] = [];
+  
+        for (let i=0; i<files.length; i++) {
+          const file = files[i];
+          const promise = await this.fileuploaderSvc.delete(file);
+          promises.push(promise);
         }
-      })
-      .catch(error => this.messageSvc.error(error));
+  
+        const filesHasBeenDeleted = await Promise.all(promises);
+        const itemHasBeenDeleted = this.propertySvc.delete(item.id!); 
+      }
+      catch (err) { this.messageSvc.error(err) };
+    }
   }
       
   ngOnDestroy(): void {
