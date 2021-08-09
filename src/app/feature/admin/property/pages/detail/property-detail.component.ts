@@ -1,8 +1,8 @@
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { PropertyService } from '@core/services/property.service';
 import { Property } from '@core/interfaces/property.interface';
+import { PropertyService } from '@core/services/property.service';
 
 @Component({
   selector: 'app-property-detail',
@@ -21,6 +21,6 @@ export class PropertyDetailComponent implements OnInit {
 
   ngOnInit(): void {
     const id = this.activatedRoute.snapshot.params.id;
-    this.property$ = this.propertySvc.readOne(id);
+    // this.property$ = this.propertySvc.readOne(id);
   }
 }

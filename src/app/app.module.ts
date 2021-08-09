@@ -8,12 +8,16 @@ import { SharedModule } from './shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
-import { AdminComponent } from '@feature/admin/admin.component';
+import { HomeLayoutComponent } from '@feature/home/home-layout.component';
+import { AdminLayoutComponent } from '@feature/admin/admin-layout.component';
+import { NavbarComponent } from '@feature/home/property/components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AdminComponent
+    NavbarComponent,
+    HomeLayoutComponent,
+    AdminLayoutComponent
   ],
   imports: [
     BrowserModule,

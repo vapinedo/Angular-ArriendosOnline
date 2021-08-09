@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AdminComponent } from '@feature/admin/admin.component';
 import { AngularFireAuthGuard, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['/auth']);
+
+import { HomeLayoutComponent } from '@feature/home/home-layout.component';
+import { AdminLayoutComponent } from '@feature/admin/admin-layout.component';
 
 const routes: Routes = [
   {
@@ -13,17 +15,18 @@ const routes: Routes = [
   },
   { 
     path: 'home',
-    loadChildren: () => import('@feature/home/home.module')
-    .then(m => m.HomeModule)
+    component: HomeLayoutComponent,
+    loadChildren: () => import('@feature/home/property/property.module')
+    .then(m => m.PropertyModule)
   },
   {  
     path: 'admin',
-    component:  AdminComponent,
+    component:  AdminLayoutComponent,
     canActivate: [AngularFireAuthGuard], 
     data: { authGuardPipe: redirectUnauthorizedToLogin },
     children: [
       {  
-        path: '',
+        path: 'home',
         loadChildren: () => import('@feature/admin/dashboard/dashboard.module')
         .then(m => m.DashboardModule)
       },

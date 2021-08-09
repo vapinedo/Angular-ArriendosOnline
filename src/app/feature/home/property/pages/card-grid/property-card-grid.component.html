@@ -1,0 +1,19 @@
+<div class="row row-cols-1 row-cols-md-4 g-4">
+    <div *ngFor="let item of data">
+
+      <article class="card col animate__animated animate__fadeIn animate_faster">
+        <img [src]="item.images[0]" class="card-img-top" [alt]="item.category">
+        <div class="card-body">
+          <h5 class="card-title">
+              {{ item.category }} 
+              <small class="text-muted">en {{ item.operationType }}</small>
+            </h5>
+            <p class="card-text">$ {{ item.price | number }}</p>   
+            <p class="card-text text-muted">Barrio {{ item.neighborhood }}</p>   
+          <!-- <p class="card-text">{{ item.description }}</p> -->
+          <a [routerLink]="['/home/propiedad-detalle', item.id]" class="btn btn-outline-primary">Ver Detalles</a>
+        </div>
+      </article>
+
+    </div>
+</div>

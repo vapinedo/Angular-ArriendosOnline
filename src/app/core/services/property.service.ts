@@ -33,10 +33,10 @@ export class PropertyService {
 
   public readOne(id: string): Observable<Property | undefined> {
     return this.afs.doc<Property>(`${this.collectionName}/${id}`)
-      .valueChanges();
+    .valueChanges();
   }
 
-  public update(item: Property, newFile?: any) {
+  public update(item: Property, newFile?: any): Promise<void> {
     return this.afs.collection<Property>(this.collectionName)
       .doc(item.id).update(item);
   }

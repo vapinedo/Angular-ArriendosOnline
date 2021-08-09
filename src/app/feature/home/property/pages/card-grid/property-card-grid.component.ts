@@ -6,16 +6,15 @@ import { Property } from '@core/interfaces/property.interface';
 import { PropertyService } from '@core/services/property.service';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  selector: 'app-property-card-grid',
+  templateUrl: './property-card-grid.component.html',
+  styleUrls: ['./property-card-grid.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class PropertyCardGridComponent implements OnInit {
 
   public subscriptions = new Subscription();
 
   public data: Property[] = [];
-  public title = 'Arriendos Online';
   public showSpinner: boolean = false;
   
   constructor( 
@@ -33,7 +32,6 @@ export class HomeComponent implements OnInit {
       this.propertyScv.read()
         .subscribe({
           next: data => {
-            console.log(data);
             this.data = data;
           }
         })
