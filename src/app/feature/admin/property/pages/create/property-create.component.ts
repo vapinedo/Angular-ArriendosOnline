@@ -19,6 +19,9 @@ import { PropertyCategoryService } from '@core/services/property-category.servic
 })
 export class PropertyCreateComponent implements OnDestroy, OnInit {
 
+  public masks = {
+    mobile: '(000) 000 0000'
+  }
   private subscriptions = new SubSink();
 
   public form: FormGroup;

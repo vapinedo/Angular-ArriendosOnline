@@ -26,7 +26,7 @@ import { NavbarComponent } from '@feature/home/property/components/navbar/navbar
     AppRoutingModule,
     FirebaseModule,
     CoreModule,
-    SharedModule,
+    SharedModule
   ],
   bootstrap: [AppComponent]
 })

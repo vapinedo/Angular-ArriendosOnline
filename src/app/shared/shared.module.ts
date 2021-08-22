@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { NgxMaskModule } from 'ngx-mask'
 import { ToastrModule } from 'ngx-toastr';
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from '../material.module';
@@ -23,6 +24,11 @@ const modules = [
     autoDismiss: true,
     preventDuplicates: true,
     positionClass: 'toast-top-right'
+  }),
+  NgxMaskModule.forRoot({
+    showMaskTyped: false,
+    dropSpecialCharacters: false
+    // clearIfNotMatch: true
   })
 ];
 

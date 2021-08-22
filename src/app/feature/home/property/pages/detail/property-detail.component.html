@@ -15,10 +15,19 @@
 
     <div class="col-md-5">
         <h2 class="title">{{ property?.category }} en {{ property.operationType }}</h2>
-        <h3 class="price"><i class='bx bx-dollar-circle'></i> {{ property.price | number }}</h3>
+        <h3 class="price">
+            <i class='bx bx-dollar-circle'></i> 
+            <span>{{ property.price | number }}</span>
+        </h3>
         <p><i class='bx bx-been-here'></i> Barrio {{ property.neighborhood }}</p>
         <p><i class='bx bx-hash'></i> {{ property.address }}</p>
-        <p><i class='bx bx-phone'></i> {{ property.mobile }} - {{ property.mobileOptional }}</p>
+        <p>
+            <i class='bx bx-phone'></i> 
+            {{ property.mobile | mask:'(000) 000 0000' }} 
+            <span *ngIf="property.mobileOptional">
+                - {{ property.mobileOptional | mask:'(000) 000 0000' }}
+            </span>
+        </p>
         <p>{{ property.description }}</p>
     </div>
 
