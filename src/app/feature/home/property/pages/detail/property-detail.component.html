@@ -14,14 +14,11 @@
     </div>
 
     <div class="col-md-5">
-        <h3>
-            {{ property?.category }} 
-            <small class="text-muted">en {{ property.operationType }}</small>
-        </h3>
-        <p>Barrio: {{ property.neighborhood }}</p>
-        <p>$ {{ property.price }}</p>
-        <p>{{ property.address }}</p>
-        <p>{{ property.ownerID }}</p>
+        <h2 class="title">{{ property?.category }} en {{ property.operationType }}</h2>
+        <h3 class="price"><i class='bx bx-dollar-circle'></i> {{ property.price | number }}</h3>
+        <p><i class='bx bx-been-here'></i> Barrio {{ property.neighborhood }}</p>
+        <p><i class='bx bx-hash'></i> {{ property.address }}</p>
+        <p><i class='bx bx-phone'></i> {{ property.mobile }} - {{ property.mobileOptional }}</p>
         <p>{{ property.description }}</p>
     </div>
 

@@ -153,13 +153,14 @@ export class PropertyUpdateComponent implements OnInit, OnDestroy {
     let response: Property = {
       images: filesURL,
       price: data.price,
+      mobile: data.mobile,
       address: data.address,
-      ownerID: data.ownerID,
       visible: data.visible,
       category: data.category,
       description: data.description,
       neighborhood: data.neighborhood,
-      operationType: data.operationType
+      operationType: data.operationType,
+      mobileOptional: data.mobileOptional
     };
     return response;
   }

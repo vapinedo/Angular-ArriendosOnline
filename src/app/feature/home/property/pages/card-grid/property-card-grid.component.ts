@@ -1,8 +1,8 @@
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { MessageService } from '@core/services/message.service';
 import { Property } from '@core/interfaces/property.interface';
+import { MessageService } from '@core/services/message.service';
 import { PropertyService } from '@core/services/property.service';
 
 @Component({

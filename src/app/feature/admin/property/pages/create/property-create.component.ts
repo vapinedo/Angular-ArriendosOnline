@@ -1,9 +1,7 @@
 import { Observable } from 'rxjs';
 import { SubSink } from 'subsink';
 import { Router } from '@angular/router';
-import { Owner } from '@core/interfaces/owner.interface';
 import { FileService } from '@core/services/file.service';
-import { OwnerService } from '@core/services/owner.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Property } from '@core/interfaces/property.interface';
 import { MessageService } from '@core/services/message.service';
@@ -23,8 +21,8 @@ export class PropertyCreateComponent implements OnDestroy, OnInit {
 
   private subscriptions = new SubSink();
 
-  private files: any[] = [];
   public form: FormGroup;
+  private files: any[] = [];
   public title = 'Nueva Propiedad';
   public showSpinner: boolean = false;
 
@@ -33,7 +31,6 @@ export class PropertyCreateComponent implements OnDestroy, OnInit {
   public defaultImage: string = '../../../../../../assets/img/img_placeholder.jpg';
   
   public operationType: any[] = [];
-  public owners$!: Observable<Owner[]>;
   public neighborhoods$!: Observable<Neighborhood[]>;
   public propertyCategories$!: Observable<PropertyCategory[]>;
 
@@ -45,7 +42,6 @@ export class PropertyCreateComponent implements OnDestroy, OnInit {
     private router: Router,
     private fb: FormBuilder,
     private fileSvc: FileService,
-    private ownerSvc: OwnerService,
     private messageSvc: MessageService,
     private propertySvc: PropertyService,
     private neighborhoodSvc: NeighborhoodService,
@@ -54,8 +50,9 @@ export class PropertyCreateComponent implements OnDestroy, OnInit {
       this.form = this.fb.group({
       visible: [false],
       description: [null],
+      mobileOptional: [null],
       price: [null, [Validators.required]],
-      ownerID: [null, [Validators.required]],
+      mobile: [null, [Validators.required]],
       address: [null, [Validators.required]],
       category: [null, [Validators.required]],
       images: [false, [Validators.requiredTrue]],
@@ -65,7 +62,6 @@ export class PropertyCreateComponent implements OnDestroy, OnInit {
   }
   
   ngOnInit(): void {
-    this.owners$ = this.ownerSvc.read();
     this.neighborhoods$ = this.neighborhoodSvc.read();
     this.operationType = this.propertySvc.readOperationType();
     this.propertyCategories$ = this.propertyCategorySvc.read();
@@ -155,13 +151,14 @@ export class PropertyCreateComponent implements OnDestroy, OnInit {
     let response: Property = {
       images: filesURL,
       price: data.price,
+      mobile: data.mobile,
       address: data.address,
-      ownerID: data.ownerID,
       visible: data.visible,
       category: data.category,
       description: data.description,
       neighborhood: data.neighborhood,
-      operationType: data.operationType
+      operationType: data.operationType,
+      mobileOptional: data.mobileOptional
     };
     return response;
   }

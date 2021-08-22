@@ -26,12 +26,12 @@ const routes: Routes = [
     data: { authGuardPipe: redirectUnauthorizedToLogin },
     children: [
       {  
-        path: 'home',
+        path: 'dashboard',
         loadChildren: () => import('@feature/admin/dashboard/dashboard.module')
         .then(m => m.DashboardModule)
       },
       {  
-        path: 'propiedades',
+        path: '',
         loadChildren: () => import('@feature/admin/property/property.module')
         .then(m => m.PropertyModule)
       },
