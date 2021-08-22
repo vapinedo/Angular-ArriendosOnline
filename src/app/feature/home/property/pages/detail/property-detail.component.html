@@ -1,15 +1,21 @@
-<article *ngIf="property !== undefined" class="row box animate__animated animate__fadeIn animate_faster">
-    <div class="col-md-7 row">
-        <nav class="images-vertical-list col-md-2">
-            <img [src]="image" *ngFor="let image of property.images" class="img-fluid">
+<article *ngIf="property$ | async as property; else spinner" class="row box animate__animated animate__fadeIn animate_faster">
+
+    <div class="col-md-7 row images-container">
+        <nav class="related-images col-md-2">
+            <img [src]="imgURL" 
+                class="img-fluid"
+                (click)="onSetNewFeatureImage(imgURL)"
+                *ngFor="let imgURL of property?.images">
         </nav>
 
-        <img [src]="property.images[0]" class="img-fluid col-md-10">
+        <div class="col-md-10">
+            <img id="featuredImg" #featuredImg [src]="property.images[0]" class="img-fluid">
+        </div>
     </div>
 
     <div class="col-md-5">
         <h3>
-            {{ property.category }} 
+            {{ property?.category }} 
             <small class="text-muted">en {{ property.operationType }}</small>
         </h3>
         <p>Barrio: {{ property.neighborhood }}</p>
@@ -19,5 +25,8 @@
         <p>{{ property.description }}</p>
     </div>
 
-    <app-spinner *ngIf="showSpinner"></app-spinner>
 </article>
+
+<ng-template #spinner>
+    <app-spinner></app-spinner>
+</ng-template>

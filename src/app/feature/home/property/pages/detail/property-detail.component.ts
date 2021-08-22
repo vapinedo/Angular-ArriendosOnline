@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, } from '@angular/core';
 import { Property } from '@core/interfaces/property.interface';
 import { PropertyService } from '@core/services/property.service';
 
@@ -10,29 +11,25 @@ import { PropertyService } from '@core/services/property.service';
 })
 export class PropertyDetailComponent implements OnInit {
 
-  public showSpinner: boolean = false;
-  public property!: Property | undefined;
+  public property$!: Observable<Property | undefined>;
   
   constructor( 
-    private router: Router,
     private propertyScv: PropertyService,
     private activatedRoute: ActivatedRoute
-  ) {}
-
+    ) {}
+    
   ngOnInit(): void {
-    this.showSpinner = true;
     const propertyID = this.activatedRoute.snapshot.params.id;
     this.getProperty(propertyID);
   }
-
+  
   getProperty(propertyID: string) {
-    this.propertyScv.readOne(propertyID)
-    .subscribe({
-      next: property => {
-        this.property = property;
-        this.showSpinner = false;
-      }
-    })
+    this.property$ = this.propertyScv.readOne(propertyID);
   }
 
+  onSetNewFeatureImage(imgURL: string) {
+    const featuredImg = document.getElementById('featuredImg');
+    featuredImg?.setAttribute('src', imgURL);
+  }
+  
 }

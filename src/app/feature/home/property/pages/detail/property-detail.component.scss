@@ -1,5 +1,12 @@
-.images-vertical-list {
-    gap: 1em;
-    display: flex;
-    flex-direction: column;
+.images-container {
+    .related-images {
+        gap: 1em;
+        display: flex;
+        cursor: pointer;
+        flex-direction: column;
+
+        img:active {
+            border: 2px solid blue;
+        }
+    }
 }
