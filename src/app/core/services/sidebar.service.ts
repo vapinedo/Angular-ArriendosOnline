@@ -19,7 +19,6 @@ export class SidebarService {
 				{ title: 'Listado', path: '/admin/propiedades' },
 				{ title: 'Propietarios', path: '/admin/propietarios' },
 				{ title: 'Barrios', path: '/admin/barrios' },
-				{ title: 'Categorías', path: '/admin/propiedad-categorias' }
 			]
 		}
 	];

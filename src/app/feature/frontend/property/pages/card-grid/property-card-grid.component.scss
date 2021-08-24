@@ -1,0 +1,30 @@
+@import './src/assets/scss/colors';
+
+.property-card {
+    border: none;
+    padding: 20px 0;
+    border-bottom: thin solid #eee;
+
+    img {
+        height: 100%;
+        cursor: pointer;
+    }
+
+    .card-body {
+        padding: 0 30px;
+
+        a {
+            text-decoration: none;
+            .card-title {
+                color: #555;
+                font-size: 22px;
+                font-weight: 300;
+            }
+        }
+        .price { margin-left: -4px; }
+        .price, .neighborhood {
+            display: flex;
+            align-items: center;
+        }
+    }
+}

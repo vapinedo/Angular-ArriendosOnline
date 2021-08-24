@@ -4,50 +4,45 @@ import { AngularFireAuthGuard, redirectUnauthorizedTo } from '@angular/fire/auth
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['/auth']);
 
-import { HomeLayoutComponent } from '@feature/home/home-layout.component';
-import { AdminLayoutComponent } from '@feature/admin/admin-layout.component';
+import { BackendLayoutComponent } from '@feature/backend/backend-layout.component';
+import { FrontendLayoutComponent } from '@feature/frontend/frontend-layout.component';
 
 const routes: Routes = [
   {
     path: 'auth',
-    loadChildren: () => import('@feature/auth/auth.module')
+    loadChildren: () => import('@feature/backend/auth/auth.module')
     .then(m => m.AuthModule)
   },
   { 
-    path: 'home',
-    component: HomeLayoutComponent,
-    loadChildren: () => import('@feature/home/property/property.module')
-    .then(m => m.PropertyModule)
+    path: 'home', // frontend
+    component: FrontendLayoutComponent,
+    loadChildren: () => import('@feature/frontend/property/frontend-property.module')
+    .then(m => m.FrontendPropertyModule)
   },
   {  
-    path: 'admin',
-    component:  AdminLayoutComponent,
+    path: 'admin', // backend
+    component:  BackendLayoutComponent,
     canActivate: [AngularFireAuthGuard], 
     data: { authGuardPipe: redirectUnauthorizedToLogin },
     children: [
       {  
+        path: '',
+        loadChildren: () => import('@feature/backend/property/backend-property.module')
+        .then(m => m.BackendPropertyModule)
+      },
+      {  
         path: 'dashboard',
-        loadChildren: () => import('@feature/admin/dashboard/dashboard.module')
+        loadChildren: () => import('@feature/backend/dashboard/dashboard.module')
         .then(m => m.DashboardModule)
       },
       {  
-        path: '',
-        loadChildren: () => import('@feature/admin/property/property.module')
-        .then(m => m.PropertyModule)
-      },
-      {  
         path: 'propietarios',
-        loadChildren: () => import('@feature/admin/owner/owner.module')
+        loadChildren: () => import('@feature/backend/owner/owner.module')
         .then(m => m.OwnerModule)
       },      
       {  
-        path: 'propiedad-categorias',
-        loadChildren: () => import('@feature/admin/property-category/property-category.module')
-        .then(m => m.PropertyCategoryModule)
-      },      
-      {  
         path: 'barrios',
-        loadChildren: () => import('@feature/admin/neighborhood/neighborhood.module')
+        loadChildren: () => import('@feature/backend/neighborhood/neighborhood.module')
         .then(m => m.NeighborhoodModule)
       }      
     ]
