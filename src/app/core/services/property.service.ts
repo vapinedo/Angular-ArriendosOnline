@@ -1,8 +1,9 @@
 import { Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { map, filter, tap } from 'rxjs/operators';
+import { Filter } from '@core/interfaces/filter.interface';
 import { Property } from '@core/interfaces/property.interface';
+import { AngularFirestore, DocumentChangeAction } from '@angular/fire/firestore';
 
 @Injectable()
 export class PropertyService {
@@ -17,18 +18,37 @@ export class PropertyService {
     return this.afs.collection<Property>(this.collectionName).add(item);
   }
 
-  public getAll(): Observable<any> {
-    return this.afs.collection<Property>(this.collectionName)
+  public getAll(filter?: Filter) {
+    const properties$ = this.afs.collection<Property>(this.collectionName)
       .snapshotChanges()
       .pipe(
-        map(data => 
-          data.map(item => {
-            const id = item.payload.doc.id;
-            const payload = item.payload.doc.data() as object; 
-            return { id, ...payload };
-          })
-        )
+        map((data: DocumentChangeAction<Property>[]) => this.getPayloadWith(data, filter)),
+        map(data => this.filterBy(data, filter)),
       );
+    return properties$;
+  }
+
+  getPayloadWith(data: DocumentChangeAction<Property>[], filter?: Filter) {
+    return data.map(item => {
+      const id = item.payload.doc.id;
+      const payload = item.payload.doc.data();
+      return { id, ...payload };
+    })
+  }
+
+  filterBy(data: any, filter?: Filter) {
+    if (filter?.category && filter.neighborhood) {
+      return data.filter((item: Property) => {
+        return item.category === filter.category && item.neighborhood === filter.neighborhood;
+      });
+    } 
+    else if (filter?.category) {
+      return data.filter((item: Property) => item.category === filter.category);
+    } 
+    else if (filter?.neighborhood) {
+      return data.filter((item: Property) => item.neighborhood === filter.neighborhood);
+    } 
+    return data.filter((item: Property) => item);
   }
 
   public getByID(id: string): Observable<Property | undefined> {

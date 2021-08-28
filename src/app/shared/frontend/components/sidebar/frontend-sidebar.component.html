@@ -7,7 +7,7 @@
   <article class="filter">
     <h4 class="title">
       Tipo 
-      <small (click)="filters.category = null" 
+      <small (click)="onCategoryFilterReset()" 
         class="filter-reset"
         *ngIf="filters.category !== null">
         Reestablecer
@@ -26,7 +26,7 @@
   <article class="filter">
     <h4 class="title">
       Barrio
-      <small (click)="filters.neighborhood = null" 
+      <small (click)="onNeighborhoodFilterReset()"
       class="filter-reset"
       *ngIf="filters.neighborhood !== null">
       Reestablecer

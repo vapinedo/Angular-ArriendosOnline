@@ -3,6 +3,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AuthGuard } from './guards/auth.guard';
 
+import { FileService } from './services/file.service';
 import { AuthService } from './services/auth.service';
 import { OwnerService } from './services/owner.service';
 import { MessageService } from './services/message.service';
@@ -20,6 +21,7 @@ import { PropertyCategoryService } from './services/property-category.service';
   providers: [
     AuthGuard,
     AuthService,
+    FileService,
     OwnerService,
     MessageService,
     SidebarService,

@@ -1,6 +1,7 @@
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { Filter } from '@core/interfaces/filter.interface';
 import { Property } from '@core/interfaces/property.interface';
 import { MessageService } from '@core/services/message.service';
 import { PropertyService } from '@core/services/property.service';
@@ -24,18 +25,22 @@ export class PropertyCardGridComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.setData();
+    this.getProperty();
   }
 
-  private setData() {
+  private getProperty(filter?: Filter) {
     this.subscriptions.add(
-      this.propertyScv.getAll()
+      this.propertyScv.getAll(filter)
         .subscribe({
           next: data => {
             this.properties = data;
           }
         })
     );
+  }
+
+  onFilterChange(filter: Filter): void {
+    this.getProperty(filter);
   }
 
 }
