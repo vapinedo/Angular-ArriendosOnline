@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SpinnerComponent } from './components/loaders/spinner.component';
+import { NotResultComponent } from './components/not-result/not-result.component';
 import { FrontendSidebarComponent } from './components/sidebar/frontend-sidebar.component';
 
 const modules = [
@@ -21,6 +22,7 @@ const modules = [
 const components = [
   NavbarComponent,
   SpinnerComponent,
+  NotResultComponent,
   FrontendSidebarComponent
 ];
 

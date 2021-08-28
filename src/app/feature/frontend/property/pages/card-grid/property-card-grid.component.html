@@ -4,8 +4,8 @@
 
   <section class="col-md-9 box row">
 
-      <div *ngFor="let property of properties">
-        <article class="card property-card animate__animated animate__fadeIn animate_faster">
+      <div *ngIf="properties.length > 0 else noResults">
+        <article *ngFor="let property of properties" class="card property-card animate__animated animate__fadeIn animate_faster">
           <div class="row g-0">
             <div class="col-md-3">
               <img [routerLink]="['/home/detail', property.id]" 
@@ -34,6 +34,10 @@
           </div>
         </article>
       </div>
+
+      <ng-template #noResults>
+        <app-not-result></app-not-result>
+      </ng-template>
 
   </section>
 </div>

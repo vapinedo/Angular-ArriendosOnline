@@ -1,0 +1,20 @@
+article {
+    .icon {
+        margin: auto;
+        display: flex;
+        font-size: 10em;
+        color: #e3e3e3;
+        justify-content: center;
+    }
+    .body {
+        display: flex;
+        color: #777;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+
+        .icon {
+            font-size: 3em;
+        }
+    }
+}
