@@ -41,7 +41,7 @@ export class NeighborhoodUpdateComponent implements OnInit, OnDestroy {
 
   private _setForm(): void {
     this.subscriptions.add(
-      this.neighborhoodSvc.readOne(this.neighbohoodID)
+      this.neighborhoodSvc.getByID(this.neighbohoodID)
         .subscribe({
           next: data => {
             this.form.patchValue({

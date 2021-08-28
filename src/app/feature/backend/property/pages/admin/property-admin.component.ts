@@ -32,7 +32,7 @@ export class PropertyAdminComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscriptions.add(
-      this.propertySvc.read()
+      this.propertySvc.getAll()
         .subscribe({
           next: data => {
             this.dataSource.data = data;

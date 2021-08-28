@@ -23,7 +23,7 @@ export class SidebarService {
 		}
 	];
 
-    read(): Observable<any> {
+    getAll(): Observable<any> {
         return new Observable(observer => {
             setTimeout(() => {
                 observer.next(this.menu);

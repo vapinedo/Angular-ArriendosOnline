@@ -41,7 +41,7 @@ export class OwnerUpdateComponent implements OnInit, OnDestroy {
 
   private _setForm(): void {
     this.subscriptions.add(
-      this.ownerSvc.readOne(this.ownerID)
+      this.ownerSvc.getByID(this.ownerID)
         .subscribe({
           next: data => {
             this.form.patchValue({

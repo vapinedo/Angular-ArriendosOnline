@@ -1,0 +1,49 @@
+@import './src/assets/scss/colors';
+
+aside {
+    padding: 24px 12px;
+
+    header {
+        margin-bottom: 20px;
+
+        .title {
+            font-size: 24px;
+        }
+    }
+    .filter {
+        width: 75%;
+        margin-bottom: 20px;
+        
+        .title {
+            display: flex;
+            font-size: 18px;
+            align-items: center;
+            justify-content: space-between;
+
+            .filter-reset {
+                color: #333;
+                font-size: 12px;
+                cursor: pointer;
+
+                &:hover { color: $azul-100; }
+            }
+        }
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            padding-left: 12px;
+
+            li {
+                color: #777;
+                cursor: pointer;
+                font-size: 14px;
+                margin-top: 4px;
+
+                &:hover { color: $azul-100; }
+
+                span { margin: 5px }
+            }
+        }
+    }
+}

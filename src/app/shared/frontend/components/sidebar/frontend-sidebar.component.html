@@ -1,3 +1,44 @@
 <aside class="animate__animated animate__fadeIn animate_faster">
-  <h3>Sidebar works!</h3>
+
+  <header>
+    <h3 class="title">Propiedades</h3>
+  </header>
+
+  <article class="filter">
+    <h4 class="title">
+      Tipo 
+      <small (click)="filters.category = null" 
+        class="filter-reset"
+        *ngIf="filters.category !== null">
+        Reestablecer
+      </small>
+    </h4>
+
+    <ul>
+      <li (click)="onCategoryFilterChange(item.name)"  
+        *ngFor="let item of categories$ | async">
+        <span>{{ item.name }}</span>
+        <i *ngIf="item.name === filters.category" class='bx bx-check'></i>
+      </li>
+    </ul>
+  </article>
+  
+  <article class="filter">
+    <h4 class="title">
+      Barrio
+      <small (click)="filters.neighborhood = null" 
+      class="filter-reset"
+      *ngIf="filters.neighborhood !== null">
+      Reestablecer
+    </small>
+    </h4>
+
+    <ul>
+      <li (click)="onNeighborhoodFilterChange(item.name)"  
+        *ngFor="let item of neighborhoods$ | async">
+        <span>{{ item.name }}</span>
+        <i *ngIf="item.name === filters.neighborhood" class='bx bx-check'></i>
+    </li>
+    </ul>
+  </article>
 </aside>

@@ -65,10 +65,10 @@ export class PropertyUpdateComponent implements OnInit, OnDestroy {
   }
   
   ngOnInit(): void {
-    this.owners$ = this.ownerSvc.read();
-    this.neighborhoods$ = this.neighborhoodSvc.read();
+    this.owners$ = this.ownerSvc.getAll();
+    this.neighborhoods$ = this.neighborhoodSvc.getAll();
     this.operationType = this.propertySvc.readOperationType();
-    this.propertyCategories$ = this.propertyCategorySvc.read();
+    this.propertyCategories$ = this.propertyCategorySvc.getAll();
   }
 
   onFileChange(event: any): void {

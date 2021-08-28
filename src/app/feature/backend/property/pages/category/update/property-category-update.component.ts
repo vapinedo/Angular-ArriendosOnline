@@ -41,7 +41,7 @@ export class PropertyCategoryUpdateComponent implements OnInit, OnDestroy {
 
   private _setForm(): void {
     this.subscriptions.add(
-      this.propertyCategorySvc.readOne(this.propertyCategoryID)
+      this.propertyCategorySvc.getByID(this.propertyCategoryID)
         .subscribe({
           next: data => {
             this.form.patchValue({

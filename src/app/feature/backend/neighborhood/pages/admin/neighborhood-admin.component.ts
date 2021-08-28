@@ -38,7 +38,7 @@ export class NeighborhoodAdminComponent implements OnInit, OnDestroy {
 
   private _setDatasource(): void {
     this.subscriptions.add(
-      this.neighborhoodSvc.read()
+      this.neighborhoodSvc.getAll()
         .subscribe({
           next: data => {
             this.dataSource.data = data;

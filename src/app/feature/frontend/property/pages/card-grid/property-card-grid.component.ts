@@ -29,7 +29,7 @@ export class PropertyCardGridComponent implements OnInit {
 
   private setData() {
     this.subscriptions.add(
-      this.propertyScv.read()
+      this.propertyScv.getAll()
         .subscribe({
           next: data => {
             this.properties = data;

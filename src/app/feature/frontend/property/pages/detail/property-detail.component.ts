@@ -22,7 +22,7 @@ export class PropertyDetailComponent implements OnInit, OnDestroy {
     
   ngOnInit(): void {
     const propertyID = this.activatedRoute.snapshot.params.id;
-    this.property$ = this.propertyScv.readOne(propertyID);
+    this.property$ = this.propertyScv.getByID(propertyID);
   }
   
   onSetNewFeatureImage(imgURL: string) {

@@ -38,7 +38,7 @@ export class OwnerAdminComponent implements OnInit, OnDestroy {
 
   private _setDatasource(): void {
     this.subscriptions.add(
-      this.ownerSvc.read()
+      this.ownerSvc.getAll()
         .subscribe({
           next: data => {
             this.dataSource.data = data;

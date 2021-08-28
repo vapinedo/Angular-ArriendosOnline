@@ -17,7 +17,7 @@ export class NeighborhoodService {
     return this.afs.collection<Neighborhood>(this.collectionName).add(item);
   }
 
-  public read(): Observable<any> {
+  public getAll(): Observable<any> {
     return this.afs.collection<Neighborhood>(this.collectionName)
       .snapshotChanges()
       .pipe(
@@ -31,7 +31,7 @@ export class NeighborhoodService {
       );
   }
 
-  public readOne(id: string): Observable<any | undefined> {
+  public getByID(id: string): Observable<any | undefined> {
     return this.afs.doc<Neighborhood>(`${this.collectionName}/${id}`)
       .valueChanges();
   }

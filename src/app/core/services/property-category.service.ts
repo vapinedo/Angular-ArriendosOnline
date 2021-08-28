@@ -17,7 +17,7 @@ export class PropertyCategoryService {
     return this.afs.collection<PropertyCategory>(this.collectionName).add(item);
   }
 
-  public read(): Observable<any> {
+  public getAll(): Observable<any> {
     return this.afs.collection<PropertyCategory>(this.collectionName)
       .snapshotChanges()
       .pipe(
@@ -31,7 +31,7 @@ export class PropertyCategoryService {
       );
   }
 
-  public readOne(id: string): Observable<any | undefined> {
+  public getByID(id: string): Observable<any | undefined> {
     return this.afs.doc<PropertyCategory>(`${this.collectionName}/${id}`)
       .valueChanges();
   }

@@ -38,7 +38,7 @@ export class PropertyCategoryAdminComponent implements OnInit, OnDestroy {
 
   private _setDatasource(): void {
     this.subscriptions.add(
-      this.propertyCategorySvc.read()
+      this.propertyCategorySvc.getAll()
         .subscribe({
           next: data => {
             this.dataSource.data = data;

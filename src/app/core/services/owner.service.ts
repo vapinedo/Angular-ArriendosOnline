@@ -17,7 +17,7 @@ export class OwnerService {
     return this.afs.collection<Owner>(this.collectionName).add(item);
   }
 
-  public read(): Observable<any> {
+  public getAll(): Observable<any> {
     return this.afs.collection<Owner>(this.collectionName)
       .snapshotChanges()
       .pipe(
@@ -31,7 +31,7 @@ export class OwnerService {
       );
   }
 
-  public readOne(id: string): Observable<Owner | undefined> {
+  public getByID(id: string): Observable<Owner | undefined> {
     return this.afs.doc<Owner>(`${this.collectionName}/${id}`)
       .valueChanges();
   }

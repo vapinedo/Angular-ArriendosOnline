@@ -35,7 +35,7 @@ export class SidebarComponent implements OnDestroy {
 
   private _setMenu() {
     this.subscriptions.add(
-      this.sidebarSvc.read()
+      this.sidebarSvc.getAll()
         .subscribe({
           next: data => {
               this.menu = data;

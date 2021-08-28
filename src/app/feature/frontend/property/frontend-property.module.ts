@@ -17,6 +17,7 @@ const modules = [
 const components = [
   PropertyDetailComponent,
   PropertyCardGridComponent
+  
 ];
 
 @NgModule({

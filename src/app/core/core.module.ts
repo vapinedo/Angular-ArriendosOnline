@@ -4,7 +4,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { AuthGuard } from './guards/auth.guard';
 
 import { AuthService } from './services/auth.service';
-import { FileService } from './services/file.service';
 import { OwnerService } from './services/owner.service';
 import { MessageService } from './services/message.service';
 import { SidebarService } from './services/sidebar.service';
@@ -27,7 +26,6 @@ import { PropertyCategoryService } from './services/property-category.service';
     DatetimeService,
     PropertyService,
     ValidatorsService,
-    FileService,
     NeighborhoodService,
     PropertyCategoryService
   ]
