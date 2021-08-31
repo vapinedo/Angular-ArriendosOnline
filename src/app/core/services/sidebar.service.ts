@@ -8,7 +8,7 @@ export class SidebarService {
 
 	private readonly menu: any[] = [
 		{
-			path: '/admin',
+			path: '/admin/dashboard',
 			icon: 'bx bx-grid-alt',
 			linkName: 'Dashboard',
 		},
@@ -16,9 +16,9 @@ export class SidebarService {
 			icon: 'bx bx-home-smile',
 			linkName: 'Propiedades',
 			submenu: [
-				{ title: 'Listado', path: '/admin/propiedades' },
-				{ title: 'Propietarios', path: '/admin/propietarios' },
 				{ title: 'Barrios', path: '/admin/barrios' },
+				{ title: 'Propiedades', path: '/admin/' },
+				{ title: 'Propietarios', path: '/admin/propietarios' },
 			]
 		}
 	];

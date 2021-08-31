@@ -23,7 +23,7 @@ export const appRoutes = {
     barrios: "/admin/barrios",
     propietarios: "/admin/propietarios",
   
-    propiedades: "/admin/propiedades/listar",
+    propiedades: "/admin",
     propiedadCrear: "/admin/propiedades/crear",
     propiedadEditar: "/admin/propiedades/editar/:id",
     propiedadDetalle: "/admin/propiedades/detalle/:id",

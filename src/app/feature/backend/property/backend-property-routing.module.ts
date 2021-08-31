@@ -10,7 +10,7 @@ import { PropertyCategoryUpdateComponent } from './pages/category/update/propert
 import { PropertyCategoryCreateComponent } from './pages/category/create/property-category-create.component';
 
 const routes: Routes = [
-  { path: 'listar', component: PropertyAdminComponent },
+  { path: '', component: PropertyAdminComponent },
   { path: 'crear', component: PropertyCreateComponent },
   { path: 'editar/:id', component: PropertyUpdateComponent },
   { path: 'detalle/:id', component: PropertyDetailComponent },

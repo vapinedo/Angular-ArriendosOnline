@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { NeighborhoodAdminComponent } from './pages/admin/neighborhood-admin.component';
 
 const routes: Routes = [
-  { path: 'barrios', component: NeighborhoodAdminComponent },
+  { path: '', component: NeighborhoodAdminComponent },
 ];
 
 @NgModule({

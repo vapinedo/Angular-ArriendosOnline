@@ -26,7 +26,7 @@ const routes: Routes = [
     data: { authGuardPipe: redirectUnauthorizedToLogin },
     children: [
       {  
-        path: 'propiedades',
+        path: '',
         loadChildren: () => import('@feature/backend/property/backend-property.module')
         .then(m => m.BackendPropertyModule)
       },
