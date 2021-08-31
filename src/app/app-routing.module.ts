@@ -10,23 +10,23 @@ import { FrontendLayoutComponent } from '@feature/frontend/frontend-layout.compo
 const routes: Routes = [
   {
     path: 'auth',
-    loadChildren: () => import('@feature/backend/auth/auth.module')
+    loadChildren: () => import('@feature/auth/auth.module')
     .then(m => m.AuthModule)
   },
   { 
-    path: 'home', // frontend
+    path: 'home', 
     component: FrontendLayoutComponent,
     loadChildren: () => import('@feature/frontend/property/frontend-property.module')
     .then(m => m.FrontendPropertyModule)
   },
   {  
-    path: 'admin', // backend
+    path: 'admin', 
     component:  BackendLayoutComponent,
     canActivate: [AngularFireAuthGuard], 
     data: { authGuardPipe: redirectUnauthorizedToLogin },
     children: [
       {  
-        path: '',
+        path: 'propiedades',
         loadChildren: () => import('@feature/backend/property/backend-property.module')
         .then(m => m.BackendPropertyModule)
       },
@@ -48,7 +48,7 @@ const routes: Routes = [
     ]
   },
   { path: '', redirectTo: '/home',  pathMatch: 'full' },
-  { path: '***', redirectTo: '/home' }
+  { path: '**', redirectTo: '/home' }
 ];
 
 @NgModule({

@@ -1,6 +1,7 @@
 import { Observable } from 'rxjs';
 import { SubSink } from 'subsink';
 import { Router } from '@angular/router';
+import { appRoutes } from 'src/environments/environment';
 import { FileService } from '@core/services/file.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Property } from '@core/interfaces/property.interface';
@@ -27,6 +28,7 @@ export class PropertyCreateComponent implements OnDestroy, OnInit {
   public form: FormGroup;
   private files: any[] = [];
   public title = 'Nueva Propiedad';
+  public appRoutes: any = appRoutes;
   public showSpinner: boolean = false;
 
   public imgPreviewUrls: any[] = [];
@@ -143,7 +145,7 @@ export class PropertyCreateComponent implements OnDestroy, OnInit {
 
         this.showSpinner = false;
         this.messageSvc.success();
-        this.router.navigate(['/admin/propiedades']);
+        this.router.navigate([`${this.appRoutes.admin.propiedades}`]);
       }
       catch (err) { this.messageSvc.error(err); }
     }

@@ -10,13 +10,13 @@ import { PropertyCategoryUpdateComponent } from './pages/category/update/propert
 import { PropertyCategoryCreateComponent } from './pages/category/create/property-category-create.component';
 
 const routes: Routes = [
-  { path: '', component: PropertyAdminComponent },
+  { path: 'listar', component: PropertyAdminComponent },
   { path: 'crear', component: PropertyCreateComponent },
   { path: 'editar/:id', component: PropertyUpdateComponent },
   { path: 'detalle/:id', component: PropertyDetailComponent },
   { path: 'categorias', component: PropertyCategoryAdminComponent },
-  { path: 'actualizar-categoria', component: PropertyCategoryUpdateComponent },
-  { path: 'crear-categoria', component: PropertyCategoryCreateComponent }
+  { path: 'crear-categoria', component: PropertyCategoryCreateComponent },
+  { path: 'editar-categoria', component: PropertyCategoryUpdateComponent }
 ];
 
 @NgModule({

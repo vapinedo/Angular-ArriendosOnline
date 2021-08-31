@@ -6,7 +6,7 @@ import { PropertyCardGridComponent } from './pages/card-grid/property-card-grid.
 
 
 const routes: Routes = [
-  { path: '', component: PropertyCardGridComponent },
+  { path: 'listar', component: PropertyCardGridComponent },
   { path: 'detail/:id', component: PropertyDetailComponent },
 ];
 

@@ -1,6 +1,6 @@
-import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { Component } from '@angular/core';
+import { appRoutes } from 'src/environments/environment';
 import { AuthService } from '@core/services/auth.service';
 import { MessageService } from '@core/services/message.service';
 import { LoginData } from '@core/interfaces/login-data.interface';
@@ -14,11 +14,10 @@ import { ValidatorsService } from '@core/services/validators.service';
 })
 export class LoginComponent {
 
-  public subscriptions = new Subscription();
-
   public form: FormGroup;
   public authError = false;
   public title = 'Arriendos Online';
+  public appRoutes: any = appRoutes;
   public showSpinner: boolean = false;
   
   constructor( 
@@ -27,15 +26,15 @@ export class LoginComponent {
     private authSvc: AuthService,
     private messageSvc: MessageService,
     private validatorsSvc: ValidatorsService,
-    ) {
-      this.form = this.fb.group({
-        email: [null, [
-          Validators.required,
-          Validators.pattern(this.validatorsSvc.VALID_EMAIL_STRING)
-        ]],
-        password: [null, [Validators.required]]
-      }); 
-    }
+  ) {
+    this.form = this.fb.group({
+      email: [null, [
+        Validators.required,
+        Validators.pattern(this.validatorsSvc.VALID_EMAIL_STRING)
+      ]],
+      password: [null, [Validators.required]]
+    }); 
+  }
 
   async onSubmit() {
     if (this.form.valid) {
@@ -47,11 +46,9 @@ export class LoginComponent {
         const response = await this.authSvc.loginByEmail(newData);
 
         this.showSpinner = false;
-        this.router.navigate(['/admin/propiedades']);
+        this.router.navigate([`${this.appRoutes.admin.propiedades}`]);
       }
-      catch (err) {
-        this.messageSvc.error(err); 
-      }            
+      catch (err) { this.messageSvc.error(err); }            
     }
     return;
   }
