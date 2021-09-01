@@ -5,25 +5,29 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreModule } from './core/core.module';
 import { FirebaseModule } from './firebase.module';
 import { AppRoutingModule } from './app-routing.module';
-import { BackendSharedModule } from '@shared/backend/backend-shared.module';
-import { FrontendSharedModule } from '@shared/frontend/frontend-shared.module';
+import { SharedModule } from '@shared/common/shared.module';
+import { HomeSharedModule } from '@shared/home/home-shared.module';
+import { AdminSharedModule } from '@shared/admin/admin-shared.module';
 
 import { AppComponent } from './app.component';
-import { FrontendLayoutComponent } from '@feature/frontend/frontend-layout.component';
-import { BackendLayoutComponent } from '@feature/backend/backend-layout.component';
+import { HomeLayoutComponent } from '@feature/home/home-layout.component';
+import { AdminLayoutComponent } from '@feature/admin/admin-layout.component';
+import { SidebarComponent } from '@shared/admin/components/layout/sidebar/sidebarcomponent';
 
 @NgModule({
   declarations: [
     AppComponent,
-    BackendLayoutComponent,
-    FrontendLayoutComponent
+    SidebarComponent,
+    HomeLayoutComponent,
+    AdminLayoutComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
 
-    BackendSharedModule,
-    FrontendSharedModule,
+    SharedModule,
+    AdminSharedModule,
+    HomeSharedModule,
     AppRoutingModule,
     FirebaseModule,
     CoreModule

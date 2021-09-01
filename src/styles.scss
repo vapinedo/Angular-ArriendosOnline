@@ -1,4 +1,5 @@
 @import './src/assets/scss/colors';
+@import './src/assets/scss/material';
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
 * {
@@ -9,125 +10,7 @@
 }
 body {
     min-height: 100vh;
-    background-color: #ededed;
-}
-
-/* -------------------------------------------------------
-    Mat Forms
- ------------------------------------------------------- */
-.mat-form-field {
-     width: 100%;
-     margin-bottom: 1em;
-}
-.form_footer {
-    text-align: right;
-}
- /* -------------------------------------------------------
-    Mat Table
- ------------------------------------------------------- */
- .table-search {
-    padding: 0;
-    display: flex;
-    margin-bottom: .7em;
-    align-items: center;
-    justify-content: space-between;
-
-    .input-search {
-        display: flex;
-        padding-left: 1em;
-        align-items: center;
-        justify-content: flex-start;
-
-        mat-icon {
-            color: $gris-400;
-        }
-        input {
-            color: $gris-400;
-            margin-left: .7em;
-            padding-left: .7em;
-            border-left: 1px solid $gris-400;
-        }
-    }
-}
-.mat-table {
-    width: 100%;
-
-    .tools {
-        i {
-            cursor: pointer;
-            color: $gris-300;
-            margin-right: .7em;
-        }
-        i:hover { color: $azul-300; }
-        i:last-child { margin-right: 0; }
-    }
-}
-
-/* -------------------------------------------
-    Mat Slide Toggle
-------------------------------------------- */
-.mat-slide-toggle {
-    .mat-slide-toggle-bar {
-        width: 50px;
-        height: 25px;
-        border-radius: 15px;
-        background-color: $gris-300;
-    }
-
-    .mat-slide-toggle-thumb-container {
-        position: absolute;
-        z-index: 1;
-        width: 20px;
-        height: 25px;
-        top: 2px;
-        left: 2px;
-        transform: translate3d(0, 0, 0);
-        transition: all 80ms linear;
-        transition-property: transform;
-    }
-
-    &.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
-        background-color: $azul-200;
-
-        .mat-slide-toggle-thumb-container { left: 12px; }
-    }
-
-    &.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
-        background-color: $blanco-500;
-    }
-}
-
-/* -------------------------------------------
-    Mat Dialog
-------------------------------------------- */
-.cdk-overlay-dark-backdrop {
-    background: rgba(255,255,255,.8) !important;
-}
-
-.mat-dialog-container {
-    padding: 0 !important;
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px !important;
-
-    header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        background-color: $azul-100 !important;
-
-        h2 {
-            margin: 0;
-            font-size: 16px;
-            color: $azul-400;
-            padding-left: 1em;
-        }
-        button {
-            width: 44px;
-            cursor: pointer;
-            border-radius: 0;
-            color: $blanco-400;
-            background-color: $azul-400;
-        }
-    }
+    background-color: $gris-100;
 }
 
 /* -------------------------------------------

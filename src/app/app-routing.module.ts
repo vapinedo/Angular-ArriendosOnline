@@ -4,8 +4,8 @@ import { AngularFireAuthGuard, redirectUnauthorizedTo } from '@angular/fire/auth
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['/auth']);
 
-import { BackendLayoutComponent } from '@feature/backend/backend-layout.component';
-import { FrontendLayoutComponent } from '@feature/frontend/frontend-layout.component';
+import { HomeLayoutComponent } from '@feature/home/home-layout.component';
+import { AdminLayoutComponent } from '@feature/admin/admin-layout.component';
 
 const routes: Routes = [
   {
@@ -15,34 +15,34 @@ const routes: Routes = [
   },
   { 
     path: 'home', 
-    component: FrontendLayoutComponent,
-    loadChildren: () => import('@feature/frontend/property/frontend-property.module')
-    .then(m => m.FrontendPropertyModule)
+    component: HomeLayoutComponent,
+    loadChildren: () => import('@feature/home/property/home-property.module')
+    .then(m => m.HomePropertyModule)
   },
   {  
     path: 'admin', 
-    component:  BackendLayoutComponent,
+    component:  AdminLayoutComponent,
     canActivate: [AngularFireAuthGuard], 
     data: { authGuardPipe: redirectUnauthorizedToLogin },
     children: [
       {  
         path: '',
-        loadChildren: () => import('@feature/backend/property/backend-property.module')
-        .then(m => m.BackendPropertyModule)
+        loadChildren: () => import('@feature/admin/property/property.module')
+        .then(m => m.PropertyModule)
       },
       {  
         path: 'dashboard',
-        loadChildren: () => import('@feature/backend/dashboard/dashboard.module')
+        loadChildren: () => import('@feature/admin/dashboard/dashboard.module')
         .then(m => m.DashboardModule)
       },
       {  
         path: 'propietarios',
-        loadChildren: () => import('@feature/backend/owner/owner.module')
+        loadChildren: () => import('@feature/admin/owner/owner.module')
         .then(m => m.OwnerModule)
       },      
       {  
         path: 'barrios',
-        loadChildren: () => import('@feature/backend/neighborhood/neighborhood.module')
+        loadChildren: () => import('@feature/admin/neighborhood/neighborhood.module')
         .then(m => m.NeighborhoodModule)
       }      
     ]
