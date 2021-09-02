@@ -1,7 +1,7 @@
 import { filter } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
+import { Router, ActivatedRoute, NavigationEnd, Data } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +9,6 @@ import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'arriendosOnline';
 
   constructor (
     private router: Router,
@@ -26,8 +25,13 @@ export class AppComponent implements OnInit {
     .pipe(filter(event => event instanceof NavigationEnd))
     .subscribe(() => {
       const childRoute = this.getChild(this.activatedRoute);
-      childRoute.data.subscribe(data => this.titleSvc.setTitle(data.title));
+      childRoute.data.subscribe(data => this.setTitle(data));
     });
+  }
+
+  setTitle(dataRoute: Data) {
+    const pageTitle = dataRoute.title ? dataRoute.title : 'Sin título';
+    this.titleSvc.setTitle(pageTitle);
   }
 
   getChild(activatedRoute: ActivatedRoute): ActivatedRoute {

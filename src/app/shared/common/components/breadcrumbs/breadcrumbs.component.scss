@@ -1,0 +1,14 @@
+@import './src/assets/scss/colors';
+
+nav {
+    padding: 0;
+    display: flex;
+    margin: 12px auto;
+    align-items: center;
+    justify-content: space-between;
+
+    .title { 
+        margin: 0; 
+        color: $negro-300;
+    }
+}

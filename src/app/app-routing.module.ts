@@ -10,11 +10,13 @@ import { AdminLayoutComponent } from '@feature/admin/admin-layout.component';
 const routes: Routes = [
   {
     path: 'auth',
+    data: { title: 'Login' },
     loadChildren: () => import('@feature/auth/auth.module')
     .then(m => m.AuthModule)
   },
   { 
     path: 'home', 
+    data: { title: 'Uribia Online' },
     component: HomeLayoutComponent,
     loadChildren: () => import('@feature/home/property/home-property.module')
     .then(m => m.HomePropertyModule)
@@ -30,8 +32,8 @@ const routes: Routes = [
         data: { 
           title: 'Propiedades',
           breadcrumb: [
-            { label: 'Propiedades', url: '' },
-            { label: 'Dashboard', url: '/admin/dashboard'  }
+            { label: 'Dashboard', url: '/admin/dashboard' },
+            { label: 'Propiedades', url: '' }
           ]
         },
         loadChildren: () => import('@feature/admin/property/property.module')
@@ -49,10 +51,10 @@ const routes: Routes = [
       {  
         path: 'propietarios',
         data: { 
-          title: 'Propopietarios',
+          title: 'Propietarios',
           breadcrumb: [
+            { label: 'Dashboard', url: '/admin/dashboard'  },
             { label: 'Propietarios', url: '' },
-            { label: 'Dashboard', url: '/admin/dashboard'  }
           ]
         },
         loadChildren: () => import('@feature/admin/owner/owner.module')
@@ -63,8 +65,8 @@ const routes: Routes = [
         data: { 
           title: 'Barrios',
           breadcrumb: [
-          { label: 'Barrios', url: '' },
-          { label: 'Dashboard', url: '/admin/dashboard'  }
+            { label: 'Dashboard', url: '/admin/dashboard'  },
+          { label: 'Barrios', url: '' }
           ]
         },
         loadChildren: () => import('@feature/admin/neighborhood/neighborhood.module')

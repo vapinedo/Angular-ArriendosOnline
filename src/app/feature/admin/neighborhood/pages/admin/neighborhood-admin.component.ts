@@ -22,7 +22,6 @@ export class NeighborhoodAdminComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  public title = 'Listado de barrios';
   public dataSource = new MatTableDataSource();
   public displayedColumns: string[] = ['name', 'visible', 'acciones'];
 

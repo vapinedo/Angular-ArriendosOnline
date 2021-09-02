@@ -22,7 +22,6 @@ export class OwnerAdminComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  public title = 'Listado de propietarios';
   public dataSource = new MatTableDataSource();
   public displayedColumns: string[] = ['name', 'lastname', 'mobile', 'acciones'];
 
