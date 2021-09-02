@@ -27,21 +27,46 @@ const routes: Routes = [
     children: [
       {  
         path: '',
+        data: { 
+          title: 'Propiedades',
+          breadcrumb: [
+            { label: 'Propiedades', url: '' },
+            { label: 'Dashboard', url: '/admin/dashboard'  }
+          ]
+        },
         loadChildren: () => import('@feature/admin/property/property.module')
         .then(m => m.PropertyModule)
       },
       {  
         path: 'dashboard',
+        data: { 
+          title: 'Dashboard',
+          breadcrumb: [{ label: 'Dashboard', url: '' }] 
+        },
         loadChildren: () => import('@feature/admin/dashboard/dashboard.module')
         .then(m => m.DashboardModule)
       },
       {  
         path: 'propietarios',
+        data: { 
+          title: 'Propopietarios',
+          breadcrumb: [
+            { label: 'Propietarios', url: '' },
+            { label: 'Dashboard', url: '/admin/dashboard'  }
+          ]
+        },
         loadChildren: () => import('@feature/admin/owner/owner.module')
         .then(m => m.OwnerModule)
       },      
       {  
         path: 'barrios',
+        data: { 
+          title: 'Barrios',
+          breadcrumb: [
+          { label: 'Barrios', url: '' },
+          { label: 'Dashboard', url: '/admin/dashboard'  }
+          ]
+        },
         loadChildren: () => import('@feature/admin/neighborhood/neighborhood.module')
         .then(m => m.NeighborhoodModule)
       }      

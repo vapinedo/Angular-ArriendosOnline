@@ -5,6 +5,7 @@
         <header class="header-content">
             <i class='bx bx-menu' (click)="onToggleSidebar()"></i>
         </header>
+        <app-breadcrumbs [currentPageTitle]="sectionTitle"></app-breadcrumbs>
         <router-outlet></router-outlet>
     </section>
 </main>
