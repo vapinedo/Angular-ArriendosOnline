@@ -11,8 +11,30 @@ import { PropertyCategoryCreateComponent } from './pages/category/create/propert
 
 const routes: Routes = [
   { path: '', component: PropertyAdminComponent },
-  { path: 'crear', component: PropertyCreateComponent },
-  { path: 'editar/:id', component: PropertyUpdateComponent },
+  { 
+    path: 'crear', 
+    component: PropertyCreateComponent, 
+    data: { 
+      title: 'Nueva propiedad',
+      breadcrumb: [
+        { label: 'Dashboard', url: '/admin/dashboard' },
+        { label: 'Propiedades', url: '/admin/' },
+        { label: 'Nueva propiedad', url: '' }
+      ]
+    }
+  },
+  { 
+    path: 'editar/:id', 
+    component: PropertyUpdateComponent, 
+    data: { 
+      title: 'Editar propiedad',
+      breadcrumb: [
+        { label: 'Dashboard', url: '/admin/dashboard' },
+        { label: 'Propiedades', url: '/admin/' },
+        { label: 'Nueva propiedad', url: '' }
+      ]
+    }
+  },
   { path: 'detalle/:id', component: PropertyDetailComponent },
   { path: 'categorias', component: PropertyCategoryAdminComponent },
   { path: 'crear-categoria', component: PropertyCategoryCreateComponent },

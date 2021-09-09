@@ -27,7 +27,6 @@ export class PropertyCreateComponent implements OnDestroy, OnInit {
 
   public form: FormGroup;
   private files: any[] = [];
-  public title = 'Nueva Propiedad';
   public appRoutes: any = appRoutes;
   public showSpinner: boolean = false;
 

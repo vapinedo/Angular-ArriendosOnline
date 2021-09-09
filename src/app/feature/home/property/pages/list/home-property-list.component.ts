@@ -28,7 +28,7 @@ export class HomePropertyListComponent implements OnInit {
     this.getProperty();
   }
 
-  private getProperty(filter?: Filter) {
+  private getProperty(filter?: any) {
     this.subscriptions.add(
       this.propertyScv.getAll(filter)
         .subscribe({
@@ -39,7 +39,7 @@ export class HomePropertyListComponent implements OnInit {
     );
   }
 
-  onFilterChange(filter: Filter): void {
+  onFilterChange(filter: any): void {
     this.getProperty(filter);
   }
 

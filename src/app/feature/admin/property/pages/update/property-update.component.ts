@@ -23,9 +23,8 @@ export class PropertyUpdateComponent implements OnInit, OnDestroy {
 
   private subscriptions = new SubSink();
 
-  private files: any[] = [];
   public form: FormGroup;
-  public title = 'Actualizar Propiedad';
+  private files: any[] = [];
   public showSpinner: boolean = false;
 
   public imgPreviewUrls: any[] = [];

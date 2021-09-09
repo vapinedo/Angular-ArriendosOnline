@@ -6,11 +6,11 @@ import { PropertyCategory } from '@core/interfaces/property-category.interface';
 import { PropertyCategoryService } from '@core/services/property-category.service';
 
 @Component({
-  selector: 'app-home-sidebar',
-  templateUrl: './home-sidebar.component.html',
-  styleUrls: ['./home-sidebar.component.scss']
+  selector: 'app-home-property-filter',
+  templateUrl: './home-property-filter.component.html',
+  styleUrls: ['./home-property-filter.component.scss']
 })
-export class HomeSidebarComponent implements OnInit {
+export class HomePropertyFilterComponent implements OnInit {
 
   @Output() onFilterChange = new EventEmitter<Filter>();
 

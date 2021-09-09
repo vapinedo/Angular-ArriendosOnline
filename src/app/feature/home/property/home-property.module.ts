@@ -6,6 +6,7 @@ import { HomePropertyRoutingModule } from './home-property-routing.module';
 
 import { HomePropertyListComponent } from './pages/list/home-property-list.component';
 import { HomePropertyDetailComponent } from './pages/detail/home-property-detail.component';
+import { HomePropertyFilterComponent } from './components/filter/home-property-filter.component';
 
 
 const modules = [
@@ -16,7 +17,8 @@ const modules = [
 
 const components = [
   HomePropertyListComponent,
-  HomePropertyDetailComponent
+  HomePropertyDetailComponent,
+  HomePropertyFilterComponent
 ];
 
 @NgModule({

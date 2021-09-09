@@ -6,7 +6,7 @@ import { HomePropertyDetailComponent } from './pages/detail/home-property-detail
 
 
 const routes: Routes = [
-  { path: 'listar', component: HomePropertyListComponent },
+  { path: '', component: HomePropertyListComponent },
   { path: 'detail/:id', component: HomePropertyDetailComponent },
 ];
 
