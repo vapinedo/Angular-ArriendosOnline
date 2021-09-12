@@ -51,7 +51,7 @@ export class PropertyUpdateComponent implements OnInit, OnDestroy {
     private propertyCategorySvc: PropertyCategoryService
     ) {
       this.form = this.fb.group({
-      visible: [false],
+      active: [false],
       description: [null],
       price: [null, [Validators.required]],
       ownerID: [null, [Validators.required]],
@@ -154,7 +154,7 @@ export class PropertyUpdateComponent implements OnInit, OnDestroy {
       price: data.price,
       mobile: data.mobile,
       address: data.address,
-      visible: data.visible,
+      active: data.active,
       category: data.category,
       description: data.description,
       neighborhood: data.neighborhood,

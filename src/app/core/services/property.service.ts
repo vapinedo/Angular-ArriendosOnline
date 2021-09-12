@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { map, filter, tap } from 'rxjs/operators';
 import { Filter } from '@core/interfaces/filter.interface';
 import { Property } from '@core/interfaces/property.interface';
-import { AngularFirestore, DocumentChangeAction } from '@angular/fire/firestore';
+import { AngularFirestore, DocumentChangeAction, DocumentReference } from '@angular/fire/firestore';
 
 @Injectable()
 export class PropertyService {
@@ -14,7 +14,7 @@ export class PropertyService {
     private afs: AngularFirestore
   ) {}
 
-  public create(item: Property): Promise<any> {
+  public create(item: Property): Promise<DocumentReference<Property>> {
     return this.afs.collection<Property>(this.collectionName).add(item);
   }
 

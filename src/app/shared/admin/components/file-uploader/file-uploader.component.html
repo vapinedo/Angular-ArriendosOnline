@@ -1,0 +1,21 @@
+<section class="file_uploader">
+    <article class="upload_control">
+        <img *ngIf="filesUrlOnBase64.length === 0" [src]="assetsUrl + defaultImage" class="default_image animate__animated animate__fadeIn animate_faster">
+        <input 
+            multiple 
+            id="files" 
+            type="file" 
+            [accept]="allowedFormats"
+            (input)="onSelectFiles($event)">
+    </article>
+    
+    <div class="image_preview_container">
+        <div *ngFor="let img of filesUrlOnBase64; let imgIndex = index" class="image_preview animate__animated animate__fadeIn animate_faster">
+            <span class="image_remove">
+                <i (click)="onFeatureImage(imgIndex)" *ngIf="imgIndex !== 0" class='bx bx-star' matTooltip="Destacar" matTooltipPosition="left"></i>
+                <i (click)="onDeleteImage(imgIndex)" class='bx bx-x-circle' matTooltip="Eliminar" matTooltipPosition="right"></i>
+            </span>
+            <img [src]="img">
+        </div>
+    </div>
+</section>

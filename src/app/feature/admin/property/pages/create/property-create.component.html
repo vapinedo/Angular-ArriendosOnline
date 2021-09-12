@@ -2,23 +2,9 @@
     <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
         
         <div class="row">
-            <div class="col-md-5 fileupload">
-                <article class="upload_control">
-                    <img *ngIf="imgPreviewUrls.length === 0" [src]="defaultImage" class="default_image animate__animated animate__fadeIn animate_faster">
-                    <input id="files" (input)="onFileChange($event)" type="file" multiple [accept]="allowedFormats">
-                </article>
-
-                <div class="image_preview_container">
-                    <div *ngFor="let url of imgPreviewUrls; let i = index" class="image_preview">
-                        <img [src]="url"> 
-                        <i class='bx bxs-star featured' *ngIf="i === 0"></i>
-                        <span class="image_remove">
-                            <i (click)="onFeatureImage(i)" *ngIf="i !== 0" class='bx bx-star' matTooltip="Destacar" matTooltipPosition="left"></i>
-                            <i (click)="onDeleteImage(i)" class='bx bx-x-circle' matTooltip="Eliminar" matTooltipPosition="right"></i>
-                        </span>
-                    </div>
-                </div>
-            </div><!-- form col 1 -->
+            <div class="col-md-5">
+                <app-file-uploader (selectedFiles)="onSelectedFiles($event)"></app-file-uploader>
+            </div>
 
             <div class="col-md-7">
                 <article class="row">
@@ -75,8 +61,8 @@
                 </article>
     
                 <div class="custom_mat_form_field_inline">
-                    <mat-label>Visible?</mat-label>
-                    <mat-slide-toggle disableRipple formControlName="visible"></mat-slide-toggle>
+                    <mat-label>Activo</mat-label>
+                    <mat-slide-toggle disableRipple formControlName="active"></mat-slide-toggle>
                 </div>  
     
                 <mat-form-field appearance="outline">
@@ -87,8 +73,8 @@
         </div><!-- form row 1 -->
 
         <div class="form_footer">
-            <app-spinner *ngIf="showSpinner"></app-spinner>
-            <button *ngIf="!showSpinner" [disabled]="form.invalid" 
+            <app-spinner *ngIf="isLoading"></app-spinner>
+            <button 
                 type="submit" color="primary" mat-raised-button>Crear</button>
         </div>
         

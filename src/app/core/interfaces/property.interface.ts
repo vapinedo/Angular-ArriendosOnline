@@ -4,7 +4,7 @@ export interface Property {
     address: string;
     mobile: string;
     images: string[];
-    visible: boolean;
+    active: boolean;
     category: string;
     description?: string;
     neighborhood: string;

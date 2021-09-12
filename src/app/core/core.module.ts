@@ -8,6 +8,7 @@ import { AuthService } from './services/auth.service';
 import { OwnerService } from './services/owner.service';
 import { MessageService } from './services/message.service';
 import { SidebarService } from './services/sidebar.service';
+import { HelpersService } from './services/helpers.service';
 import { PropertyService } from './services/property.service';
 import { DatetimeService } from './services/datetime.service';
 import { ValidatorsService } from './services/validators.service';
@@ -24,6 +25,7 @@ import { PropertyCategoryService } from './services/property-category.service';
     FileService,
     OwnerService,
     MessageService,
+    HelpersService,
     SidebarService,
     DatetimeService,
     PropertyService,

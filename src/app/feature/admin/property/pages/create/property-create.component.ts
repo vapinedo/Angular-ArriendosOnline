@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { appRoutes } from 'src/environments/environment';
 import { FileService } from '@core/services/file.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Property } from '@core/interfaces/property.interface';
 import { MessageService } from '@core/services/message.service';
 import { PropertyService } from '@core/services/property.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -26,21 +25,13 @@ export class PropertyCreateComponent implements OnDestroy, OnInit {
   private subscriptions = new SubSink();
 
   public form: FormGroup;
-  private files: any[] = [];
+  public files: File[] = [];
   public appRoutes: any = appRoutes;
-  public showSpinner: boolean = false;
+  public isLoading: boolean = false;
 
-  public imgPreviewUrls: any[] = [];
-  public showImagesPreview: boolean = false;
-  public defaultImage: string = '../../../../../../assets/img/img_placeholder.jpg';
-  
   public operationType: any[] = [];
   public neighborhoods$!: Observable<Neighborhood[]>;
   public propertyCategories$!: Observable<PropertyCategory[]>;
-
-  public isInvalidFormats: boolean = false;
-  public readonly allowedFormats = '.jpeg,.jpg,.png,.svg';
-  private readonly validFormats: string[] = ['image/jpeg', 'image/png'];
 
   constructor(
     private router: Router,
@@ -52,16 +43,15 @@ export class PropertyCreateComponent implements OnDestroy, OnInit {
     private propertyCategorySvc: PropertyCategoryService
     ) {
       this.form = this.fb.group({
-      visible: [false],
       description: [null],
       mobileOptional: [null],
-      price: [null, [Validators.required]],
-      mobile: [null, [Validators.required]],
-      address: [null, [Validators.required]],
-      category: [null, [Validators.required]],
-      images: [false, [Validators.requiredTrue]],
-      neighborhood: [null, [Validators.required]],
-      operationType: [null, [Validators.required]]
+      price: [null, []],
+      mobile: [null, []],
+      address: [null, []],
+      category: [null, []],
+      active: [false, []],
+      neighborhood: [null, []],
+      operationType: [null, []]
     }); 
   }
   
@@ -71,100 +61,33 @@ export class PropertyCreateComponent implements OnDestroy, OnInit {
     this.propertyCategories$ = this.propertyCategorySvc.getAll();
   }
 
-  onFileChange(event: any): void {
-    const tempFiles = event.target.files;
-    
-    if (tempFiles) {
-      for (const file of tempFiles) {
-        this.files.push(file);
-      }
-        
-      if (this._filesAreOnlyImages(tempFiles)) {
-        this._generateImgPreview(tempFiles);
-        this.form.controls.images.patchValue(true);
-      } 
-      else {
-        this.isInvalidFormats = true;
-        this.form.controls.images.patchValue(false);
-      }
-    }
-  }
-
-  onFeatureImage(imageIndex: number): void {
-    const featureImageOnFiles = this.files.splice(imageIndex, 1);
-    const featureImageOnPreviewUrls = this.imgPreviewUrls.splice(imageIndex, 1);
-
-    this.files.unshift(featureImageOnFiles[0]);
-    this.imgPreviewUrls.unshift(featureImageOnPreviewUrls[0]);
-  }
-  
-  onDeleteImage(imageIndex: number): void {
-    if (this.files.length === 1 ) {
-      this.form.controls.images.patchValue(false);
-    } 
-    this.files.splice(imageIndex, 1);
-    this.imgPreviewUrls.splice(imageIndex, 1);
-  }
-
-  private _generateImgPreview(files: FileList): void {
-    for(let i=0; i<files.length; i++) { 
-      const file = files[i];
-      const reader = new FileReader();
-      reader.onload = () => this.imgPreviewUrls.push(reader.result as string);
-      reader.readAsDataURL(file);
-    }
-  }
-
-  private _filesAreOnlyImages(files: any): boolean {
-    for(let i=0; i<files.length; i++) {
-      const format = files[i].type;
-      if (!this.validFormats.includes(format)) {
-        return false;
-      }
-    }
-    return true;
+  onSelectedFiles(files: File[]): void {
+    this.files = files;
   }
 
   async onSubmit(): Promise<void> {
-    if (this.form.valid) {
-      this.form.disable();
-      this.showSpinner = true;
-      const formData = this.form.value;
+    if (!this.form.valid && this.files.length > 0) return;
 
-      try {
-        let promises: any[] = [];
-        for (let i=0; i<this.files.length; i++) {
-          const file = this.files[i];
-          const promise = await this.fileSvc.create(file);
-          promises.push(promise);
-        }
-        const filesURL = await Promise.all(promises);
-        const newData = this._prepareDataBeforeSend(formData, filesURL);
-        const dataCreated = await this.propertySvc.create(newData);
+    this.form.disable();
+    this.isLoading = true;
+    const formData = this.form.value;
+    const uploadFiles = await this.getFilesPromises(this.files);
 
-        this.showSpinner = false;
-        this.messageSvc.success();
-        this.router.navigate([`${this.appRoutes.admin.propiedades}`]);
-      }
-      catch (err) { this.messageSvc.error(err); }
+    try {
+      const images = await Promise.all(uploadFiles);
+      const newProperty = { ...formData, images };
+      const response = await this.propertySvc.create(newProperty);
+
+      this.isLoading = false;
+      this.messageSvc.success();
+      this.router.navigate([`${this.appRoutes.admin.propiedades}`]);
     }
-    return;
+    catch (err) { console.log(err); }
   }
 
-  private _prepareDataBeforeSend(data: any, filesURL: string[]): Property {
-    let response: Property = {
-      images: filesURL,
-      price: data.price,
-      mobile: data.mobile,
-      address: data.address,
-      visible: data.visible,
-      category: data.category,
-      description: data.description,
-      neighborhood: data.neighborhood,
-      operationType: data.operationType,
-      mobileOptional: data.mobileOptional
-    };
-    return response;
+  getFilesPromises(files: File[]) {
+    let promises = files.map(async file => await this.fileSvc.create(file));
+    return promises;
   }
 
   ngOnDestroy(): void {

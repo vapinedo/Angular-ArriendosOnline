@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 import { SharedModule } from '@shared/common/shared.module';
 import { AdminSharedModule } from '@shared/admin/admin-shared.module';
@@ -13,6 +14,7 @@ import { PropertyCategoryUpdateComponent } from './pages/category/update/propert
 import { PropertyCategoryCreateComponent } from './pages/category/create/property-category-create.component';
 
 const modules = [
+  CommonModule,
   SharedModule,
   AdminSharedModule,
   PropertyRoutingModule
