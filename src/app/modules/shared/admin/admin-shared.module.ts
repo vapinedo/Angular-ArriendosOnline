@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { MaterialModule } from 'src/app/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CustomMaterialModule } from '../../custom/custom-material.module';
 
 import { DialogComponent } from './components/dialog/dialog.component';
 import { FileUploaderComponent } from './components/file-uploader/file-uploader.component';
@@ -14,8 +14,8 @@ const components = [
 
 const modules = [
   CommonModule,
-  MaterialModule,
   ReactiveFormsModule,
+  CustomMaterialModule,
   FormsModule
 ];
 

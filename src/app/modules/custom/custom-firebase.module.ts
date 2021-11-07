@@ -20,4 +20,4 @@ const modules = [
         { provide: BUCKET, useValue: 'gs://ng-arriendos-uribia.appspot.com' }
     ]
 })
-export class FirebaseModule { }
+export class CustomFirebaseModule { }

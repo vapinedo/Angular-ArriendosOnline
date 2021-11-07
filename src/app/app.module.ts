@@ -2,12 +2,12 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { CoreModule } from './core/core.module';
-import { FirebaseModule } from './firebase.module';
+import { CoreModule } from '@core/core.module';
 import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from '@shared/common/shared.module';
 import { HomeSharedModule } from '@shared/home/home-shared.module';
 import { AdminSharedModule } from '@shared/admin/admin-shared.module';
+import { CustomFirebaseModule } from './modules/custom/custom-firebase.module';
 
 import { AppComponent } from './app.component';
 import { HomeLayoutComponent } from '@feature/home/home-layout.component';
@@ -29,8 +29,8 @@ import { SidebarComponent } from '@shared/admin/components/layout/sidebar/sideba
     AdminSharedModule,
     HomeSharedModule,
     AppRoutingModule,
-    FirebaseModule,
-    CoreModule
+    CoreModule,
+    CustomFirebaseModule
   ],
   bootstrap: [AppComponent]
 })
