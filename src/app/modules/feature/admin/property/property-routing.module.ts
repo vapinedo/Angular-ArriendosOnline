@@ -30,7 +30,7 @@ const routes: Routes = [
       title: 'Editar propiedad',
       breadcrumb: [
         { label: 'Dashboard', url: '/admin/dashboard' },
-        { label: 'Propiedades', url: '/admin/' },
+        { label: 'Propiedades', url: '/admin/propiedades' },
         { label: 'Nueva propiedad', url: '' }
       ]
     }

@@ -12,24 +12,24 @@ const routes: Routes = [
     path: 'auth',
     data: { title: 'Login' },
     loadChildren: () => import('@feature/auth/auth.module')
-    .then(m => m.AuthModule)
+      .then(m => m.AuthModule)
   },
-  { 
-    path: 'home', 
+  {
+    path: 'home',
     data: { title: 'Uribia Online' },
     component: HomeLayoutComponent,
     loadChildren: () => import('@feature/home/property/home-property.module')
-    .then(m => m.HomePropertyModule)
+      .then(m => m.HomePropertyModule)
   },
-  {  
-    path: 'admin', 
-    component:  AdminLayoutComponent,
-    canActivate: [AngularFireAuthGuard], 
+  {
+    path: 'admin',
+    component: AdminLayoutComponent,
+    canActivate: [AngularFireAuthGuard],
     data: { authGuardPipe: redirectUnauthorizedToLogin },
     children: [
-      {  
-        path: '',
-        data: { 
+      {
+        path: 'propiedades',
+        data: {
           title: 'Propiedades',
           breadcrumb: [
             { label: 'Dashboard', url: '/admin/dashboard' },
@@ -37,44 +37,44 @@ const routes: Routes = [
           ]
         },
         loadChildren: () => import('@feature/admin/property/property.module')
-        .then(m => m.PropertyModule)
+          .then(m => m.PropertyModule)
       },
-      {  
+      {
         path: 'dashboard',
-        data: { 
+        data: {
           title: 'Dashboard',
-          breadcrumb: [{ label: 'Dashboard', url: '' }] 
+          breadcrumb: [{ label: 'Dashboard', url: '' }]
         },
         loadChildren: () => import('@feature/admin/dashboard/dashboard.module')
-        .then(m => m.DashboardModule)
+          .then(m => m.DashboardModule)
       },
-      {  
+      {
         path: 'propietarios',
-        data: { 
+        data: {
           title: 'Propietarios',
           breadcrumb: [
-            { label: 'Dashboard', url: '/admin/dashboard'  },
+            { label: 'Dashboard', url: '/admin/dashboard' },
             { label: 'Propietarios', url: '' },
           ]
         },
         loadChildren: () => import('@feature/admin/owner/owner.module')
-        .then(m => m.OwnerModule)
-      },      
-      {  
+          .then(m => m.OwnerModule)
+      },
+      {
         path: 'barrios',
-        data: { 
+        data: {
           title: 'Barrios',
           breadcrumb: [
-            { label: 'Dashboard', url: '/admin/dashboard'  },
-          { label: 'Barrios', url: '' }
+            { label: 'Dashboard', url: '/admin/dashboard' },
+            { label: 'Barrios', url: '' }
           ]
         },
         loadChildren: () => import('@feature/admin/neighborhood/neighborhood.module')
-        .then(m => m.NeighborhoodModule)
-      }      
+          .then(m => m.NeighborhoodModule)
+      }
     ]
   },
-  { path: '', redirectTo: '/home',  pathMatch: 'full' },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', redirectTo: '/home' }
 ];
 
